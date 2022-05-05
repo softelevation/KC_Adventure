@@ -3,22 +3,28 @@ import {StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import {hp, wp} from './responsive';
 import Block from './Block';
 import Text from './Text';
-import {ImageComponent} from '.';
+
+import {defaultFontSize} from './theme/fontsize';
+import ImageComponent from './ImageComponent';
 
 const componentStyles = () => {
   return StyleSheet.create({
     label: {
-      // marginBottom: hp(0.8),
+      marginBottom: hp(1),
     },
     input: {
-      paddingVertical: hp(1.5),
-      paddingHorizontal: wp(2),
-      fontSize: 16,
-      color: '#1C2A39',
-      backgroundColor: '#FAFAFA',
+      paddingVertical: hp(1.6),
+      paddingHorizontal: wp(3),
+      fontSize: defaultFontSize,
+      color: '#000',
+      backgroundColor: '#fff',
       borderWidth: 1,
-      borderColor: '#C5C5C7',
+      borderColor: '#FAFAFA',
       borderRadius: 5,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.1,
+      shadowRadius: 10,
     },
     toggle: {
       position: 'absolute',
@@ -29,13 +35,14 @@ const componentStyles = () => {
       right: 8,
     },
     primaryInput: {
-      paddingVertical: hp(1.5),
-      paddingHorizontal: wp(2),
-      fontSize: 16,
-      color: '#F2EDFA',
-
-      backgroundColor: 'transparent',
-      borderRadius: 16,
+      paddingVertical: hp(1.6),
+      paddingHorizontal: wp(3),
+      fontSize: defaultFontSize,
+      color: '#000',
+      backgroundColor: '#fff',
+      borderWidth: 1,
+      borderColor: '#FAFAFA',
+      borderRadius: 5,
     },
     neomorph: {
       borderRadius: 16,
@@ -44,6 +51,12 @@ const componentStyles = () => {
       marginTop: hp(0.3),
       marginHorizontal: wp(1),
       padding: 3,
+    },
+    shadow: {
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.1,
+      shadowRadius: 10,
     },
   });
 };
@@ -77,14 +90,11 @@ const Input = ({
     <Block flex={false}>
       {label ? (
         <Text
-          errorColor={error}
-          caption
+          error={error}
           regular
           center={center ? true : false}
           style={styles.label}
-          black={!error}
-          accent={error}
-          color="#8A8E99">
+          black={!error}>
           {label}
         </Text>
       ) : null}
@@ -97,46 +107,15 @@ const Input = ({
     }
     return (
       <TouchableOpacity
-        onPress={() => setToggleSecure({toggleSecure: !toggleSecure})}>
+        style={{marginRight: wp(2)}}
+        onPress={() => setToggleSecure(!toggleSecure)}>
         {rightLabel || (
           <ImageComponent
-            height={30}
-            width={30}
+            height={10}
+            width={14}
             name={!toggleSecure ? 'eye' : 'eye'}
           />
         )}
-      </TouchableOpacity>
-    );
-  };
-
-  const renderRight = () => {
-    if (!rightLabel) {
-      return null;
-    }
-
-    return (
-      <TouchableOpacity
-        style={{marginTop: hp(0.5)}}
-        onPress={() => setToggleSecure(!toggleSecure)}>
-        <ImageComponent
-          height={30}
-          width={30}
-          name={!toggleSecure ? 'eye' : 'eye'}
-        />
-      </TouchableOpacity>
-    );
-  };
-
-  const renderRightIcon = () => {
-    if (!rightIcon) {
-      return null;
-    }
-
-    return (
-      <TouchableOpacity
-        style={{marginTop: hp(0.5), marginRight: wp(2)}}
-        onPress={() => setToggleSecure(!toggleSecure)}>
-        <ImageComponent height={30} width={30} name={rightIcon} />
       </TouchableOpacity>
     );
   };
@@ -177,20 +156,22 @@ const Input = ({
       <Block
         flex={false}
         borderColor={error ? 'red' : 'transparent'}
-        borderWidth={error ? 1 : 0}
-        margin={[hp(1), 0]}>
+        margin={[hp(1), 0, 0]}
+        borderWidth={error ? 1 : 0}>
         {renderLabel()}
         <Block
+          flex={false}
           row
+          style={styles.shadow}
           center
-          padding={[0, wp(2)]}
-          space={'between'}
-          style={{width: wp(90), backgroundColor: '#fff', borderRadius: 16}}>
+          // padding={[0, wp(2)]}
+          primary
+          space={'between'}>
           <TextInput
             placeholder={placeholder}
             style={[
               primaryInputStyles,
-              rightLabel ? {width: wp(77)} : {width: wp(85)},
+              secure ? {width: wp(73)} : {width: wp(85)},
             ]}
             secureTextEntry={isSecure}
             autoComplete="off"
@@ -199,7 +180,7 @@ const Input = ({
             autoCorrect={false}
             keyboardType={inputType}
             placeholderTextColor={
-              placeholderTextColor ? placeholderTextColor : '#F2EDFA'
+              placeholderTextColor ? placeholderTextColor : '#000'
             }
             {...rest}
           />
@@ -209,7 +190,6 @@ const Input = ({
             </Text>
           )}
           {renderToggle()}
-          {renderRight()}
         </Block>
       </Block>
     );
@@ -222,7 +202,7 @@ const Input = ({
         borderRadius={16}
         borderColor={error ? 'red' : 'transparent'}
         borderWidth={error ? 1 : 0}
-        margin={[hp(2), 0, 0]}>
+        margin={[hp(1), 0, 0]}>
         {renderLabel()}
         <TextInput
           placeholder={placeholder}
@@ -234,13 +214,12 @@ const Input = ({
           autoCorrect={false}
           keyboardType={inputType}
           placeholderTextColor={
-            placeholderTextColor ? placeholderTextColor : '#F2EDFA'
+            placeholderTextColor ? placeholderTextColor : '#000'
           }
           {...rest}
         />
 
         {renderToggle()}
-        {renderRight()}
       </Block>
       {errorText && error && (
         <Text white semibold margin={[hp(0.7), wp(2), 0]} size={14}>

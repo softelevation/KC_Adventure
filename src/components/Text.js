@@ -52,6 +52,7 @@ const componentStyles = () => {
     error: {color: light.warning},
     link: {color: light.link},
     warning: {color: light.warning},
+    paragraph: {color: light.border},
     // // fonts
     h1: {fontSize: headerFontSize},
     h2: {fontSize: titleFontSize},
@@ -78,6 +79,7 @@ const CustomText = ({
   link,
   warning,
   color,
+  paragraph,
   // font Alignment
   center,
   right,
@@ -176,6 +178,7 @@ const CustomText = ({
     color && !styles[color] && {color},
     warning && styles.warning,
     primary && styles.primary,
+    paragraph && styles.paragraph,
     secondary && styles.secondary,
     uppercase && styles.uppercase,
     underline && styles.underline,

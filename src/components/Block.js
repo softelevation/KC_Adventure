@@ -44,12 +44,12 @@ const componentStyles = () => {
       elevation: 3,
     },
     borderColor: {
-      borderColor: '#E9EBF3',
+      borderColor: '#C4C4C4',
     },
     primary: {backgroundColor: light.primary},
     secondary: {backgroundColor: light.secondary},
     defaultPadding: {
-      paddingHorizontal: wp(4),
+      paddingHorizontal: wp(10),
     },
   });
 };

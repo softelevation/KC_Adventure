@@ -2,10 +2,10 @@ import {Platform} from 'react-native';
 import {hp, wp} from '../responsive';
 
 export const defaultFontSize = 14;
-export const headerFontSize = 20;
+export const headerFontSize = 36;
 export const subtitleFontSize = 12;
-export const bodyFontSize = 16;
-export const titleFontSize = 18;
+export const bodyFontSize = 18;
+export const titleFontSize = 24;
 
 export const t1 = hp(1);
 export const t2 = hp(2);

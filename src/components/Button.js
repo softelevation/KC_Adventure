@@ -10,11 +10,10 @@ import {t1} from './theme/fontsize';
 const componentStyles = () => {
   return StyleSheet.create({
     button: {
-      borderRadius: 5,
+      borderRadius: 30,
       justifyContent: 'center',
       alignItems: 'center',
       marginVertical: t1,
-      borderWidth: 1,
     },
     shadow: {
       shadowColor: '#000',
@@ -25,14 +24,6 @@ const componentStyles = () => {
     disabledButton: {
       backgroundColor: '#00000052',
       borderWidth: 0,
-    },
-    circular: {
-      borderRadius: 20,
-      padding: 20,
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: 40,
-      height: 40,
     },
     accent: {
       backgroundColor: light.warning,
@@ -107,7 +98,6 @@ const Button = ({
     styles.button,
     borderColor && {borderColor},
     disabled && shadow && styles.shadow,
-    circular && styles.circular,
     color && styles[color], // predefined styles colors for backgroundColor
     color && !styles[color] && {backgroundColor: color}, // custom backgroundColor
     style,
@@ -155,8 +145,8 @@ const Button = ({
 
   return (
     <TouchableOpacity
-      style={[buttonStyles, disabled && styles.disabledButton]}
-      disabled={!!disabled}
+      style={[buttonStyles, (disabled || isLoading) && styles.disabledButton]}
+      disabled={!!disabled || isLoading}
       activeOpacity={disabled ? opacity || 0.8 : 0.2}
       {...rest}>
       {isLoading ? (

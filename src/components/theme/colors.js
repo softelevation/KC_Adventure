@@ -27,5 +27,5 @@ export const light = {
   success: '#22bb33',
   pending: '#f0ad4e',
   info: '#aaaaaa',
-  border: '#E9EBF3',
+  border: '#C4C4C4',
 };
