@@ -4,10 +4,12 @@ const defaultOptions = {
 const RoutesName = {
   SPLASH_STACK_SCREEN: 'SplashStack',
   AUTH_STACK_SCREEN: 'AuthStack',
-  HOME_STACK_SCREEN: 'HomeStack',
+  DASHBOARD_STACK_SCREEN: 'DashboardStack',
   SPLASH_SCREEN: 'SplashScreen',
   LOGIN_SCREEN: 'LoginScreen',
   SIGNUP_SCREEN: 'SignupScreen',
-  HOME_SCREEN: 'HomeScreen',
+  ADVENTURE_SCREEN: 'AdventureScreen',
+  EXPERIENCES_SCREEN: 'ExperienceScreen',
+  EXPERIENCES_DETAILS_SCREEN: 'ExperienceDetailsScreen',
 };
 export {defaultOptions, RoutesName};

@@ -27,5 +27,7 @@ export const SemiBoldFont =
   Platform.OS === 'ios' ? 'Poppins-SemiBold' : 'Poppins-SemiBold';
 export const MediumFont =
   Platform.OS === 'ios' ? 'Poppins-Medium' : 'Poppins-Medium';
+export const ExtraBold =
+  Platform.OS === 'ios' ? 'Poppins-ExtraBold' : 'Poppins-ExtraBold';
 export const Thin = Platform.OS === 'ios' ? 'Roboto-Thin' : 'Roboto-Thin';
 export const Light = Platform.OS === 'ios' ? 'Roboto-Light' : 'Roboto-Light';

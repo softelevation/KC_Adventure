@@ -33,13 +33,10 @@ const componentStyles = () => {
       justifyContent: 'flex-end',
     },
     shadow: {
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 1,
-      },
-      shadowOpacity: 0.22,
-      shadowRadius: 2.22,
+      shadowColor: 'rgba(0, 0, 0, 0.05)',
+      shadowOffset: {width: 0, height: 10},
+      shadowOpacity: 1,
+      shadowRadius: 10,
 
       elevation: 3,
     },

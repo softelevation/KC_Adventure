@@ -12,6 +12,7 @@ import {
   titleFontSize,
   Regular,
   Bold,
+  ExtraBold,
 } from './theme/fontsize';
 
 const componentStyles = () => {
@@ -31,6 +32,9 @@ const componentStyles = () => {
     },
     bold: {
       fontFamily: Bold,
+    },
+    extrabold: {
+      fontFamily: ExtraBold,
     },
     semibold: {
       fontFamily: SemiBoldFont,
@@ -97,6 +101,7 @@ const CustomText = ({
   regular,
   bold,
   semibold,
+  extrabold,
   medium,
   weight,
   transform,
@@ -175,6 +180,7 @@ const CustomText = ({
     spacing && {letterSpacing: spacing},
     weight && {fontWeight: weight},
     regular && styles.regular,
+    extrabold && styles.extrabold,
     bold && styles.bold,
     semibold && styles.semibold,
     medium && styles.medium,

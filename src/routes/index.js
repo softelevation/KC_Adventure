@@ -22,7 +22,7 @@ const Routes = () => {
           component={AuthNavigator}
         />
         <Stack.Screen
-          name={RoutesName.HOME_STACK_SCREEN}
+          name={RoutesName.DASHBOARD_STACK_SCREEN}
           component={DashboardNavigator}
         />
       </Stack.Navigator>

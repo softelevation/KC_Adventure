@@ -5,4 +5,11 @@ export const images = {
   bg: require('./icons/Bg.png'),
   apple: require('./icons/apple.png'),
   google: require('./icons/google.png'),
+  adventure_bg: require('./icons/adventure_post.png'),
+  menu_icon: require('./icons/menu.png'),
+  notification_icon: require('./icons/Notification.png'),
+  demo_icon: require('./icons/image2.png'),
+  demo1_icon: require('./icons/image2.png'),
+  heart_icon: require('./icons/heart.png'),
+  hearts_icon: require('./icons/heart_S.png'),
 };
