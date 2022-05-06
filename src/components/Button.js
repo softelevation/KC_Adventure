@@ -106,11 +106,7 @@ const Button = ({
   if (iconWithText) {
     return (
       <TouchableOpacity
-        style={[
-          buttonStyles,
-          disabled && styles.disabledButton,
-          {paddingVertical: t1},
-        ]}
+        style={[buttonStyles, disabled && styles.disabledButton]}
         disabled={!!disabled}
         activeOpacity={disabled ? opacity || 0.8 : 0.2}
         {...rest}>
@@ -127,12 +123,11 @@ const Button = ({
               />
             </Block>
             <Text
-              semibold
+              bold
               style={textStyle}
               center
-              h1
-              uppercase={uppercase}
-              size={size || 14}
+              uppercase={true}
+              size={size || defaultFontSize}
               margin={[0, 0, 0, wp(3)]}
               color={renderTextColor()}>
               {children}
@@ -156,7 +151,7 @@ const Button = ({
           bold
           style={textStyle}
           center
-          uppercase={uppercase}
+          uppercase={true}
           size={size || defaultFontSize}
           color={renderTextColor()}>
           {children}

@@ -65,6 +65,7 @@ const componentStyles = () => {
     warning: {color: light.warning},
     paragraph: {color: light.border},
     info: {color: light.info},
+    lightBlack: {color: light.lightblack},
     // // fonts
     h1: {fontSize: headerFontSize},
     h2: {fontSize: titleFontSize},
@@ -117,6 +118,7 @@ const CustomText = ({
   margin,
   gutterBottom,
   info,
+  lightBlack,
   ...props
 }) => {
   const styles = componentStyles();
@@ -197,6 +199,7 @@ const CustomText = ({
     secondary && styles.secondary,
     uppercase && styles.uppercase,
     underline && styles.underline,
+    lightBlack && styles.lightBlack,
     info && styles.info,
     error && styles.error,
     capitalize && styles.capitalize,

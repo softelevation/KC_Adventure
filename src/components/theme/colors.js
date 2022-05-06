@@ -28,4 +28,5 @@ export const light = {
   pending: '#f0ad4e',
   info: '#444444',
   border: '#A5A4A4',
+  lightblack: '#303030',
 };
