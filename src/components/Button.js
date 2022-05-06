@@ -5,7 +5,7 @@ import ImageComponent from './ImageComponent';
 import {wp} from './responsive';
 import Text from './Text';
 import {light} from './theme/colors';
-import {t1} from './theme/fontsize';
+import {defaultFontSize, t1} from './theme/fontsize';
 
 const componentStyles = () => {
   return StyleSheet.create({
@@ -153,12 +153,11 @@ const Button = ({
         <ActivityIndicator size="small" color={light.primary} />
       ) : (
         <Text
-          semibold
+          bold
           style={textStyle}
           center
-          h1
           uppercase={uppercase}
-          size={size || 14}
+          size={size || defaultFontSize}
           color={renderTextColor()}>
           {children}
         </Text>

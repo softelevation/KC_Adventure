@@ -4,7 +4,7 @@ import {hp, wp} from './responsive';
 import Block from './Block';
 import Text from './Text';
 
-import {defaultFontSize} from './theme/fontsize';
+import {defaultFontSize, Regular} from './theme/fontsize';
 import ImageComponent from './ImageComponent';
 
 const componentStyles = () => {
@@ -16,14 +16,13 @@ const componentStyles = () => {
       paddingVertical: hp(1.6),
       paddingHorizontal: wp(3),
       fontSize: defaultFontSize,
-      color: '#000',
-      backgroundColor: '#fff',
-      borderWidth: 1,
-      borderColor: '#FAFAFA',
-      borderRadius: 5,
-      shadowColor: '#000',
-      shadowOffset: {width: 0, height: 2},
-      shadowOpacity: 0.1,
+      fontFamily: Regular,
+      color: '#000000',
+      backgroundColor: '#FFFFFF',
+      borderRadius: 8,
+      shadowColor: 'rgba(0, 0, 0, 0.05)',
+      shadowOffset: {width: 0, height: 10},
+      shadowOpacity: 1,
       shadowRadius: 10,
     },
     toggle: {
@@ -39,10 +38,9 @@ const componentStyles = () => {
       paddingHorizontal: wp(3),
       fontSize: defaultFontSize,
       color: '#000',
-      backgroundColor: '#fff',
-      borderWidth: 1,
-      borderColor: '#FAFAFA',
-      borderRadius: 5,
+      backgroundColor: '#FFFFFF',
+      borderRadius: 8,
+      fontFamily: Regular,
     },
     neomorph: {
       borderRadius: 16,
@@ -53,9 +51,9 @@ const componentStyles = () => {
       padding: 3,
     },
     shadow: {
-      shadowColor: '#000',
-      shadowOffset: {width: 0, height: 2},
-      shadowOpacity: 0.1,
+      shadowColor: 'rgba(0, 0, 0, 0.05)',
+      shadowOffset: {width: 0, height: 10},
+      shadowOpacity: 1,
       shadowRadius: 10,
     },
   });
@@ -90,8 +88,10 @@ const Input = ({
     <Block flex={false}>
       {label ? (
         <Text
+          h5
           error={error}
-          regular
+          semibold
+          info
           center={center ? true : false}
           style={styles.label}
           black={!error}>
@@ -111,9 +111,9 @@ const Input = ({
         onPress={() => setToggleSecure(!toggleSecure)}>
         {rightLabel || (
           <ImageComponent
-            height={10}
-            width={14}
-            name={!toggleSecure ? 'eye' : 'eye'}
+            height={18}
+            width={18}
+            name={!toggleSecure ? 'eye_off' : 'eye'}
           />
         )}
       </TouchableOpacity>
@@ -156,6 +156,7 @@ const Input = ({
       <Block
         flex={false}
         borderColor={error ? 'red' : 'transparent'}
+        borderRadius={8}
         margin={[hp(1), 0, 0]}
         borderWidth={error ? 1 : 0}>
         {renderLabel()}
@@ -164,7 +165,7 @@ const Input = ({
           row
           style={styles.shadow}
           center
-          // padding={[0, wp(2)]}
+          borderRadius={8}
           primary
           space={'between'}>
           <TextInput
@@ -199,7 +200,7 @@ const Input = ({
     <>
       <Block
         flex={false}
-        borderRadius={16}
+        borderRadius={8}
         borderColor={error ? 'red' : 'transparent'}
         borderWidth={error ? 1 : 0}
         margin={[hp(1), 0, 0]}>

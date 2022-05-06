@@ -8,8 +8,8 @@ const LoginScreen = () => {
   return (
     <ImageBackground source={images.bg} style={CommonStyles.defaultFlex}>
       <SafeAreaView />
-      <Block margin={[hp(15), 0, 0]} defaultPadding={true} flex={false}>
-        <Text center={true} h1>
+      <Block margin={[hp(10), 0, 0]} defaultPadding={true} flex={false}>
+        <Text center={true} h1 semibold>
           Sign up
         </Text>
         <Block flex={false} margin={[hp(2), 0, 0]}>

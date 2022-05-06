@@ -12,8 +12,10 @@ const LoginScreen = () => {
     <ImageBackground source={images.bg} style={CommonStyles.defaultFlex}>
       <SafeAreaView />
       <Block margin={[hp(15), 0, 0]} defaultPadding={true} flex={false}>
-        <Text h1>Sign In</Text>
-        <Text h4 margin={[hp(1), 0, 0]}>
+        <Text semibold h1>
+          Sign In
+        </Text>
+        <Text medium h3 margin={[hp(1), 0, 0]}>
           Welcome to the KC&E
         </Text>
         <Block flex={false} margin={[hp(2), 0, 0]}>
@@ -27,7 +29,7 @@ const LoginScreen = () => {
             />
           </Block>
         </Block>
-        <Text center margin={[hp(3), 0, hp(4)]}>
+        <Text semibold h5 center info margin={[hp(3), 0, hp(4)]}>
           Forgot your password ?
         </Text>
         <Block flex={false} center>
@@ -71,12 +73,12 @@ const LoginScreen = () => {
             <ImageComponent name="apple" height={22} width={20} />
           </Block>
         </Block>
-        <Text center>
-          Don't have an account?{' '}
+        <Text medium color={'#1F1F1F'} center>
+          Don't have an Account?{' '}
           <Text
             onPress={() => navigate(RoutesName.SIGNUP_SCREEN)}
             secondary={true}
-            semibold>
+            bold>
             SignUp!
           </Text>
         </Text>

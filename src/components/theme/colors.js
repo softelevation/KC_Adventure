@@ -15,7 +15,7 @@ export const dark = {
 };
 export const light = {
   name: 'light',
-  primary: '#fff',
+  primary: '#FFFFFF',
   secondary: '#65837B',
   background: '#fff',
   header: '#000',
@@ -26,6 +26,6 @@ export const light = {
   danger: '#EE3254',
   success: '#22bb33',
   pending: '#f0ad4e',
-  info: '#aaaaaa',
-  border: '#C4C4C4',
+  info: '#444444',
+  border: '#A5A4A4',
 };

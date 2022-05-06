@@ -6,8 +6,12 @@ import {
   bodyFontSize,
   defaultFontSize,
   headerFontSize,
+  MediumFont,
+  SemiBoldFont,
   subtitleFontSize,
   titleFontSize,
+  Regular,
+  Bold,
 } from './theme/fontsize';
 
 const componentStyles = () => {
@@ -23,13 +27,16 @@ const componentStyles = () => {
       textTransform: 'uppercase',
     },
     regular: {
-      // fontFamily: Regular,
+      fontFamily: Regular,
     },
     bold: {
-      // fontFamily: Bold,
+      fontFamily: Bold,
     },
     semibold: {
-      // fontFamily: Medium,
+      fontFamily: SemiBoldFont,
+    },
+    medium: {
+      fontFamily: MediumFont,
     },
     thin: {
       // fontFamily: Thin,
@@ -53,6 +60,7 @@ const componentStyles = () => {
     link: {color: light.link},
     warning: {color: light.warning},
     paragraph: {color: light.border},
+    info: {color: light.info},
     // // fonts
     h1: {fontSize: headerFontSize},
     h2: {fontSize: titleFontSize},
@@ -103,6 +111,7 @@ const CustomText = ({
   children,
   margin,
   gutterBottom,
+  info,
   ...props
 }) => {
   const styles = componentStyles();
@@ -182,6 +191,7 @@ const CustomText = ({
     secondary && styles.secondary,
     uppercase && styles.uppercase,
     underline && styles.underline,
+    info && styles.info,
     error && styles.error,
     capitalize && styles.capitalize,
     margin && {...handleMargins()},
