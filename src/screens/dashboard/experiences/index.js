@@ -1,13 +1,14 @@
-import {useNavigation} from '@react-navigation/native';
+import {DrawerActions, useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {FlatList, ScrollView} from 'react-native';
 import CommonStyles from 'src/assets/styles';
+import Header from 'src/common/header';
 import {Block, CustomButton, hp, ImageComponent, Text, wp} from '_elements';
 import {RoutesName} from '_routeName';
 
 const Experiences = () => {
   const [active, setActive] = useState('All');
-  const {navigate} = useNavigation();
+  const navigation = useNavigation();
   const _renderItem = ({item}) => {
     return (
       <Block margin={[hp(3), wp(4), 0]} center flex={false}>
@@ -76,7 +77,7 @@ const Experiences = () => {
     return (
       <CustomButton
         onPress={() => {
-          navigate(RoutesName.EXPERIENCES_DETAILS_SCREEN);
+          navigation.navigate(RoutesName.EXPERIENCES_DETAILS_SCREEN);
         }}>
         <Block
           style={{width: wp(47)}}
@@ -110,19 +111,7 @@ const Experiences = () => {
   };
   return (
     <Block safearea={true} primary>
-      <Block
-        row
-        space={'between'}
-        shadow
-        primary
-        flex={false}
-        padding={[hp(2)]}>
-        <ImageComponent name="menu_icon" height={24} width={24} />
-        <Text uppercase bold>
-          Experiences
-        </Text>
-        <ImageComponent name="notification_icon" height={24} width={24} />
-      </Block>
+      <Header name="Experiences" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Block flex={false}>
           <FlatList

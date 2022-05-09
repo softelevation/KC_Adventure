@@ -4,6 +4,11 @@ import SignUpScreen from './auth/signup';
 import AdventureScreen from './dashboard/index';
 import ExperienceDetail from './dashboard/details';
 import ExperienceScreen from './dashboard/experiences';
+import NotificationScreen from './notifications';
+import HelpCenter from './help-center';
+import AboutUs from './about';
+import Wishlist from './wishlist';
+import TermsAndConditions from './terms';
 
 export {
   SplashScreen,
@@ -12,4 +17,9 @@ export {
   ExperienceScreen,
   ExperienceDetail,
   AdventureScreen,
+  NotificationScreen,
+  HelpCenter,
+  AboutUs,
+  Wishlist,
+  TermsAndConditions,
 };

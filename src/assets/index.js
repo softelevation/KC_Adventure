@@ -15,4 +15,13 @@ export const images = {
   star_icon: require('./icons/star.png'),
   location_icon: require('./icons/location.png'),
   back_icon: require('./icons/back.png'),
+  home_icon: require('./icons/home.png'),
+  wishlist_icon: require('./icons/favorite.png'),
+  help_icon: require('./icons/feedback.png'),
+  logout_icon: require('./icons/logout.png'),
+  terms_icon: require('./icons/privacy_tip.png'),
+  about_icon: require('./icons/view_list.png'),
+  notifi_icon: require('./icons/fi-ss-bell.png'),
+  aboutus_img: require('./icons/aboutus-img.png'),
+  terms_img: require('./icons/terms-img.png'),
 };

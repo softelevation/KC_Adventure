@@ -2,9 +2,10 @@
 
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {AdventureScreen, ExperienceDetail, ExperienceScreen} from '_screens';
+import {AdventureScreen, ExperienceDetail} from '_screens';
 import {defaultOptions} from './constants';
 import {RoutesName} from '_routeName';
+import DrawerNavigator from './drawerNav';
 const Dashboard = createNativeStackNavigator();
 
 function DashboardNavigator() {
@@ -17,8 +18,8 @@ function DashboardNavigator() {
         component={AdventureScreen}
       />
       <Dashboard.Screen
-        name={RoutesName.EXPERIENCES_SCREEN}
-        component={ExperienceScreen}
+        name={RoutesName.EXPERIENCES_DRAWER_SCREEN}
+        component={DrawerNavigator}
       />
       <Dashboard.Screen
         name={RoutesName.EXPERIENCES_DETAILS_SCREEN}

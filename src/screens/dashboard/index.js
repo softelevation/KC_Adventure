@@ -34,7 +34,7 @@ const Adventure = () => {
   const onSubmit = () => {
     setModalVisible(false);
     Keyboard.dismiss();
-    navigate(RoutesName.EXPERIENCES_SCREEN);
+    navigate(RoutesName.EXPERIENCES_DRAWER_SCREEN);
   };
 
   useFocusEffect(
