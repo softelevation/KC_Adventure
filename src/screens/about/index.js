@@ -8,7 +8,7 @@ const AboutScreen = () => {
     <Block safearea={true} primary>
       <Header name="About Us" />
       <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
-        <ImageComponent name="aboutus_img" width={wp(100)} height={208} />
+        <ImageComponent name="aboutus_img" width={380} height={208} />
         <Block flex={false} padding={[hp(2), wp(3)]}>
           <Text gutterBottom bold size={16}>
             About Us

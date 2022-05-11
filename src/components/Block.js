@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Animated, SafeAreaView} from 'react-native';
+import {StyleSheet, View, Animated, SafeAreaView, Platform} from 'react-native';
 import {wp} from './responsive';
 import {light} from './theme/colors';
 
@@ -33,7 +33,7 @@ const componentStyles = () => {
       justifyContent: 'flex-end',
     },
     shadow: {
-      shadowColor: 'rgba(0, 0, 0, 0.05)',
+      shadowColor: Platform.OS === "ios" ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0.5)',
       shadowOffset: {width: 0, height: 10},
       shadowOpacity: 1,
       shadowRadius: 10,

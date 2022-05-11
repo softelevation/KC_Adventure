@@ -11,7 +11,7 @@ import {RoutesName} from '_routeName';
 const Adventure = () => {
   const [isModalVisible, setModalVisible] = useState(true);
   const {navigate} = useNavigation();
-  const [defaultHeight, setDefaultHeight] = useState(35);
+  const [defaultHeight, setDefaultHeight] = useState(40);
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -22,7 +22,7 @@ const Adventure = () => {
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       () => {
-        setDefaultHeight(35);
+        setDefaultHeight(40);
       },
     );
 

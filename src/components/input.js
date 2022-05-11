@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import {Platform, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import {hp, wp} from './responsive';
 import Block from './Block';
 import Text from './Text';
@@ -20,10 +20,11 @@ const componentStyles = () => {
       color: '#000000',
       backgroundColor: '#FFFFFF',
       borderRadius: 8,
-      shadowColor: 'rgba(0, 0, 0, 0.05)',
+      shadowColor: Platform.OS === "ios" ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0.5)',
       shadowOffset: {width: 0, height: 10},
       shadowOpacity: 1,
       shadowRadius: 10,
+      elevation:3,
     },
     toggle: {
       position: 'absolute',
@@ -51,10 +52,11 @@ const componentStyles = () => {
       padding: 3,
     },
     shadow: {
-      shadowColor: 'rgba(0, 0, 0, 0.05)',
+      shadowColor: Platform.OS === "ios" ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0.5)',
       shadowOffset: {width: 0, height: 10},
       shadowOpacity: 1,
       shadowRadius: 10,
+      elevation:3,
     },
   });
 };
@@ -109,6 +111,7 @@ const Input = ({
       <TouchableOpacity
         style={{marginRight: wp(2)}}
         onPress={() => setToggleSecure(!toggleSecure)}>
+        <Block flex={false} header>
         {rightLabel || (
           <ImageComponent
             height={18}
@@ -116,6 +119,7 @@ const Input = ({
             name={!toggleSecure ? 'eye_off' : 'eye'}
           />
         )}
+        </Block>
       </TouchableOpacity>
     );
   };
@@ -166,7 +170,7 @@ const Input = ({
           style={styles.shadow}
           center
           borderRadius={8}
-          primary
+          header
           space={'between'}>
           <TextInput
             placeholder={placeholder}

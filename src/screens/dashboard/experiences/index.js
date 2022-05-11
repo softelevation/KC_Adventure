@@ -41,7 +41,7 @@ const Experiences = () => {
         row
         header
         shadow
-        margin={[hp(3), wp(2), 0]}
+        margin={[hp(1.4), wp(2)]}
         borderRadius={20}
         flex={false}>
         <ImageComponent name="demo_icon" width={152} height={131} radius={14} />
@@ -84,6 +84,7 @@ const Experiences = () => {
   const _renderHorizontalItem = ({item}) => {
     return (
       <CustomButton
+        activeOpacity={0.9}
         onPress={() => {
           navigation.navigate(RoutesName.EXPERIENCES_DETAILS_SCREEN);
         }}>
@@ -137,7 +138,7 @@ const Experiences = () => {
             <VirtualizedView>
               <FlatList
                 keyExtractor={(item, index) => index.toString()}
-                contentContainerStyle={{marginBottom: hp(2)}}
+                contentContainerStyle={{paddingBottom: hp(3)}}
                 horizontal
                 data={['All', 'America', 'Europe', 'Asia', 'Osenia']}
                 renderItem={_renderHorizontalItem}
@@ -153,7 +154,6 @@ const Experiences = () => {
               <FlatList
                 scrollEnabled={false}
                 keyExtractor={(item, index) => index.toString()}
-                contentContainerStyle={{marginBottom: hp(2)}}
                 data={['All', 'America', 'Europe', 'Asia', 'Osenia']}
                 renderItem={_renderVerticalItem}
                 showsHorizontalScrollIndicator={false}
