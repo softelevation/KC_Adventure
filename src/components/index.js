@@ -5,5 +5,16 @@ import ImageComponent from './ImageComponent';
 import CustomButton from './CustomButton';
 import Button from './Button';
 import {hp, wp} from './responsive';
+import VirtualizedView from './virtualizedView';
 
-export {Block, Text, Input, ImageComponent, CustomButton, Button, hp, wp};
+export {
+  Block,
+  Text,
+  Input,
+  ImageComponent,
+  CustomButton,
+  Button,
+  hp,
+  wp,
+  VirtualizedView,
+};

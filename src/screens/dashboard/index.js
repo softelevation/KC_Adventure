@@ -61,7 +61,7 @@ const Adventure = () => {
         <Block
           padding={[hp(3), wp(5)]}
           borderRadius={24}
-          primary
+          header
           flex={false}
           style={{height: hp(defaultHeight)}}>
           <Text gutterBottom info semibold h5>

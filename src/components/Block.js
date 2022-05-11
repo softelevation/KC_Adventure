@@ -45,6 +45,7 @@ const componentStyles = () => {
     },
     primary: {backgroundColor: light.primary},
     secondary: {backgroundColor: light.secondary},
+    header: {backgroundColor: light.white},
     defaultPadding: {
       paddingHorizontal: wp(10),
     },
@@ -82,6 +83,7 @@ const Block = ({
   alignSelf,
   linear,
   defaultPadding,
+  header,
   ...rest
 }) => {
   const styles = componentStyles();
@@ -277,6 +279,7 @@ const Block = ({
     wrap && {flexWrap: 'wrap'},
     borderColor && !styles[color] && {borderColor: borderColor},
     borderColorDeafult && styles.borderColor,
+    header && styles.header,
     secondary && styles.secondary,
     margin && {...handleMargins()},
     padding && {...handlePaddings()},
@@ -298,7 +301,7 @@ const Block = ({
   }
   if (safearea) {
     return (
-      <SafeAreaView {...rest} style={blockStyles}>
+      <SafeAreaView {...rest} style={[blockStyles, {backgroundColor: '#fff'}]}>
         {children}
       </SafeAreaView>
     );

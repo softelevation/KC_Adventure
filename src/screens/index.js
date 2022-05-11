@@ -9,6 +9,8 @@ import HelpCenter from './help-center';
 import AboutUs from './about';
 import Wishlist from './wishlist';
 import TermsAndConditions from './terms';
+import Tour from './tour';
+import TourDetails from './tour/details';
 
 export {
   SplashScreen,
@@ -22,4 +24,6 @@ export {
   AboutUs,
   Wishlist,
   TermsAndConditions,
+  Tour,
+  TourDetails,
 };
