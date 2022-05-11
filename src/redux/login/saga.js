@@ -45,28 +45,7 @@ export function* request(action) {
   }
 }
 
-export function* ProfileRequest(action) {
-  try {
-    const response = yield call(
-      apiCall,
-      'GET',
-      API_URL.PROFILE_URL,
-      action.payload,
-    ); //Get request
-    const dataResponse = decrypted(response.data);
-    if (response.status === 1) {
-      yield put(profileSuccess(dataResponse));
-    } else {
-      onDisplayNotification(response.message);
-      yield put(profileError(response));
-    }
-  } catch (err) {
-    onDisplayNotification('Oops something went wrong');
-    yield put(profileError());
-  }
-}
 export function* authWatcher() {
   yield all([takeLatest(ActionConstants.LOGIN_REQUEST, request)]);
-  yield all([takeLatest(ActionConstants.PROFILE_REQUEST, ProfileRequest)]);
 }
 export default authWatcher;

@@ -7,7 +7,7 @@ const Notifications = () => {
     return (
       <Block
         row
-        primary
+        header
         shadow
         margin={[hp(3), wp(2), 0, wp(2)]}
         borderRadius={14}

@@ -17,5 +17,7 @@ const RoutesName = {
   ABOUT_US_SCREEN: 'AboutScreen',
   TERMS_SCREEN: 'TermsScreen',
   HELP_SCREEN: 'HelpScreen',
+  TOUR_SCREEN: 'TourScreen',
+  TOUR_DETAILS_SCREEN: 'TourDetailsScreen',
 };
 export {defaultOptions, RoutesName};

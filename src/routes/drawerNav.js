@@ -8,6 +8,8 @@ import {
   HelpCenter,
   NotificationScreen,
   TermsAndConditions,
+  Tour,
+  TourDetails,
   Wishlist,
 } from '_screens';
 import {defaultOptions} from './constants';
@@ -41,6 +43,11 @@ function DrawerNavigator() {
         component={NotificationScreen}
       />
       <Drawer.Screen name={RoutesName.HELP_SCREEN} component={HelpCenter} />
+      <Drawer.Screen name={RoutesName.TOUR_SCREEN} component={Tour} />
+      <Drawer.Screen
+        name={RoutesName.TOUR_DETAILS_SCREEN}
+        component={TourDetails}
+      />
     </Drawer.Navigator>
   );
 }

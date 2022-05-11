@@ -7,7 +7,7 @@ const TermsAndConditions = () => {
   return (
     <Block safearea={true} primary>
       <Header name="Terms And Conditions" />
-      <ScrollView>
+      <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
         <ImageComponent name="terms_img" width={wp(100)} height={208} />
         <Block flex={false} padding={[hp(2), wp(3)]}>
           <Text height={30} gutterBottom medium color={'#263238'}>

@@ -7,7 +7,7 @@ const WishlistScreen = () => {
     return (
       <Block
         row
-        primary
+        header
         shadow
         margin={[hp(3), wp(2), 0]}
         borderRadius={20}

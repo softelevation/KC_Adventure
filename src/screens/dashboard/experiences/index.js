@@ -3,7 +3,15 @@ import React, {useState} from 'react';
 import {FlatList, ScrollView} from 'react-native';
 import CommonStyles from 'src/assets/styles';
 import Header from 'src/common/header';
-import {Block, CustomButton, hp, ImageComponent, Text, wp} from '_elements';
+import {
+  Block,
+  CustomButton,
+  hp,
+  ImageComponent,
+  Text,
+  VirtualizedView,
+  wp,
+} from '_elements';
 import {RoutesName} from '_routeName';
 
 const Experiences = () => {
@@ -31,7 +39,7 @@ const Experiences = () => {
     return (
       <Block
         row
-        primary
+        header
         shadow
         margin={[hp(3), wp(2), 0]}
         borderRadius={20}
@@ -81,7 +89,7 @@ const Experiences = () => {
         }}>
         <Block
           style={{width: wp(47)}}
-          primary
+          header
           shadow
           margin={[hp(3), wp(2), 0]}
           padding={[0, 0, hp(1)]}
@@ -126,25 +134,31 @@ const Experiences = () => {
             Top Experiences
           </Text>
           <Block flex={false}>
-            <FlatList
-              contentContainerStyle={{marginBottom: hp(2)}}
-              horizontal
-              data={['All', 'America', 'Europe', 'Asia', 'Osenia']}
-              renderItem={_renderHorizontalItem}
-              showsHorizontalScrollIndicator={false}
-            />
+            <VirtualizedView>
+              <FlatList
+                keyExtractor={(item, index) => index.toString()}
+                contentContainerStyle={{marginBottom: hp(2)}}
+                horizontal
+                data={['All', 'America', 'Europe', 'Asia', 'Osenia']}
+                renderItem={_renderHorizontalItem}
+                showsHorizontalScrollIndicator={false}
+              />
+            </VirtualizedView>
           </Block>
           <Text semibold h3>
             Top Rated
           </Text>
           <Block flex={false}>
-            <FlatList
-              contentContainerStyle={{marginBottom: hp(2)}}
-              // horizontal
-              data={['All', 'America', 'Europe', 'Asia', 'Osenia']}
-              renderItem={_renderVerticalItem}
-              showsHorizontalScrollIndicator={false}
-            />
+            <VirtualizedView>
+              <FlatList
+                scrollEnabled={false}
+                keyExtractor={(item, index) => index.toString()}
+                contentContainerStyle={{marginBottom: hp(2)}}
+                data={['All', 'America', 'Europe', 'Asia', 'Osenia']}
+                renderItem={_renderVerticalItem}
+                showsHorizontalScrollIndicator={false}
+              />
+            </VirtualizedView>
           </Block>
         </Block>
       </ScrollView>
