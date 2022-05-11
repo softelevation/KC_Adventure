@@ -8,7 +8,8 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "pod-install": "cd ios && pod install --repo-update"
+    "pod-install": "cd ios && pod install --repo-update",
+    "reverse-ports":"adb reverse tcp:8081 tcp:8081"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.3",
