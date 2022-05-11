@@ -63,7 +63,8 @@ const LoginScreen = () => {
             middle
             flex={false}
             borderRadius={40}
-            primary
+            shadow
+            header
             style={CommonStyles.icon}>
             <ImageComponent name="google" height={20} width={20} />
           </Block>
@@ -71,8 +72,9 @@ const LoginScreen = () => {
             center
             middle
             flex={false}
+            shadow
             borderRadius={40}
-            primary
+            header
             style={CommonStyles.icon}>
             <ImageComponent name="apple" height={22} width={20} />
           </Block>

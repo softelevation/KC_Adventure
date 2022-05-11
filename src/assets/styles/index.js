@@ -4,7 +4,7 @@ const CommonStyles = {
   defaultFlex: {
     flex: 1,
   },
-  icon: {height: 40, width: 40},
+  icon: {height: 50, width: 50},
   modalStyle: {
     position: 'absolute',
     bottom: 0,
