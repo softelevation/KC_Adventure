@@ -23,7 +23,7 @@ const Header = ({name = '', menuIcon = true}) => {
           <ImageComponent name="back_icon" width={8} height={15} />
         </CustomButton>
       )}
-      <Text uppercase bold>
+      <Text spacing={1} uppercase bold>
         {name}
       </Text>
       <ImageComponent name="notification_icon" height={24} width={24} />

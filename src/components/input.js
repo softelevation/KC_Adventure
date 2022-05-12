@@ -20,11 +20,12 @@ const componentStyles = () => {
       color: '#000000',
       backgroundColor: '#FFFFFF',
       borderRadius: 8,
-      shadowColor: Platform.OS === "ios" ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0.5)',
+      shadowColor:
+        Platform.OS === 'ios' ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0.5)',
       shadowOffset: {width: 0, height: 10},
       shadowOpacity: 1,
       shadowRadius: 10,
-      elevation:3,
+      elevation: 3,
     },
     toggle: {
       position: 'absolute',
@@ -52,11 +53,12 @@ const componentStyles = () => {
       padding: 3,
     },
     shadow: {
-      shadowColor: Platform.OS === "ios" ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0.5)',
+      shadowColor:
+        Platform.OS === 'ios' ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0.5)',
       shadowOffset: {width: 0, height: 10},
       shadowOpacity: 1,
       shadowRadius: 10,
-      elevation:3,
+      elevation: 3,
     },
   });
 };
@@ -73,7 +75,6 @@ const Input = ({
   rightStyle,
   onRightPress,
   placeholder,
-  errorText,
   editable = true,
   center,
   placeholderTextColor,
@@ -112,13 +113,13 @@ const Input = ({
         style={{marginRight: wp(2)}}
         onPress={() => setToggleSecure(!toggleSecure)}>
         <Block flex={false} header>
-        {rightLabel || (
-          <ImageComponent
-            height={18}
-            width={18}
-            name={!toggleSecure ? 'eye_off' : 'eye'}
-          />
-        )}
+          {rightLabel || (
+            <ImageComponent
+              height={18}
+              width={18}
+              name={!toggleSecure ? 'eye_off' : 'eye'}
+            />
+          )}
         </Block>
       </TouchableOpacity>
     );
@@ -155,18 +156,16 @@ const Input = ({
     style,
   ];
 
+  const placeholderColor = error ? 'red' : placeholderTextColor;
   if (primary) {
     return (
-      <Block
-        flex={false}
-        borderColor={error ? 'red' : 'transparent'}
-        borderRadius={8}
-        margin={[hp(1), 0, 0]}
-        borderWidth={error ? 1 : 0}>
+      <Block flex={false} borderRadius={8} margin={[hp(1), 0, 0]}>
         {renderLabel()}
         <Block
           flex={false}
           row
+          borderColor={error ? 'red' : 'transparent'}
+          borderWidth={error ? 1 : 0}
           style={styles.shadow}
           center
           borderRadius={8}
@@ -184,51 +183,49 @@ const Input = ({
             editable={editable}
             autoCorrect={false}
             keyboardType={inputType}
-            placeholderTextColor={
-              placeholderTextColor ? placeholderTextColor : '#000'
-            }
+            placeholderTextColor={placeholderColor ? placeholderColor : '#000'}
             {...rest}
           />
-          {errorText && error && (
-            <Text size={12} errorColor>
-              {errorText}
-            </Text>
-          )}
+
           {renderToggle()}
         </Block>
+        {error && (
+          <Text error medium margin={[hp(0.7), 0, 0]} size={14}>
+            {error}
+          </Text>
+        )}
       </Block>
     );
   }
 
   return (
     <>
-      <Block
-        flex={false}
-        borderRadius={8}
-        borderColor={error ? 'red' : 'transparent'}
-        borderWidth={error ? 1 : 0}
-        margin={[hp(1), 0, 0]}>
+      <Block borderRadius={8} flex={false} margin={[hp(1), 0, 0]}>
         {renderLabel()}
-        <TextInput
-          placeholder={placeholder}
-          style={inputStyles}
-          secureTextEntry={isSecure}
-          autoComplete="off"
-          autoCapitalize="none"
-          editable={editable}
-          autoCorrect={false}
-          keyboardType={inputType}
-          placeholderTextColor={
-            placeholderTextColor ? placeholderTextColor : '#000'
-          }
-          {...rest}
-        />
+        <Block
+          flex={false}
+          borderRadius={8}
+          borderColor={error ? 'red' : 'transparent'}
+          borderWidth={error ? 1 : 0}>
+          <TextInput
+            placeholder={placeholder}
+            style={inputStyles}
+            secureTextEntry={isSecure}
+            autoComplete="off"
+            autoCapitalize="none"
+            editable={editable}
+            autoCorrect={false}
+            keyboardType={inputType}
+            placeholderTextColor={placeholderColor ? placeholderColor : '#000'}
+            {...rest}
+          />
+        </Block>
 
         {renderToggle()}
       </Block>
-      {errorText && error && (
-        <Text white semibold margin={[hp(0.7), wp(2), 0]} size={14}>
-          {errorText}
+      {error && (
+        <Text error medium margin={[hp(0.7), wp(2), 0]} size={14}>
+          {error}
         </Text>
       )}
     </>

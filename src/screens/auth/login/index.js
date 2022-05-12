@@ -5,9 +5,28 @@ import {images} from 'src/assets';
 import CommonStyles from 'src/assets/styles';
 import {Block, Button, hp, ImageComponent, Input, Text, wp} from '_elements';
 import {RoutesName} from '_routeName';
+import {useFormik} from 'formik';
+import * as Yup from 'yup';
 
 const LoginScreen = () => {
   const {navigate} = useNavigation();
+  const formik = useFormik({
+    initialValues: {
+      password: '',
+      email: '',
+    },
+    validationSchema: Yup.object().shape({
+      password: Yup.string()
+        .min(7, 'Too Short!')
+        .max(20, 'Too Long!')
+        .required('Required'),
+      email: Yup.string().email('Invalid email').required('Required'),
+    }),
+    onSubmit: values => {
+      alert(JSON.stringify(values, null, 2));
+      // navigate(RoutesName.DASHBOARD_STACK_SCREEN);
+    },
+  });
   return (
     <ImageBackground source={images.bg} style={CommonStyles.defaultFlex}>
       <SafeAreaView />
@@ -19,13 +38,24 @@ const LoginScreen = () => {
           Welcome to the KC&E
         </Text>
         <Block flex={false} margin={[hp(2), 0, 0]}>
-          <Input placeholder={'Email Address'} label="Email Address" />
+          <Input
+            placeholder={'Email Address'}
+            label="Email Address"
+            onChangeText={formik.handleChange('email')}
+            value={formik.values.email}
+            onBlur={() => formik.handleBlur('email')}
+            error={formik.touched && formik.errors.email}
+          />
           <Block flex={false} margin={[hp(1.5), 0, 0]}>
             <Input
               primary
               secure={true}
               placeholder={'Password'}
               label="Password"
+              value={formik.values.password}
+              onChangeText={formik.handleChange('password')}
+              onBlur={() => formik.handleBlur('password')}
+              error={formik.touched && formik.errors.password}
             />
           </Block>
         </Block>
@@ -34,9 +64,10 @@ const LoginScreen = () => {
         </Text>
         <Block flex={false} center>
           <Button
-            onPress={() => navigate(RoutesName.DASHBOARD_STACK_SCREEN)}
+            onPress={formik.handleSubmit}
             style={{width: wp(35)}}
             uppercase
+            disabled={!formik.isValid || !formik.dirty}
             color={'primary'}>
             Sign In
           </Button>
