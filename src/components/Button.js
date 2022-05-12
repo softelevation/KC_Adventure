@@ -44,6 +44,7 @@ const componentStyles = () => {
       backgroundColor: 'transparent',
       borderColor: light.secondary,
       paddingVertical: t1 * 1.5,
+      borderWidth: 1,
     },
     facebook: {
       backgroundColor: light.facebook,
