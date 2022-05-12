@@ -51,6 +51,9 @@ const DrawerScreen = ({state}) => {
       {renderContent('Logout', 'logout_icon', false, () =>
         navigate(RoutesName.AUTH_STACK_SCREEN),
       )}
+       {renderContent('Guide','', false, () =>
+        navigate(RoutesName.GUIDE_SCREEN),
+      )}
     </Block>
   );
 };
