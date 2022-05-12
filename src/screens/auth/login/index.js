@@ -23,8 +23,7 @@ const LoginScreen = () => {
       email: Yup.string().email('Invalid email').required('Required'),
     }),
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
-      // navigate(RoutesName.DASHBOARD_STACK_SCREEN);
+      navigate(RoutesName.DASHBOARD_STACK_SCREEN);
     },
   });
   return (
