@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from 'src/common/header';
-import {Block, hp, ImageComponent, Text, wp} from '_elements';
-import {FlatList} from 'react-native';
+import { Block, hp, ImageComponent, Text, wp } from '_elements';
+import { FlatList } from 'react-native';
 const Notifications = () => {
   const _renderItem = () => {
     return (
@@ -20,7 +20,7 @@ const Notifications = () => {
         <Text
           h5
           color={'#A5A4A4'}
-          style={{width: wp(71)}}
+          style={{ width: wp(71) }}
           margin={[0, 0, 0, wp(3)]}>
           Lorem ipsum dolor sit amet, conse ctetur adipiscing elit nunc
           vulputate.Lorem ipsum dolors sit amet, conse.
@@ -32,7 +32,8 @@ const Notifications = () => {
     <Block safearea={true} primary>
       <Header name="Notification" />
       <Block flex={1} margin={[0, wp(3)]}>
-        <FlatList data={['1', '2', '3', '4']} renderItem={_renderItem} />
+        <FlatList data={['1', '2', '3', '4']} contentContainerStyle={{ paddingBottom: hp(3) }}
+          renderItem={_renderItem} />
       </Block>
     </Block>
   );

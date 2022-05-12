@@ -11,6 +11,7 @@ import Wishlist from './wishlist';
 import TermsAndConditions from './terms';
 import Tour from './tour';
 import TourDetails from './tour/details';
+import GuideScreen from './guide';
 
 export {
   SplashScreen,
@@ -26,4 +27,5 @@ export {
   TermsAndConditions,
   Tour,
   TourDetails,
+  GuideScreen
 };

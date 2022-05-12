@@ -11,6 +11,8 @@ import {
   Tour,
   TourDetails,
   Wishlist,
+  GuideScreen
+  
 } from '_screens';
 import {defaultOptions} from './constants';
 import {RoutesName} from '_routeName';
@@ -47,6 +49,10 @@ function DrawerNavigator() {
       <Drawer.Screen
         name={RoutesName.TOUR_DETAILS_SCREEN}
         component={TourDetails}
+      />
+        <Drawer.Screen
+        name={RoutesName.GUIDE_SCREEN}
+        component={GuideScreen}
       />
     </Drawer.Navigator>
   );

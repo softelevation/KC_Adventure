@@ -16,10 +16,12 @@ const componentStyles = () => {
       marginVertical: t1,
     },
     shadow: {
-      shadowColor: '#000',
-      shadowOffset: {width: 0, height: 2},
-      shadowOpacity: 0.1,
+      shadowColor: Platform.OS === "ios" ? 'rgba(101, 131, 123, 0.15)' : 'rgba(101, 131, 123, 0.9)',
+      shadowOffset: {width: 0, height: 10},
+      shadowOpacity: 1,
       shadowRadius: 10,
+
+      elevation: 5,
     },
     disabledButton: {
       backgroundColor: '#00000052',
@@ -41,7 +43,7 @@ const componentStyles = () => {
       borderColor: '#fff',
     },
     secondary: {
-      backgroundColor: 'transparent',
+      backgroundColor: light.white,
       borderColor: light.secondary,
       paddingVertical: t1 * 1.5,
       borderWidth: 1,
@@ -99,6 +101,7 @@ const Button = ({
     styles.button,
     borderColor && {borderColor},
     disabled && shadow && styles.shadow,
+    shadow && styles.shadow,
     color && styles[color], // predefined styles colors for backgroundColor
     color && !styles[color] && {backgroundColor: color}, // custom backgroundColor
     style,
