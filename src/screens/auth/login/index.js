@@ -7,6 +7,7 @@ import {Block, Button, hp, ImageComponent, Input, Text, wp} from '_elements';
 import {RoutesName} from '_routeName';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const LoginScreen = () => {
   const {navigate} = useNavigation();
@@ -29,6 +30,7 @@ const LoginScreen = () => {
   return (
     <ImageBackground source={images.bg} style={CommonStyles.defaultFlex}>
       <SafeAreaView />
+      <KeyboardAwareScrollView>
       <Block margin={[hp(15), 0, 0]} defaultPadding={true} flex={false}>
         <Text semibold h1>
           Sign In
@@ -119,6 +121,7 @@ const LoginScreen = () => {
           </Text>
         </Text>
       </Block>
+      </KeyboardAwareScrollView>
     </ImageBackground>
   );
 };

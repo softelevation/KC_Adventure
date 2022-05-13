@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {Platform, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
-import {hp, wp} from './responsive';
+import React, { useState } from 'react';
+import { Platform, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { hp, wp } from './responsive';
 import Block from './Block';
 import Text from './Text';
 
-import {defaultFontSize, Regular} from './theme/fontsize';
+import { defaultFontSize, Regular } from './theme/fontsize';
 import ImageComponent from './ImageComponent';
 
 const componentStyles = () => {
@@ -22,7 +22,7 @@ const componentStyles = () => {
       borderRadius: 8,
       shadowColor:
         Platform.OS === 'ios' ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0.5)',
-      shadowOffset: {width: 0, height: 10},
+      shadowOffset: { width: 0, height: 10 },
       shadowOpacity: 1,
       shadowRadius: 10,
       elevation: 3,
@@ -55,7 +55,7 @@ const componentStyles = () => {
     shadow: {
       shadowColor:
         Platform.OS === 'ios' ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0.5)',
-      shadowOffset: {width: 0, height: 10},
+      shadowOffset: { width: 0, height: 10 },
       shadowOpacity: 1,
       shadowRadius: 10,
       elevation: 3,
@@ -110,7 +110,7 @@ const Input = ({
     }
     return (
       <TouchableOpacity
-        style={{marginRight: wp(2)}}
+        style={{ marginRight: wp(2) }}
         onPress={() => setToggleSecure(!toggleSecure)}>
         <Block flex={false} header>
           {rightLabel || (
@@ -130,14 +130,14 @@ const Input = ({
   const inputType = email
     ? 'email-address'
     : number
-    ? 'numeric'
-    : phone
-    ? 'phone-pad'
-    : 'default';
+      ? 'numeric'
+      : phone
+        ? 'phone-pad'
+        : 'default';
 
   const inputStyles = [
     styles.input,
-    color && {color: color},
+    color && { color: color },
     !editable && {
       backgroundColor: '#000',
       color: '#fff',
@@ -147,7 +147,7 @@ const Input = ({
   ];
   const primaryInputStyles = [
     styles.primaryInput,
-    color && {color: color},
+    color && { color: color },
     !editable && {
       backgroundColor: '#000',
       color: '#fff',
@@ -175,7 +175,7 @@ const Input = ({
             placeholder={placeholder}
             style={[
               primaryInputStyles,
-              secure ? {width: wp(73)} : {width: wp(85)},
+              secure ? { width: wp(73) } : { width: wp(85) },
             ]}
             secureTextEntry={isSecure}
             autoComplete="off"
@@ -199,7 +199,7 @@ const Input = ({
   }
 
   return (
-    <>
+    <Block flex={false} >
       <Block borderRadius={8} flex={false} margin={[hp(1), 0, 0]}>
         {renderLabel()}
         <Block
@@ -228,7 +228,7 @@ const Input = ({
           {error}
         </Text>
       )}
-    </>
+    </Block>
   );
 };
 
