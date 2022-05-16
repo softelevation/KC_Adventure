@@ -1,11 +1,15 @@
 import React from 'react';
-import {ImageBackground, ScrollView} from 'react-native';
-import {images} from 'src/assets';
+import { ImageBackground, ScrollView } from 'react-native';
+import { images } from 'src/assets';
 import CommonStyles from 'src/assets/styles';
 import Header from 'src/common/header';
-import {Block, Button, hp, ImageComponent, Text, wp} from '_elements';
+import { useNavigation } from '@react-navigation/core';
+import { RoutesName } from '_routeName';
+import { Block, Button, hp, ImageComponent, Text, wp } from '_elements';
+import { navigationRef } from 'src/routes/navigation-service';
 
 const TourDetails = () => {
+  const { navigate } = useNavigation();
   return (
     <Block safearea={true} primary>
       <Header name="Tour Details" menuIcon={false} />
@@ -58,10 +62,14 @@ const TourDetails = () => {
         </Block>
       </ScrollView>
       <Block flex={false} row space={'evenly'}>
-        <Button style={{width: wp(42)}} uppercase color={'secondary'}>
+        <Button style={{ width: wp(42) }} uppercase color={'secondary'}>
           Skip
         </Button>
-        <Button style={{width: wp(42)}} uppercase color={'primary'}>
+        <Button
+          style={{ width: wp(42) }}
+          uppercase color={'primary'}
+          onPress={() => navigate('MapScreen')}
+        >
           Get your Guide
         </Button>
       </Block>
