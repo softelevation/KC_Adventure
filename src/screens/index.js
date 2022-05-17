@@ -12,6 +12,9 @@ import TermsAndConditions from './terms';
 import Tour from './tour';
 import TourDetails from './tour/details';
 import GuideScreen from './guide';
+import LoacationFound from './location-found';
+import LoacationDetails from './location-found/details';
+import MapsScreen from './maps';
 
 export {
   SplashScreen,
@@ -27,5 +30,8 @@ export {
   TermsAndConditions,
   Tour,
   TourDetails,
-  GuideScreen
+  GuideScreen,
+  LoacationFound,
+  LoacationDetails,
+  MapsScreen,
 };

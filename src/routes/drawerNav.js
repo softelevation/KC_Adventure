@@ -11,29 +11,53 @@ import {
   Tour,
   TourDetails,
   Wishlist,
-  GuideScreen
-  
+  GuideScreen,
+  ExperienceDetail,
+  MapsScreen,
+  LoacationFound,
 } from '_screens';
 import {defaultOptions} from './constants';
 import {RoutesName} from '_routeName';
 import DrawerScreen from 'src/common/drawer';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const Drawer = createDrawerNavigator();
+const DrawerStack = createNativeStackNavigator();
+const ExperinceStackNavigator = () => {
+  return (
+    <DrawerStack.Navigator
+      initialRouteName={RoutesName.EXPERIENCES_SCREEN}
+      screenOptions={{...defaultOptions}}>
+      <DrawerStack.Screen
+        name={RoutesName.EXPERIENCES_SCREEN}
+        component={ExperienceScreen}
+      />
+      <DrawerStack.Screen
+        name={RoutesName.EXPERIENCES_DETAILS_SCREEN}
+        component={ExperienceDetail}
+      />
+      <DrawerStack.Screen name={RoutesName.MAP_SCREEN} component={MapsScreen} />
+      <DrawerStack.Screen
+        name={RoutesName.LOCATION_FOUND_SCREEN}
+        component={LoacationFound}
+      />
+    </DrawerStack.Navigator>
+  );
+};
 
 function DrawerNavigator() {
   return (
     <Drawer.Navigator
       drawerContent={props => <DrawerScreen {...props} />}
-      initialRouteName={RoutesName.EXPERIENCES_SCREEN}
+      initialRouteName={RoutesName.EXPERIENCES_STACK_SCREEN}
       screenOptions={{
         ...defaultOptions,
         drawerType: 'back',
         overlayColor: 'transparent',
       }}>
       <Drawer.Screen
-        name={RoutesName.EXPERIENCES_SCREEN}
-        component={ExperienceScreen}
+        name={RoutesName.EXPERIENCES_STACK_SCREEN}
+        component={ExperinceStackNavigator}
       />
-
       <Drawer.Screen name={RoutesName.WISHLIST_SCREEN} component={Wishlist} />
       <Drawer.Screen name={RoutesName.ABOUT_US_SCREEN} component={AboutUs} />
       <Drawer.Screen
@@ -50,10 +74,7 @@ function DrawerNavigator() {
         name={RoutesName.TOUR_DETAILS_SCREEN}
         component={TourDetails}
       />
-        <Drawer.Screen
-        name={RoutesName.GUIDE_SCREEN}
-        component={GuideScreen}
-      />
+      <Drawer.Screen name={RoutesName.GUIDE_SCREEN} component={GuideScreen} />
     </Drawer.Navigator>
   );
 }
