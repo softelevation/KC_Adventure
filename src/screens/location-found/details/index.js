@@ -1,12 +1,11 @@
 import React from 'react';
 import Header from 'src/common/header';
-import { Block, hp, ImageComponent, Text, wp } from '_elements';
-import { ScrollView, FlatList } from 'react-native';
+import {Block, hp, ImageComponent, Text, wp} from '_elements';
+import {ScrollView, FlatList} from 'react-native';
 const LocationDetails = () => {
-  const _renderVerticalItem = ({ item }) => {
+  const _renderVerticalItem = ({item}) => {
     return (
       <Block safearea={true} primary>
-
         <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
           <ImageComponent name="aboutus_img" width={wp(100)} height={208} />
           <Block flex={false} padding={[hp(2), wp(3)]}>
@@ -16,22 +15,8 @@ const LocationDetails = () => {
               venenatis in sed. Mauris venenatis sed et, cras. Quisque fermentum
               faucibus eget sit et nulla sodales. Tellus pellentesque dignissim
               malesuada in netus odio sed congue. Arcu, tempor ut posuere urna
-              mauris. Est a risus, nisi nisi. Odio at vitae in massa diam habitant
-              ullamcorper volutpat non.{'\n'}
-              {'\n'} Lorem quam semper felis id quis laoreet pulvinar nunc proin.
-              Ac ultrices imperdiet dictum aliquet eros egestas ultrices.
-              Pellentesque lorem nunc quis posuere posuere. In volutpat.{'\n'}
-              {'\n'} Duis at posuere ut morbi. Ac purus id donec vitae amet
-              facilisi. Arcu ac volutpat, non eget integer pharetra in neque.
-              Egestas habitant ultrices ac elit suscipit mattis morbi habitasse
-              lorem.{'\n'}
-              {'\n'} Interdum posuere neque in feugiat. Parturient ac accumsan
-              ultrices suscipit enim nisl viverra dolor fames. Semper parturient
-              pulvinar nec auctor lectus tempus quam. Dapibus eget sollicitudin
-              dignissim pretium miInterdum posuere neque in feugiat. Parturient ac
-              accumsan ultrices suscipit enim nisl viverra dolor fames. Semper
-              parturient pulvinar nec auctor lectus tempus quam. Dapibus eget
-              sollicitudin dignissim pretium mi
+              mauris. Est a risus, nisi nisi. Odio at vitae in massa diam
+              habitant ullamcorper volutpat non.{'\n'}
             </Text>
           </Block>
         </ScrollView>
@@ -42,11 +27,18 @@ const LocationDetails = () => {
     <Block safearea={true} primary>
       <Header menuIcon={false} name="bike details" />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Block center flex={false} >
-          <Text spacing={1} height={27} gutterBottom width={wp(50)} center margin={[0, wp(10)]} bold size={18}>
+        <Block center flex={false}>
+          <Text
+            spacing={1}
+            height={27}
+            gutterBottom
+            center
+            margin={[hp(1), wp(10)]}
+            bold
+            size={18}>
             Before you get going let’s review some important information!
           </Text>
-          <Block flex={false}>
+          <Block margin={[hp(1), 0, 0]} flex={false}>
             <FlatList
               scrollEnabled={false}
               keyExtractor={(item, index) => index.toString()}
@@ -62,4 +54,3 @@ const LocationDetails = () => {
 };
 
 export default LocationDetails;
-
