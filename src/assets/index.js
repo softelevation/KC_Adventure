@@ -26,4 +26,5 @@ export const images = {
   terms_img: require('./icons/terms-img.png'),
   guide_img: require('./icons/guide_post.png'),
   done_icon: require('./icons/done.png'),
+  Location_Detail:require('./icons/unsplash_1.png')
 };
