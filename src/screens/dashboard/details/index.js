@@ -13,10 +13,11 @@ import {
 } from '_elements';
 import Modal from 'react-native-modal';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {RoutesName} from '_routeName';
 
 const ExperienceDetails = () => {
   const [isModalVisible, setModalVisible] = useState(true);
-  const {goBack} = useNavigation();
+  const {goBack, navigate} = useNavigation();
 
   useFocusEffect(
     React.useCallback(() => {
@@ -94,6 +95,7 @@ const ExperienceDetails = () => {
           </Text>
           <Block flex={false} center margin={[hp(3), 0, 0]}>
             <Button
+              onPress={() => navigate(RoutesName.MAP_SCREEN)}
               icon="location_icon"
               iconColor={'#fff'}
               iconWithText

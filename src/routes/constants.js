@@ -10,6 +10,7 @@ const RoutesName = {
   SIGNUP_SCREEN: 'SignupScreen',
   ADVENTURE_SCREEN: 'AdventureScreen',
   EXPERIENCES_SCREEN: 'ExperienceScreen',
+  EXPERIENCES_STACK_SCREEN: 'ExperienceStackScreen',
   EXPERIENCES_DRAWER_SCREEN: 'ExperienceDrawerScreen',
   EXPERIENCES_DETAILS_SCREEN: 'ExperienceDetailsScreen',
   NOTIFICATION_SCREEN: 'NotifcationScreen',
@@ -19,7 +20,8 @@ const RoutesName = {
   HELP_SCREEN: 'HelpScreen',
   TOUR_SCREEN: 'TourScreen',
   TOUR_DETAILS_SCREEN: 'TourDetailsScreen',
-  GUIDE_SCREEN :'GuideScreen',
-  MAP_SCREEN:'MapScreen',
+  GUIDE_SCREEN: 'GuideScreen',
+  MAP_SCREEN: 'MapScreen',
+  LOCATION_FOUND_SCREEN: 'LocationFoundScreen',
 };
 export {defaultOptions, RoutesName};
