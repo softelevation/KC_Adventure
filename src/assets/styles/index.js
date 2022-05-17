@@ -16,6 +16,11 @@ const CommonStyles = {
     borderRadius: 24,
     marginHorizontal: wp(2),
   },
+  modalEmergencyStyle: {
+    borderRadius: 24,
+    marginHorizontal: wp(4),
+    // position: 'absolute',
+  },
   modalWithoutMarginStyle: {
     position: 'absolute',
     bottom: 0,

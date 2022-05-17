@@ -35,8 +35,8 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	 <key>NSLocationWhenInUseUsageDescription</key>
+  <string>$(PRODUCT_NAME) want to use your location when clocking in and out</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Black.otf</string>

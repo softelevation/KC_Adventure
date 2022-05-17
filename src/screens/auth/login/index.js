@@ -13,8 +13,8 @@ const LoginScreen = () => {
   const {navigate} = useNavigation();
   const formik = useFormik({
     initialValues: {
-      password: '',
-      email: '',
+      password: '12345678',
+      email: 'bharat.chhabra339@gmail.com',
     },
     validationSchema: Yup.object().shape({
       password: Yup.string()
@@ -68,7 +68,7 @@ const LoginScreen = () => {
               onPress={() => formik.handleSubmit()}
               style={{width: wp(35)}}
               uppercase
-              disabled={!formik.isValid || !formik.dirty}
+              disabled={!formik.isValid}
               color={'primary'}>
               Sign In
             </Button>

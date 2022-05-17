@@ -24,5 +24,6 @@ export const images = {
   notifi_icon: require('./icons/fi-ss-bell.png'),
   aboutus_img: require('./icons/aboutus-img.png'),
   terms_img: require('./icons/terms-img.png'),
-  guide_img: require('./icons/guide_post.png')
+  guide_img: require('./icons/guide_post.png'),
+  done_icon: require('./icons/done.png'),
 };
