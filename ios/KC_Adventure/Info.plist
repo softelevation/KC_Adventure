@@ -35,7 +35,11 @@
 			</dict>
 		</dict>
 	</dict>
-	 <key>NSLocationWhenInUseUsageDescription</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
+  <string>$(PRODUCT_NAME) want to use your location when clocking in and out</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+  <string>$(PRODUCT_NAME) want to use your location when clocking in and out</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
   <string>$(PRODUCT_NAME) want to use your location when clocking in and out</string>
 	<key>UIAppFonts</key>
 	<array>

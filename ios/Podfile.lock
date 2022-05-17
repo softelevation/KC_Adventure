@@ -99,6 +99,12 @@ PODS:
     - GoogleMaps/Base
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
+  - Permission-LocationAccuracy (3.3.1):
+    - RNPermissions
+  - Permission-LocationAlways (3.3.1):
+    - RNPermissions
+  - Permission-LocationWhenInUse (3.3.1):
+    - RNPermissions
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -312,6 +318,8 @@ PODS:
     - Google-Maps-iOS-Utils (= 4.1.0)
     - GoogleMaps (= 6.1.1)
     - React-Core
+  - react-native-location (2.5.0):
+    - React
   - react-native-maps (0.31.1):
     - React-Core
   - react-native-safe-area-context (4.2.5):
@@ -389,6 +397,8 @@ PODS:
     - React-Core
   - RNGestureHandler (2.4.2):
     - React-Core
+  - RNPermissions (3.3.1):
+    - React-Core
   - RNReanimated (2.8.0):
     - DoubleConversion
     - FBLazyVector
@@ -452,6 +462,9 @@ DEPENDENCIES:
   - FlipperKit/SKIOSNetworkPlugin (= 0.125.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - OpenSSL-Universal (= 1.1.1100)
+  - Permission-LocationAccuracy (from `../node_modules/react-native-permissions/ios/LocationAccuracy`)
+  - Permission-LocationAlways (from `../node_modules/react-native-permissions/ios/LocationAlways`)
+  - Permission-LocationWhenInUse (from `../node_modules/react-native-permissions/ios/LocationWhenInUse`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -469,6 +482,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-google-maps (from `../node_modules/react-native-maps`)
+  - react-native-location (from `../node_modules/react-native-location`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -485,6 +499,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -520,6 +535,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  Permission-LocationAccuracy:
+    :path: "../node_modules/react-native-permissions/ios/LocationAccuracy"
+  Permission-LocationAlways:
+    :path: "../node_modules/react-native-permissions/ios/LocationAlways"
+  Permission-LocationWhenInUse:
+    :path: "../node_modules/react-native-permissions/ios/LocationWhenInUse"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -550,6 +571,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/geolocation"
   react-native-google-maps:
     :path: "../node_modules/react-native-maps"
+  react-native-location:
+    :path: "../node_modules/react-native-location"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
   react-native-safe-area-context:
@@ -582,6 +605,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -610,6 +635,9 @@ SPEC CHECKSUMS:
   GoogleMaps: 94e6e0851beece6678af9f508f4918b7a7c61722
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
+  Permission-LocationAccuracy: 43d7a6b3d736a90168e9fc7117a721ca44722f83
+  Permission-LocationAlways: fbf36cbdcabc3101f1168ad1ec45cfc5a6448cc4
+  Permission-LocationWhenInUse: 006c85c8de0c05b5d8be8e8029e4f6b813270293
   RCT-Folly: 4d8508a426467c48885f1151029bc15fa5d7b3b8
   RCTRequired: 00581111c53531e39e3c6346ef0d2c0cf52a5a37
   RCTTypeSafety: 07e03ee7800e7dd65cba8e52ad0c2edb06c96604
@@ -625,6 +653,7 @@ SPEC CHECKSUMS:
   React-logger: f79dd3cc0f9b44f5611c6c7862badd891a862cf8
   react-native-geolocation: 69f4fd37650b8e7fee91816d395e62dd16f5ab8d
   react-native-google-maps: 8231ffa015bf8b222c2e2661fa9163cdb609a224
+  react-native-location: 5a40ec1cc6abf2f6d94df979f98ec76c3a415681
   react-native-maps: 8b8bfada2c86205a7f5a07dd1f92f29b33ea83aa
   react-native-safe-area-context: ebf8c413eb8b5f7c392a036a315eb7b46b96845f
   React-perflogger: 30ab8d6db10e175626069e742eead3ebe8f24fd5
@@ -641,12 +670,13 @@ SPEC CHECKSUMS:
   ReactCommon: bf2888a826ceedf54b99ad1b6182d1bc4a8a3984
   RNCAsyncStorage: 9367a646dc24e3ab7b6874d79bc1bfd0832dce58
   RNGestureHandler: 61628a2c859172551aa2100d3e73d1e57878392f
+  RNPermissions: 34d678157c800b25b22a488e4d8babb57456e796
   RNReanimated: 64573e25e078ae6bec03b891586d50b9ec284393
   RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: 17cd9a50243093b547c1e539c749928dd68152da
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: d3abe33a964a6eb4daf6f6ae4adfe567812bbd99
+PODFILE CHECKSUM: 548bfdf73c74116a6417b49f634a4723ba6e4e96
 
 COCOAPODS: 1.11.3
