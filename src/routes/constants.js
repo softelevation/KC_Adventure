@@ -23,5 +23,6 @@ const RoutesName = {
   GUIDE_SCREEN: 'GuideScreen',
   MAP_SCREEN: 'MapScreen',
   LOCATION_FOUND_SCREEN: 'LocationFoundScreen',
+  LOCATION_DETAILS:'LocationDetails'
 };
 export {defaultOptions, RoutesName};

@@ -15,6 +15,7 @@ import {
   ExperienceDetail,
   MapsScreen,
   LoacationFound,
+  LoacationDetails,
 } from '_screens';
 import {defaultOptions} from './constants';
 import {RoutesName} from '_routeName';
@@ -39,6 +40,10 @@ const ExperinceStackNavigator = () => {
       <DrawerStack.Screen
         name={RoutesName.LOCATION_FOUND_SCREEN}
         component={LoacationFound}
+      />
+       <DrawerStack.Screen
+        name={RoutesName.LOCATION_DETAILS}
+        component={LoacationDetails}
       />
     </DrawerStack.Navigator>
   );
