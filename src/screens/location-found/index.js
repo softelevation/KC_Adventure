@@ -20,7 +20,7 @@ const LocationFound = () => {
       <CustomButton
         activeOpacity={0.9}
         onPress={() => {
-          navigation.navigate(RoutesName.LOCATION_FOUND_SCREEN);
+          navigation.navigate(RoutesName.ROOM_BOOK);
         }}>
         <Block
           header

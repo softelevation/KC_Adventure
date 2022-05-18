@@ -106,8 +106,8 @@ const Experiences = () => {
           flex={false}>
           <ImageComponent
             name="demo1_icon"
-            width={179}
-            height={156}
+            width={194}
+            height={157}
             radius={14}
           />
           <Block

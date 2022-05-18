@@ -15,6 +15,7 @@ import GuideScreen from './guide';
 import LoacationFound from './location-found';
 import LoacationDetails from './location-found/details';
 import MapsScreen from './maps';
+import BookRoom from './room-book';
 
 export {
   SplashScreen,
@@ -34,4 +35,5 @@ export {
   LoacationFound,
   LoacationDetails,
   MapsScreen,
+  BookRoom,
 };

@@ -1,7 +1,7 @@
 // In App.js in a new project
 
 import * as React from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import {
   AboutUs,
   ExperienceScreen,
@@ -16,18 +16,19 @@ import {
   MapsScreen,
   LoacationFound,
   LoacationDetails,
+  BookRoom,
 } from '_screens';
-import {defaultOptions} from './constants';
-import {RoutesName} from '_routeName';
+import { defaultOptions } from './constants';
+import { RoutesName } from '_routeName';
 import DrawerScreen from 'src/common/drawer';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Drawer = createDrawerNavigator();
 const DrawerStack = createNativeStackNavigator();
 const ExperinceStackNavigator = () => {
   return (
     <DrawerStack.Navigator
       initialRouteName={RoutesName.EXPERIENCES_SCREEN}
-      screenOptions={{...defaultOptions}}>
+      screenOptions={{ ...defaultOptions }}>
       <DrawerStack.Screen
         name={RoutesName.EXPERIENCES_SCREEN}
         component={ExperienceScreen}
@@ -41,9 +42,13 @@ const ExperinceStackNavigator = () => {
         name={RoutesName.LOCATION_FOUND_SCREEN}
         component={LoacationFound}
       />
-       <DrawerStack.Screen
+      <DrawerStack.Screen
         name={RoutesName.LOCATION_DETAILS}
         component={LoacationDetails}
+      />
+      <DrawerStack.Screen
+        name={RoutesName.ROOM_BOOK}
+        component={BookRoom}
       />
     </DrawerStack.Navigator>
   );

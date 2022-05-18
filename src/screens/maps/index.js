@@ -16,6 +16,7 @@ import {useFocusEffect} from '@react-navigation/native';
 const MapsScreen = () => {
   const getLiveLocation = async () => {
     const checkPermission = await locationPermission();
+    console.log(checkPermission,'checkPermission')
     if (checkPermission) {
       const request = await requestPermission();
       if (request) {

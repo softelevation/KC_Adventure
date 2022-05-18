@@ -132,7 +132,7 @@ const Adventure = () => {
               borderRadius={24}
               header
               flex={false}
-              style={{height: hp(53)}}>
+              style={{height: hp(55)}}>
               <Block flex={false} center>
                 <ImageComponent name="done_icon" height={64} width={135} />
                 <Text gutterBottom size={25} semibold center>

@@ -65,7 +65,7 @@ const ExperienceDetails = () => {
           borderRadius={24}
           primary
           flex={false}
-          style={{height: hp(55)}}>
+          style={{height: hp(58)}}>
           <Text gutterBottom lightBlack bold h2>
             Isola Bella
           </Text>

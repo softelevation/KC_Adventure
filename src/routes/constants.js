@@ -23,6 +23,7 @@ const RoutesName = {
   GUIDE_SCREEN: 'GuideScreen',
   MAP_SCREEN: 'MapScreen',
   LOCATION_FOUND_SCREEN: 'LocationFoundScreen',
-  LOCATION_DETAILS:'LocationDetails'
+  LOCATION_DETAILS: 'LocationDetails',
+  ROOM_BOOK: 'RoomBook',
 };
-export {defaultOptions, RoutesName};
+export { defaultOptions, RoutesName };

@@ -18,7 +18,7 @@ export const getCurrentLocation = () =>
         console.log('error.message: ', error.message);
       },
       {
-        enableHighAccuracy: true,
+        enableHighAccuracy: false,
         timeout: 20000,
         maximumAge: 1000,
       },
@@ -35,6 +35,13 @@ export const requestPermission = () => {
       // …
     });
   } else {
+    return request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then(result => {
+      console.log('result Android: ', result);
+      if (result === RESULTS.GRANTED) {
+        return true;
+      }
+      // …
+    });
   }
 };
 
@@ -52,6 +59,7 @@ export const locationPermission = async () => {
             console.log(
               'The permission has not been requested / is denied but requestable',
             );
+            
             return false;
           case RESULTS.LIMITED:
             console.log('The permission is limited: some actions are possible');
@@ -71,23 +79,37 @@ export const locationPermission = async () => {
         // …
       });
   } else {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: 'Location Access Required',
-          message: 'This App needs to Access your location',
-        },
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        //To Check, If Permission is granted
-        // getOneTimeLocation();
-        // subscribeLocationLocation();
-      } else {
-        // setLocationStatus('Permission Denied');
+   return check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
+    .then(result => {
+      switch (result) {
+        case RESULTS.UNAVAILABLE:
+          console.log(
+            'This feature is not available (on this device / in this context)',
+          );
+          return false;
+        case RESULTS.DENIED:
+          console.log(
+            'The permission has not been requested / is denied but requestable',
+          );
+          requestPermission();
+          return false;
+        case RESULTS.LIMITED:
+          console.log('The permission is limited: some actions are possible');
+          return false;
+        case RESULTS.GRANTED:
+          console.log('The permission is granted');
+          return true;
+        case RESULTS.BLOCKED:
+          console.log('The permission is denied and not requestable anymore');
+          requestPermission();
+          return false;
+        default:
+          return false;
       }
-    } catch (err) {
-      console.warn(err);
-    }
+    })
+    .catch(error => {
+      console.log('error: ', error);
+      // …
+    });
   }
 };
