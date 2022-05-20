@@ -1,10 +1,12 @@
 import React, {useRef} from 'react';
 import Header from 'src/common/header';
 import {SignatureScreen} from 'src/components/signature';
-import WebView from 'react-native-webview';
+import {RoutesName} from '_routeName';
+import {useNavigation} from '@react-navigation/native';
 import {Block, Button, hp, ImageComponent, Input, Text, wp} from '_elements';
 const BookRoom = ({text, onOK}) => {
   const ref = useRef();
+  const navigation = useNavigation();
 
   // Called after ref.current.readSignature() reads a non-empty base64 string
   const handleOK = signature => {
@@ -35,18 +37,18 @@ const BookRoom = ({text, onOK}) => {
     <Block safearea={true} primary>
       <Header menuIcon={false} name="room book" />
 
-      <Block flex={false} margin={[hp(4), 0, 0]} padding={[0,wp(6)]}>
+      <Block flex={false} margin={[hp(4), 0, 0]} padding={[0, wp(6)]}>
         <Input placeholder={'Enter Name'} label="Name" />
+        <Block flex={false} margin={[hp(4), 0, 0]}>
+          <Input primary placeholder={'Enter '} label="Room Number" />
+        </Block>
 
-        <Input primary placeholder={'Enter '} label="Room Number" />
-
-        <Text h5 semibold color={'#444444'}>
-          Signature
-        </Text>
         <SignatureScreen />
-        <Block margin={[hp(5),0]} center flex={false}>
-          <Button style={{width: wp(50)}} uppercase color={'primary'}>
-            Start your search
+        <Block margin={[hp(5), 0]} center flex={false}>
+          <Button style={{width: wp(50)}} uppercase color={'primary'} onPress={() => {
+          navigation.navigate(RoutesName.FEED_BACK);
+        }} >
+            book to room
           </Button>
         </Block>
       </Block>
