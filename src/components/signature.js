@@ -1,8 +1,8 @@
 import React, {useRef, useState} from 'react';
-import {StyleSheet,  View, Image} from 'react-native';
+import {StyleSheet, View, Image} from 'react-native';
 import Signature from 'react-native-signature-canvas';
 import {Webview} from 'react-native-webview';
-import {Block, hp ,Text} from '_elements';
+import {Block, hp, Text} from '_elements';
 import {light} from './theme/colors';
 
 export const SignatureScreen = () => {
@@ -30,7 +30,7 @@ export const SignatureScreen = () => {
   }`;
 
   return (
-    <Block flex={false}>
+    <Block flex={false} marginTop={hp(5)} style={{height: hp(18)}}>
       {/* <View style={styles.preview}>
         {signature ? (
           <Image
@@ -40,47 +40,37 @@ export const SignatureScreen = () => {
           />
         ) : null}
       </View> */}
-      <Block style={{height: hp(15), marginBottom: hp(5) , marginTop:hp(5)}}  flex={false}>
+
       <Text h5 semibold color={'#444444'}>
-          Signature
-        </Text>
-        <Signature
-          ref={ref}
-          style={{backgroundColor: '#fffff'}}
-          descriptionText="Sign"
-          clearText="Clear"
-          confirmText="Save"
-          webStyle={`
-          .m-signature-pad {
-            position: absolute;
-            font-size: 10px;
-            width: 700px;
-            height: 400px;
-            top: 50%;
-            left: 30%;
-            margin-left: -350px;
-            margin-top: -200px;
-            margin-bottom:100px;
-            border: 1px solid #e8e8e8;
-            background-color: #fff;
-            border-radius: 4px;
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
-          }
-          .m-signature-pad--body {
-            
-          }
-          `}
-          onEnd={handleEnd}
-          onOK={handleSignature}
-          onEmpty={handleEmpty}
-          onClear={handleClear}
-          backgroundColor="rgb(255,255,255)"
-          penColor={light.secondary}
-          imageType="image/jpeg"
-          minWidth={2}
-          
-        />
-      </Block>
+        Signature
+      </Text>
+      <Signature
+        ref={ref}
+        bgHeight={100}
+        descriptionText="Sign"
+        clearText="Clear"
+        confirmText="Save"
+        onEnd={handleEnd}
+        onEmpty={handleEmpty}
+        onClear={handleClear}
+        backgroundColor="rgb(255,255,255)"
+        penColor={light.secondary}
+        imageType="image/jpeg"
+        scrollable={false}
+        onOK={handleSignature}
+        webStyle={`
+                .m-signature-pad {
+                  flex: 1;
+                  box-shadow: none;
+                  border-radius: 10px;
+                  height:100px;
+                }
+                .m-signature-pad--footer {
+                  display: none;
+                }
+                `}
+        backgroundColor={'rgba(255,255,255,0)'}
+      />
     </Block>
   );
 };

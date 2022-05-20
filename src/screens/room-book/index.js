@@ -37,17 +37,29 @@ const BookRoom = ({text, onOK}) => {
     <Block safearea={true} primary>
       <Header menuIcon={false} name="room book" />
 
-      <Block flex={false} margin={[hp(4), 0, 0]} padding={[0, wp(6)]}>
-        <Input placeholder={'Enter Name'} label="Name" />
-        <Block flex={false} margin={[hp(4), 0, 0]}>
-          <Input primary placeholder={'Enter '} label="Room Number" />
+      <Block flex={false} margin={[hp(4), 0, 0]} padding={[0, wp(5)]}>
+        <Input
+          placeholder={'Enter Name'}
+          style={{marginTop: -hp(1)}}
+          label="Name"
+        />
+        <Block flex={false} margin={[hp(3), 0, 0]}>
+          <Input
+            placeholder={'Enter '}
+            style={{marginTop: -hp(0.5)}}
+            label="Room Number"
+          />
         </Block>
 
         <SignatureScreen />
-        <Block margin={[hp(5), 0]} center flex={false}>
-          <Button style={{width: wp(50)}} uppercase color={'primary'} onPress={() => {
-          navigation.navigate(RoutesName.FEED_BACK);
-        }} >
+        <Block margin={[hp(10), 0]} center flex={false}>
+          <Button
+            style={{width: wp(50)}}
+            uppercase
+            color={'primary'}
+            onPress={() => {
+              navigation.navigate(RoutesName.FEED_BACK);
+            }}>
             book to room
           </Button>
         </Block>

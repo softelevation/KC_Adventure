@@ -32,4 +32,11 @@ export const images = {
   credit_icon: require('./icons/creditcard.png'),
   upi_icon: require('./icons/upi.png'),
   wallet_icon: require('./icons/wallet.png'),
+  gpay_icon: require('./icons/gpay.png'),
+  phonepe_icon: require('./icons/phonepe.png'),
+  bhim_icon: require('./icons/bhim.png'),
+  upi_logo: require('./icons/upiicon.png'),
+  radio_off: require('./icons/radiooff.png'),
+  radio_on: require('./icons/radioon.png'),
+  view_all: require('./icons/viewall.png'),
 };
