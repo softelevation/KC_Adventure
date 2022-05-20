@@ -1,8 +1,8 @@
 import React, {useRef, useState} from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet,  View, Image} from 'react-native';
 import Signature from 'react-native-signature-canvas';
 import {Webview} from 'react-native-webview';
-import {Block, hp} from '_elements';
+import {Block, hp ,Text} from '_elements';
 import {light} from './theme/colors';
 
 export const SignatureScreen = () => {
@@ -28,6 +28,7 @@ export const SignatureScreen = () => {
     border-radius:20px;
     background:#fff;
   }`;
+
   return (
     <Block flex={false}>
       {/* <View style={styles.preview}>
@@ -39,20 +40,34 @@ export const SignatureScreen = () => {
           />
         ) : null}
       </View> */}
-      <Block style={{height: hp(20), marginBottom: hp(2)}} flex={false}>
+      <Block style={{height: hp(15), marginBottom: hp(5) , marginTop:hp(5)}}  flex={false}>
+      <Text h5 semibold color={'#444444'}>
+          Signature
+        </Text>
         <Signature
           ref={ref}
-          style={{backgroundColor: '#fffff', borderRadius: 20}}
+          style={{backgroundColor: '#fffff'}}
           descriptionText="Sign"
           clearText="Clear"
           confirmText="Save"
           webStyle={`
           .m-signature-pad {
-            box-shadow: none;
-            border-radius: 10px;
+            position: absolute;
+            font-size: 10px;
+            width: 700px;
+            height: 400px;
+            top: 50%;
+            left: 30%;
+            margin-left: -350px;
+            margin-top: -200px;
+            margin-bottom:100px;
+            border: 1px solid #e8e8e8;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
           }
-          .m-signature-pad--footer {
-            display: none;
+          .m-signature-pad--body {
+            
           }
           `}
           onEnd={handleEnd}
@@ -63,6 +78,7 @@ export const SignatureScreen = () => {
           penColor={light.secondary}
           imageType="image/jpeg"
           minWidth={2}
+          
         />
       </Block>
     </Block>

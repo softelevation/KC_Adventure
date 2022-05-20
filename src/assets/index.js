@@ -26,5 +26,10 @@ export const images = {
   terms_img: require('./icons/terms-img.png'),
   guide_img: require('./icons/guide_post.png'),
   done_icon: require('./icons/done.png'),
-  Location_Detail:require('./icons/unsplash_1.png')
+  Location_Detail: require('./icons/unsplash_1.png'),
+  check_icon: require('./icons/check.png'),
+  uncheck_icon: require('./icons/uncheck.png'),
+  credit_icon: require('./icons/creditcard.png'),
+  upi_icon: require('./icons/upi.png'),
+  wallet_icon: require('./icons/wallet.png'),
 };
