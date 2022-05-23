@@ -1,8 +1,8 @@
 import React, {useRef, useState} from 'react';
-import {StyleSheet, View, Image} from 'react-native';
+import {StyleSheet, View, Image, Platform} from 'react-native';
 import Signature from 'react-native-signature-canvas';
 import {Webview} from 'react-native-webview';
-import {Block, hp, Text} from '_elements';
+import {Block, hp, wp, Text} from '_elements';
 import {light} from './theme/colors';
 
 export const SignatureScreen = () => {
@@ -30,7 +30,11 @@ export const SignatureScreen = () => {
   }`;
 
   return (
-    <Block flex={false} marginTop={hp(5)} style={{height: hp(18)}}>
+    <Block
+      flex={false}
+      marginTop={hp(5)}
+      padding={[0, wp(5)]}
+      style={{height: hp(18)}}>
       {/* <View style={styles.preview}>
         {signature ? (
           <Image
@@ -47,6 +51,16 @@ export const SignatureScreen = () => {
       <Signature
         ref={ref}
         bgHeight={100}
+        // style={{
+        //   shadowColor:
+        //     Platform.OS === 'ios'
+        //       ? 'rgba(0, 0, 0, 0.05)'
+        //       : 'rgba(0, 0, 0, 0.5)',
+        //   shadowOffset: {width: 0, height: 10},
+        //   shadowOpacity: 1,
+        //   shadowRadius: 10,
+        //   elevation: 3,
+        // }}
         descriptionText="Sign"
         clearText="Clear"
         confirmText="Save"
@@ -60,16 +74,25 @@ export const SignatureScreen = () => {
         onOK={handleSignature}
         webStyle={`
                 .m-signature-pad {
-                  flex: 1;
-                  box-shadow: none;
+                  // flex: 1;
+                  // box-shadow: none;
                   border-radius: 10px;
+                  border: none;
                   height:100px;
+                  width:320px;
+                  positin:center;
+                  marginleft:3px;
+                  
                 }
                 .m-signature-pad--footer {
                   display: none;
+                  
+                }
+                .m-signature-pad--body {
+                  border: none;
+                  
                 }
                 `}
-        backgroundColor={'rgba(255,255,255,0)'}
       />
     </Block>
   );

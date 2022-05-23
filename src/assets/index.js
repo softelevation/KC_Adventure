@@ -39,4 +39,6 @@ export const images = {
   radio_off: require('./icons/radiooff.png'),
   radio_on: require('./icons/radioon.png'),
   view_all: require('./icons/viewall.png'),
+  marker_background: require('./icons/markerbackground.png'),
+  dinner_icon: require('./icons/dinner.png'),
 };

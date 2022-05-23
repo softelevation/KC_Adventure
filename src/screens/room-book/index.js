@@ -4,6 +4,7 @@ import {SignatureScreen} from 'src/components/signature';
 import {RoutesName} from '_routeName';
 import {useNavigation} from '@react-navigation/native';
 import {Block, Button, hp, ImageComponent, Input, Text, wp} from '_elements';
+
 const BookRoom = ({text, onOK}) => {
   const ref = useRef();
   const navigation = useNavigation();
@@ -50,19 +51,20 @@ const BookRoom = ({text, onOK}) => {
             label="Room Number"
           />
         </Block>
+      </Block>
 
-        <SignatureScreen />
-        <Block margin={[hp(10), 0]} center flex={false}>
-          <Button
-            style={{width: wp(50)}}
-            uppercase
-            color={'primary'}
-            onPress={() => {
-              navigation.navigate(RoutesName.FEED_BACK);
-            }}>
-            book to room
-          </Button>
-        </Block>
+      <SignatureScreen />
+
+      <Block margin={[hp(10), 0]} center flex={false}>
+        <Button
+          style={{width: wp(50)}}
+          uppercase
+          color={'primary'}
+          onPress={() => {
+            navigation.navigate(RoutesName.FEED_BACK);
+          }}>
+          book to room
+        </Button>
       </Block>
     </Block>
   );
