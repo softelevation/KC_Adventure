@@ -11,19 +11,36 @@ import {
 } from 'src/utils/helper';
 import Header from 'src/common/header';
 import CommonStyles from 'src/assets/styles';
-import {ImageBackground, StyleSheet} from 'react-native';
-import {Block, hp, wp, ImageComponent, Text} from '_elements';
+import {Image, View, StyleSheet, TouchableOpacity} from 'react-native';
+import WebView from 'react-native-webview';
+import {
+  Block,
+  hp,
+  wp,
+  Button,
+  CustomButton,
+  ImageComponent,
+  Text,
+} from '_elements';
+import CustomRatingBar from 'src/components/rating';
 import {useFocusEffect} from '@react-navigation/native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {Marker, Callout} from 'react-native-maps';
 import {images} from 'src/assets';
+import Modal from 'react-native-modal';
+import {RoutesName} from '_routeName';
+import {useNavigation} from '@react-navigation/native';
+import Restaurant_Image from 'src/assets/icons/restaurantimg.png';
 const latitudeDelta = 0.015;
 const longitudeDelta = 0.0121;
 const MapsScreen = () => {
+  const [isModalVisible, setModalVisible] = useState(true);
+  const {goBack, navigate} = useNavigation();
   const [state, setState] = useState({
     latitude: 0,
     longitude: 0,
   });
+
   const getLiveLocation = async () => {
     const checkPermission = await locationPermission();
     console.log(checkPermission, 'checkPermission');
@@ -50,7 +67,6 @@ const MapsScreen = () => {
       getLiveLocation();
     }, []),
   );
-
   return (
     <Block safearea>
       <Block style={styles.container} flex={false}>
@@ -59,8 +75,8 @@ const MapsScreen = () => {
           style={styles.map}
           zoomControlEnabled={false}
           zoomEnabled={true}
-          showsUserLocation={true}
-          showsMyLocationButton={false}
+          // showsUserLocation={true}
+          // showsMyLocationButton={false}
           region={{
             ...state,
             latitudeDelta: latitudeDelta,
@@ -69,35 +85,139 @@ const MapsScreen = () => {
           <Marker
             coordinate={{...state}}
             title={'XYZ'}
-            // icon={images.marker_background}
+            icon={images.restaurant_icon}
             description={'RESTAURANT'}>
-            {/* <Callout tooltip>
-              <Block flex={false}>
-                <Text>XYZ</Text>
-              </Block>
-            </Callout> */}
-            <ImageBackground
-              source={images.marker_background}
-              style={{
-                height: 40,
-                width: 35,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+            <Callout tooltip>
               <Block
                 flex={false}
-                center
-                middle
-                margin={[-hp(1), 0, 0, 0]}
-                style={{height: 29, width: 29}}
-                color="#1DAEEF"
-                borderRadius={15}>
-                <ImageComponent name="dinner_icon" height={20} width={20} />
+                borderRadius={21}
+                height={hp(30)}
+                width={wp(85)}
+                header
+                shadow
+                // padding={[hp(5),wp(5),hp(5),wp(2)]}
+                column>
+                <Text
+                  center
+                  style={{
+                    height: 100,
+                    width: 100,
+                    alignSelf: 'center',
+                  }}>
+                  <ImageComponent
+                    name={'restaurant_img'}
+                    // resizeMode="contain"
+                    // style={{height: 72, borderRadius: 20, width: 72}}
+                    height={72}
+                    width={72}
+                  />
+                </Text>
+
+                <Text size={14} regular center>
+                  Point of interest description or video{'\n'}button to learn
+                  more or to close
+                </Text>
+                <Text size={18} bold center>
+                  KEEP RIDING
+                </Text>
+                <Text
+                  style={{
+                    height: 100,
+                    width: 300,
+                  }}>
+                  <CustomRatingBar />
+                </Text>
+                <Text
+                  style={{
+                    height: 70,
+                    width: 70,
+                  }}>
+                  <CustomRatingBar />
+                </Text>
               </Block>
-            </ImageBackground>
+            </Callout>
           </Marker>
         </MapView>
       </Block>
+      <Block flex={false} space="between" row margin={[hp(2)]}>
+        <CustomButton
+          onPress={() => goBack()}
+          center
+          middle
+          borderRadius={40}
+          primary
+          style={CommonStyles.icon}>
+          <ImageComponent name="back_icon" width={8} height={15} />
+        </CustomButton>
+        <Block flex={false} row>
+          <ImageComponent name="camera_icon" height={45} width={45} />
+          <ImageComponent name="like_icon" height={45} width={45} />
+        </Block>
+      </Block>
+      <Modal
+        coverScreen={false}
+        hasBackdrop={false}
+        style={CommonStyles.modalWithoutMarginStyle}
+        avoidKeyboard
+        isVisible={isModalVisible}>
+        <Block
+          padding={[hp(3), wp(5)]}
+          borderRadius={24}
+          primary
+          flex={false}
+          style={{height: hp(28)}}>
+          <Block flex={false} padding={[0, wp(6)]} space="between" row>
+            <Block flex={false} center>
+              <Text center paragraph height={20}>
+                Distance{'\n'}Traveled
+              </Text>
+              <Text size={18} bold>
+                107{''}{' '}
+                <Text semibold size={12}>
+                  mi
+                </Text>
+              </Text>
+            </Block>
+            <Block flex={false} middle center>
+              <Text center paragraph height={20}>
+                Distance{'\n'}to next POI
+              </Text>
+              <Text size={18} bold>
+                67{''}{' '}
+                <Text semibold size={12}>
+                  mi
+                </Text>
+              </Text>
+            </Block>
+            <Block flex={false} center>
+              <Text center paragraph height={20}>
+                Distance{'\n'}Remaining
+              </Text>
+              <Text size={18} bold>
+                27{''}{' '}
+                <Text semibold size={12}>
+                  mi
+                </Text>
+              </Text>
+            </Block>
+          </Block>
+          <Block
+            margin={[hp(2), 0, hp(1.5)]}
+            style={{width: wp(90)}}
+            flex={false}
+            borderWidth={[0, 0, 0.5, 0]}
+            borderColor={'#F2F2F2'}
+          />
+          <Block flex={false} center margin={[hp(1), 0, 0]}>
+            <Button
+              // onPress={() => navigate(RoutesName.MAP_SCREEN)}
+              style={{width: wp(70)}}
+              color={'primary'}>
+              Emergency contact
+            </Button>
+          </Block>
+        </Block>
+      </Modal>
     </Block>
   );
 };

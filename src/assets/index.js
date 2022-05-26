@@ -41,4 +41,12 @@ export const images = {
   view_all: require('./icons/viewall.png'),
   marker_background: require('./icons/markerbackground.png'),
   dinner_icon: require('./icons/dinner.png'),
+  map_back: require('./icons/mapback.png'),
+  camera_icon: require('./icons/camera.png'),
+  like_icon: require('./icons/like.png'),
+  restaurant_icon: require('./icons/restaurant.png'),
+  restaurant_img: require('./icons/restaurantimg.png'),
+  arrow_img: require('./icons/arrow.png'),
+  filled_star: require('./icons/filledstar.png'),
+  corner_star: require('./icons/cornerstar.png'),
 };
