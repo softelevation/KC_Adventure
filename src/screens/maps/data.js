@@ -1,5 +1,5 @@
 import React from 'react';
-import { images } from 'src/assets';
+import {images} from 'src/assets';
 export const data = [
   {
     id: 0,

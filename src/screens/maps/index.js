@@ -95,7 +95,6 @@ const MapsScreen = () => {
             return (
               <Marker
                 coordinate={val.coords}
-                title={'XYZ'}
                 icon={val.image}
                 calloutAnchor={{x: 0.4, y: 8}}
                 description={'RESTAURANT'}>
@@ -106,15 +105,14 @@ const MapsScreen = () => {
                     height={hp(30)}
                     width={wp(85)}
                     header
+                    center
                     shadow
-                    // padding={[hp(5),wp(5),hp(5),wp(2)]}
+                    padding={[hp(2), 0, hp(0)]}
                     column>
                     <Text
                       center
                       style={{
-                        height: 100,
-                        width: 100,
-                        alignSelf: 'center',
+                        height: 85,
                       }}>
                       <ImageComponent
                         name={'restaurant_img'}
@@ -125,18 +123,16 @@ const MapsScreen = () => {
                       />
                     </Text>
 
-                    <Text size={14} regular center>
+                    <Text gutterBottom size={14} regular center>
                       Point of interest description or video{'\n'}button to
                       learn more or to close
                     </Text>
-                    <Text size={18} bold center>
+                    <Text gutterBottom size={18} bold center>
                       KEEP RIDING
                     </Text>
                     <Text
-                      center
                       style={{
                         height: 80,
-                        width: 300,
                       }}>
                       <CustomRatingBar />
                     </Text>
