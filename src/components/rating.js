@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Image, TouchableOpacity, View, StyleSheet} from 'react-native';
-import {ImageComponent, Text} from '_elements';
+import {ImageComponent, Text, wp} from '_elements';
 import {images} from 'src/assets';
 
 const CustomRatingBar = () => {
@@ -14,6 +14,7 @@ const CustomRatingBar = () => {
           <ImageComponent
             // style={{height: 60, width: 60}}
             name={item <= defaultRating ? 'filled_star' : 'corner_star'}
+            // styles={{marginRight: wp(3)}}
             height={30}
             width={30}
           />
@@ -23,11 +24,4 @@ const CustomRatingBar = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  customRatingBarStyle: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-    // marginTop: 30,
-  },
-});
 export default CustomRatingBar;
