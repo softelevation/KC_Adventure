@@ -31,42 +31,45 @@ import Modal from 'react-native-modal';
 import {RoutesName} from '_routeName';
 import {useNavigation} from '@react-navigation/native';
 import Restaurant_Image from 'src/assets/icons/restaurantimg.png';
-const latitudeDelta = 0.015;
-const longitudeDelta = 0.0121;
+import {data} from './data';
+// const latitudeDelta = 0.0922;
+// const longitudeDelta = 0.0421;
 const MapsScreen = () => {
   const [isModalVisible, setModalVisible] = useState(true);
   const {goBack, navigate} = useNavigation();
   const [state, setState] = useState({
-    latitude: 0,
-    longitude: 0,
+    latitude: 30.7786,
+    longitude: 76.906,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
   });
 
-  const getLiveLocation = async () => {
-    const checkPermission = await locationPermission();
-    console.log(checkPermission, 'checkPermission');
-    if (checkPermission) {
-      const request = await requestPermission();
-      if (request) {
-        const {latitude, longitude, heading} = await getCurrentLocation();
-        console.log(
-          'latitude, longitude, heading: ',
-          latitude,
-          longitude,
-          heading,
-        );
-        setState({
-          latitude: latitude,
-          longitude: longitude,
-        });
-      }
-    }
-  };
+  // const getLiveLocation = async () => {
+  //   const checkPermission = await locationPermission();
+  //   console.log(checkPermission, 'checkPermission');
+  //   if (checkPermission) {
+  //     const request = await requestPermission();
+  //     if (request) {
+  //       const {latitude, longitude, heading} = await getCurrentLocation();
+  //       console.log(
+  //         'latitude, longitude, heading: ',
+  //         latitude,
+  //         longitude,
+  //         heading,
+  //       );
+  //       setState({
+  //         latitude: latitude,
+  //         longitude: longitude,
+  //       });
+  //     }
+  //   }
+  // };
 
-  useFocusEffect(
-    useCallback(() => {
-      getLiveLocation();
-    }, []),
-  );
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     getLiveLocation();
+  //   }, []),
+  // );
   return (
     <Block safearea>
       <Block style={styles.container} flex={false}>
@@ -74,69 +77,68 @@ const MapsScreen = () => {
           provider={PROVIDER_GOOGLE} // remove if not using Google Maps
           style={styles.map}
           zoomControlEnabled={false}
+          showsUserLocation
           zoomEnabled={true}
-          // showsUserLocation={true}
-          // showsMyLocationButton={false}
-          region={{
-            ...state,
-            latitudeDelta: latitudeDelta,
-            longitudeDelta: longitudeDelta,
-          }}>
-          <Marker
-            coordinate={{...state}}
-            title={'XYZ'}
-            icon={images.restaurant_icon}
-            description={'RESTAURANT'}>
-            <Callout tooltip>
-              <Block
-                flex={false}
-                borderRadius={21}
-                height={hp(30)}
-                width={wp(85)}
-                header
-                shadow
-                // padding={[hp(5),wp(5),hp(5),wp(2)]}
-                column>
-                <Text
-                  center
-                  style={{
-                    height: 100,
-                    width: 100,
-                    alignSelf: 'center',
-                  }}>
-                  <ImageComponent
-                    name={'restaurant_img'}
-                    // resizeMode="contain"
-                    // style={{height: 72, borderRadius: 20, width: 72}}
-                    height={72}
-                    width={72}
-                  />
-                </Text>
+          initialRegion={state}
+          // region={{
+          //   ...state,
+          //   latitudeDelta: latitudeDelta,
+          //   longitudeDelta: longitudeDelta,
+          // }}
+        >
+          {data.map((val, i) => {
+            return (
+              <Marker
+                coordinate={val.coords}
+                title={'XYZ'}
+                icon={val.image}
+                description={'RESTAURANT'}>
+                <Callout tooltip>
+                  <Block
+                    flex={false}
+                    borderRadius={21}
+                    height={hp(30)}
+                    width={wp(85)}
+                    header
+                    shadow
+                    // padding={[hp(5),wp(5),hp(5),wp(2)]}
+                    column>
+                    <Text
+                      center
+                      style={{
+                        height: 100,
+                        width: 100,
+                        alignSelf: 'center',
+                      }}>
+                      <ImageComponent
+                        name={'restaurant_img'}
+                        // resizeMode="contain"
+                        // style={{height: 72, borderRadius: 20, width: 72}}
+                        height={72}
+                        width={72}
+                      />
+                    </Text>
 
-                <Text size={14} regular center>
-                  Point of interest description or video{'\n'}button to learn
-                  more or to close
-                </Text>
-                <Text size={18} bold center>
-                  KEEP RIDING
-                </Text>
-                <Text
-                  style={{
-                    height: 100,
-                    width: 300,
-                  }}>
-                  <CustomRatingBar />
-                </Text>
-                <Text
-                  style={{
-                    height: 70,
-                    width: 70,
-                  }}>
-                  <CustomRatingBar />
-                </Text>
-              </Block>
-            </Callout>
-          </Marker>
+                    <Text size={14} regular center>
+                      Point of interest description or video{'\n'}button to
+                      learn more or to close
+                    </Text>
+                    <Text size={18} bold center>
+                      KEEP RIDING
+                    </Text>
+                    <Text
+                      center
+                      style={{
+                        height: 80,
+                        width: 300,
+                      }}>
+                      <CustomRatingBar />
+                    </Text>
+                  </Block>
+                </Callout>
+              </Marker>
+            );
+          })}
         </MapView>
       </Block>
       <Block flex={false} space="between" row margin={[hp(2)]}>

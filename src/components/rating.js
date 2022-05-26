@@ -1,30 +1,25 @@
 import React, {useState} from 'react';
 import {Image, TouchableOpacity, View, StyleSheet} from 'react-native';
 import {ImageComponent, Text} from '_elements';
-import { images } from 'src/assets';
+import {images} from 'src/assets';
 
 const CustomRatingBar = () => {
-  const [defaultRating, setDefaultRating] = useState(2);
+  const [defaultRating, setDefaultRating] = useState(5);
   // To set the max number of Stars
   const [maxRating, setMaxRating] = useState([1, 2, 3, 4, 5]);
   return (
-    <View style={styles.customRatingBarStyle}>
-      {maxRating.map((item, key) => {
+    <>
+      {maxRating.map(item => {
         return (
-          <TouchableOpacity
-            activeOpacity={0.7}
-            key={item}
-            onPress={() => setDefaultRating(item)}>
-            <ImageComponent
-              // style={{height: 60, width: 60}}
-              name={item <= defaultRating ? 'filled_star' : 'corner_star'}
-              height={60}
-              width={60}
-            />
-          </TouchableOpacity>
+          <ImageComponent
+            // style={{height: 60, width: 60}}
+            name={item <= defaultRating ? 'filled_star' : 'corner_star'}
+            height={30}
+            width={30}
+          />
         );
       })}
-    </View>
+    </>
   );
 };
 

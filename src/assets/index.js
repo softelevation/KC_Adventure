@@ -44,9 +44,11 @@ export const images = {
   map_back: require('./icons/mapback.png'),
   camera_icon: require('./icons/camera.png'),
   like_icon: require('./icons/like.png'),
-  restaurant_icon: require('./icons/restaurant.png'),
   restaurant_img: require('./icons/restaurantimg.png'),
   arrow_img: require('./icons/arrow.png'),
   filled_star: require('./icons/filledstar.png'),
   corner_star: require('./icons/cornerstar.png'),
+  restaurant_icon: require('./icons/restaurant.png'),
+  restaurant2_icon: require('./icons/restaurant2.png'),
+  restaurant3_icon: require('./icons/restaurant3.png'),
 };
