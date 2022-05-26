@@ -11,7 +11,13 @@ import {
 } from 'src/utils/helper';
 import Header from 'src/common/header';
 import CommonStyles from 'src/assets/styles';
-import {Image, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  Image,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
 import WebView from 'react-native-webview';
 import {
   Block,
@@ -71,7 +77,6 @@ const MapsScreen = () => {
     <Block safearea>
       <Block style={styles.container} flex={false}>
         <MapView
-          provider={PROVIDER_GOOGLE} // remove if not using Google Maps
           style={styles.map}
           zoomControlEnabled={false}
           zoomEnabled={true}
@@ -151,7 +156,9 @@ const MapsScreen = () => {
         </CustomButton>
         <Block flex={false} row>
           <ImageComponent name="camera_icon" height={45} width={45} />
-          <ImageComponent name="like_icon" height={45} width={45} />
+          <Block flex={false} margin={[0, 0, 0, wp(2)]}>
+            <ImageComponent name="like_icon" height={45} width={45} />
+          </Block>
         </Block>
       </Block>
       <Modal

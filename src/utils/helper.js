@@ -1,6 +1,12 @@
-import {PermissionsAndroid, Platform} from 'react-native';
+import {Alert, Platform} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
-import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
+import {
+  check,
+  PERMISSIONS,
+  RESULTS,
+  request,
+  openSettings,
+} from 'react-native-permissions';
 
 export const getCurrentLocation = () =>
   new Promise((resolve, reject) => {
@@ -44,6 +50,10 @@ export const requestPermission = () => {
     });
   }
 };
+const createTwoButtonAlert = (response, title = 'Error') =>
+  Alert.alert(title, response, [
+    {text: 'Open Settings', onPress: () => openSettings()},
+  ]);
 
 export const locationPermission = async () => {
   if (Platform.OS === 'ios') {
@@ -54,21 +64,33 @@ export const locationPermission = async () => {
             console.log(
               'This feature is not available (on this device / in this context)',
             );
+            createTwoButtonAlert(
+              'This feature is not available (on this device / in this context)',
+            );
             return false;
           case RESULTS.DENIED:
             console.log(
               'The permission has not been requested / is denied but requestable',
             );
-            
+
+            createTwoButtonAlert(
+              'The permission has not been requested / is denied but requestable',
+            );
             return false;
           case RESULTS.LIMITED:
             console.log('The permission is limited: some actions are possible');
+            createTwoButtonAlert(
+              'The permission is limited: some actions are possible',
+            );
             return false;
           case RESULTS.GRANTED:
             console.log('The permission is granted');
             return true;
           case RESULTS.BLOCKED:
             console.log('The permission is denied and not requestable anymore');
+            createTwoButtonAlert(
+              'The permission is denied and not requestable anymore',
+            );
             return false;
           default:
             return false;
@@ -79,37 +101,48 @@ export const locationPermission = async () => {
         // …
       });
   } else {
-   return check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
-    .then(result => {
-      switch (result) {
-        case RESULTS.UNAVAILABLE:
-          console.log(
-            'This feature is not available (on this device / in this context)',
-          );
-          return false;
-        case RESULTS.DENIED:
-          console.log(
-            'The permission has not been requested / is denied but requestable',
-          );
-          requestPermission();
-          return false;
-        case RESULTS.LIMITED:
-          console.log('The permission is limited: some actions are possible');
-          return false;
-        case RESULTS.GRANTED:
-          console.log('The permission is granted');
-          return true;
-        case RESULTS.BLOCKED:
-          console.log('The permission is denied and not requestable anymore');
-          requestPermission();
-          return false;
-        default:
-          return false;
-      }
-    })
-    .catch(error => {
-      console.log('error: ', error);
-      // …
-    });
+    return check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
+      .then(result => {
+        switch (result) {
+          case RESULTS.UNAVAILABLE:
+            console.log(
+              'This feature is not available (on this device / in this context)',
+            );
+            createTwoButtonAlert(
+              'This feature is not available (on this device / in this context)',
+            );
+            return false;
+          case RESULTS.DENIED:
+            console.log(
+              'The permission has not been requested / is denied but requestable',
+            );
+
+            createTwoButtonAlert(
+              'The permission has not been requested / is denied but requestable',
+            );
+            return false;
+          case RESULTS.LIMITED:
+            console.log('The permission is limited: some actions are possible');
+            createTwoButtonAlert(
+              'The permission is limited: some actions are possible',
+            );
+            return false;
+          case RESULTS.GRANTED:
+            console.log('The permission is granted');
+            return true;
+          case RESULTS.BLOCKED:
+            console.log('The permission is denied and not requestable anymore');
+            createTwoButtonAlert(
+              'The permission is denied and not requestable anymore',
+            );
+            return false;
+          default:
+            return false;
+        }
+      })
+      .catch(error => {
+        console.log('error: ', error);
+        // …
+      });
   }
 };
