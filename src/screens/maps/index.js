@@ -97,6 +97,7 @@ const MapsScreen = () => {
                 coordinate={val.coords}
                 title={'XYZ'}
                 icon={val.image}
+                calloutAnchor={{x: 0.4, y: 8}}
                 description={'RESTAURANT'}>
                 <Callout tooltip>
                   <Block
