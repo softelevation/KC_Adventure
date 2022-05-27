@@ -2,23 +2,10 @@
 // https://aboutreact.com/react-native-geolocation/
 
 // import React in our code
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import {
-  getCurrentLocation,
-  locationPermission,
-  requestPermission,
-} from 'src/utils/helper';
-import Header from 'src/common/header';
 import CommonStyles from 'src/assets/styles';
-import {
-  Image,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Platform,
-} from 'react-native';
-import WebView from 'react-native-webview';
+import {StyleSheet} from 'react-native';
 import {
   Block,
   hp,
@@ -29,26 +16,29 @@ import {
   Text,
 } from '_elements';
 import CustomRatingBar from 'src/components/rating';
-import {useFocusEffect} from '@react-navigation/native';
+
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {Marker, Callout} from 'react-native-maps';
-import {images} from 'src/assets';
 import Modal from 'react-native-modal';
-import {RoutesName} from '_routeName';
 import {useNavigation} from '@react-navigation/native';
-import Restaurant_Image from 'src/assets/icons/restaurantimg.png';
+
 import {data} from './data';
+import { useDispatch, useSelector } from 'react-redux';
 // const latitudeDelta = 0.0922;
 // const longitudeDelta = 0.0421;
 const MapsScreen = () => {
   const [isModalVisible, setModalVisible] = useState(true);
   const {goBack, navigate} = useNavigation();
+    const location = useSelector(state => state.location.data);
+
   const [state, setState] = useState({
-    latitude: 30.7786,
-    longitude: 76.906,
+    latitude: location.latitude || 0,
+    longitude: location.longitude || 0,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   });
+
+  // const dispatch = useDispatch();
 
   // const getLiveLocation = async () => {
   //   const checkPermission = await locationPermission();
@@ -76,6 +66,7 @@ const MapsScreen = () => {
   //     getLiveLocation();
   //   }, []),
   // );
+  
   return (
     <Block safearea>
       <Block style={styles.container} flex={false}>
@@ -94,9 +85,8 @@ const MapsScreen = () => {
           {data.map((val, i) => {
             return (
               <Marker
-                coordinate={val.coords}
+                coordinate={state}
                 icon={val.image}
-                calloutAnchor={{x: 0.4, y: 8}}
                 description={'RESTAURANT'}>
                 <Callout tooltip>
                   <Block
@@ -107,12 +97,12 @@ const MapsScreen = () => {
                     header
                     center
                     shadow
-                    padding={[hp(2), 0, hp(0)]}
+                    padding={[hp(0), 0, hp(0)]}
                     column>
                     <Text
                       center
                       style={{
-                        height: 85,
+                        height: 95,
                       }}>
                       <ImageComponent
                         name={'restaurant_img'}
@@ -132,7 +122,7 @@ const MapsScreen = () => {
                     </Text>
                     <Text
                       style={{
-                        height: 80,
+                        height: 50,
                       }}>
                       <CustomRatingBar />
                     </Text>

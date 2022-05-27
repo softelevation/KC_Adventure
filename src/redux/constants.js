@@ -7,4 +7,5 @@ export const ActionConstants = {
   LOCATION_ERROR: 'LOCATION_ERROR',
 
   RESET_STORE: 'RESET_STORE',
+  GET_LOCATION: 'GET_LOCATION',
 };

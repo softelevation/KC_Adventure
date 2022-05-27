@@ -1,7 +1,7 @@
 import {ActionConstants} from '../constants';
 const initialState = {
   loading: false,
-  data: [],
+  data: {},
   error: '',
 };
 export function location(state = initialState, action) {
