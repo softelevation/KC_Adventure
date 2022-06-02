@@ -7,8 +7,8 @@ export const data = [
   {
     id: 1,
     coords: {
-      latitude: 30.7786,
-      longitude: 76.906,
+      latitude: 30.682414,
+      longitude: 76.725572,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
     },
@@ -17,8 +17,8 @@ export const data = [
   {
     id: 2,
     coords: {
-      latitude: 30.8333,
-      longitude: 76.9357,
+      latitude: 30.681934,
+      longitude: 76.732095,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
     },
@@ -27,8 +27,8 @@ export const data = [
   {
     id: 3,
     coords: {
-      latitude: 30.8406,
-      longitude: 76.9584,
+      latitude: 30.676545,
+      longitude: 76.72746,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
     },
@@ -37,8 +37,8 @@ export const data = [
   {
     id: 4,
     coords: {
-      latitude: 30.6936,
-      longitude: 76.845,
+      latitude: 30.679424,
+      longitude: 76.723126,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
     },

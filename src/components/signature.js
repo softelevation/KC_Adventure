@@ -17,7 +17,7 @@ export const SignatureScreen = () => {
   const handleEmpty = () => {};
 
   const handleClear = () => {
-    setSignature(null);
+    setSign(null);
   };
 
   const handleEnd = () => {
@@ -32,7 +32,7 @@ export const SignatureScreen = () => {
   return (
     <Block
       flex={false}
-      marginTop={hp(5)}
+      margin={[hp(3), 0, 0]}
       padding={[0, wp(5)]}
       style={{height: hp(18)}}>
       {/* <View style={styles.preview}>
@@ -45,7 +45,7 @@ export const SignatureScreen = () => {
         ) : null}
       </View> */}
 
-      <Text h5 semibold color={'#444444'}>
+      <Text gutterBottom h5 semibold color={'#444444'}>
         Signature
       </Text>
       <Signature
@@ -77,12 +77,11 @@ export const SignatureScreen = () => {
                   // flex: 1;
                   // box-shadow: none;
                   border-radius: 10px;
-                  border: none;
+                  // border: none;
                   height:100px;
-                  width:320px;
-                  positin:center;
-                  marginleft:3px;
-                  
+                  width:340px;
+                  position:center;
+                  margin-left:3px;
                 }
                 .m-signature-pad--footer {
                   display: none;

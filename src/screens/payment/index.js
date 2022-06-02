@@ -1,16 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Header from 'src/common/header';
-import {FlatList, ScrollView} from 'react-native';
+import {ScrollView} from 'react-native';
 import {Block, Button, hp, Input, Text, wp, ImageComponent} from '_elements';
 import Checkbox from 'src/components/checkbox';
 import CommonStyles from 'src/assets/styles';
 import {light} from 'src/components/theme/colors';
-import {
-  Collapse,
-  CollapseHeader,
-  CollapseBody,
-  AccordionList,
-} from 'accordion-collapse-react-native';
+import {AccordionList} from 'accordion-collapse-react-native';
 import {
   strictValidArrayWithLength,
   strictValidString,
@@ -18,7 +13,7 @@ import {
 import {Bold} from 'src/components/theme/fontsize';
 
 const payment = () => {
-  const [items, setItems] = useState([
+  const items = [
     {
       id: 1,
       header: 'Credit/Debit card',
@@ -89,18 +84,18 @@ const payment = () => {
       header: 'Other Methods',
       margin: 10,
     },
-  ]);
+  ];
   const _header = item => {
     return (
       <Block flex={false} column>
         <Block
-          margin={[0, 0, hp(2)]}
+          margin={[0, 0, hp(2), wp(3)]}
           style={{width: wp(95)}}
           flex={false}
           borderWidth={[0, 0, 0.5, 0]}
           borderColor={'#F2F2F2'}
         />
-        <Block flex={false} row center>
+        <Block padding={[0, 0, 0, wp(2)]} flex={false} row center>
           {strictValidString(item.image) && item.image !== 'checkbox' && (
             <ImageComponent name={item.image} height={20} width={20} />
           )}
@@ -177,22 +172,18 @@ const payment = () => {
           borderRadius={5}
           flex={false}>
           <Block flex={false} margin={[0, wp(1.5)]} row space={'between'}>
-            <Text
-              size={14}
-              margin={[hp(0.5), 0, 0, 0]}
-              regular
-              color={'#000000'}>
+            <Text size={14} regular color={'#000000'}>
               Coupon/Ongoing offer codes
             </Text>
             <Block flex={false} row center>
               <Text
                 size={14}
-                margin={[hp(0.5), wp(3), 0, 0]}
+                margin={[0, wp(3), 0, 0]}
                 semibold
                 color={'#000000'}>
                 View All
               </Text>
-              <ImageComponent name="view_all" height={15} width={8} />
+              <ImageComponent name="view_all" height={10} width={5} />
             </Block>
           </Block>
           <Input
@@ -219,7 +210,7 @@ const payment = () => {
           flex={false}
           header
           shadow
-          padding={[hp(2), wp(2)]}
+          padding={[hp(1), wp(2)]}
           borderRadius={10}>
           <Block flex={false} row space="between" padding={[0, wp(2)]} center>
             <Text size={16} semibold color={'#000000'}>

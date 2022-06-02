@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // React Native Geolocation
 // https://aboutreact.com/react-native-geolocation/
 
@@ -17,13 +18,13 @@ import {
 } from '_elements';
 import CustomRatingBar from 'src/components/rating';
 
-import MapView, {AnimatedRegion} from 'react-native-maps';
+import MapView from 'react-native-maps';
 import {Marker, Callout} from 'react-native-maps';
 import Modal from 'react-native-modal';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 
 import {data} from './data';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {
   getCurrentLocation,
   locationPermission,
@@ -33,7 +34,7 @@ const latitudeDelta = 0.0922;
 const longitudeDelta = 0.0421;
 const MapsScreen = () => {
   const [isModalVisible, setModalVisible] = useState(true);
-  const {goBack, navigate} = useNavigation();
+  const {goBack} = useNavigation();
   const location = useSelector(state => state.location.data);
 
   const [state, setState] = useState({
@@ -105,7 +106,7 @@ const MapsScreen = () => {
           {data.map((val, i) => {
             return (
               <Marker
-                coordinate={state}
+                coordinate={val.coords}
                 icon={val.image}
                 image={val.image}
                 description={'RESTAURANT'}>
@@ -118,13 +119,9 @@ const MapsScreen = () => {
                     header
                     center
                     shadow
-                    padding={[hp(0), 0, hp(0)]}
+                    padding={[hp(4), 0, hp(0)]}
                     column>
-                    <Text
-                      center
-                      style={{
-                        height: 95,
-                      }}>
+                    <Text center height={95}>
                       <ImageComponent
                         name={'restaurant_img'}
                         // resizeMode="contain"
@@ -141,10 +138,7 @@ const MapsScreen = () => {
                     <Text gutterBottom size={18} bold center>
                       KEEP RIDING
                     </Text>
-                    <Text
-                      style={{
-                        height: 50,
-                      }}>
+                    <Text height={50}>
                       <CustomRatingBar />
                     </Text>
                   </Block>

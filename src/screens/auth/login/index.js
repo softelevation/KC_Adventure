@@ -9,12 +9,12 @@ import * as Yup from 'yup';
 import {useDispatch, useSelector} from 'react-redux';
 import {authRequest} from 'src/redux/login/action';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import { navigate } from 'src/routes/navigation-service';
+import {navigate} from 'src/routes/navigation-service';
 
 const LoginScreen = () => {
   // const {navigate} = useNavigation();
   const dispatch = useDispatch();
- const loading = useSelector(state => state.auth.login.loading)
+  const loading = useSelector(state => state.auth.login.loading);
   const formik = useFormik({
     initialValues: {
       password: '',
@@ -28,11 +28,11 @@ const LoginScreen = () => {
       email: Yup.string().email('Invalid email').required('Required'),
     }),
     onSubmit: values => {
-      const data  = {
+      const data = {
         email: values.email,
         password: values.password,
       };
-       dispatch(authRequest(data));
+      dispatch(authRequest(data));
     },
   });
   return (

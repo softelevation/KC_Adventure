@@ -46,7 +46,7 @@ const BookRoom = ({text, onOK}) => {
         />
         <Block flex={false} margin={[hp(3), 0, 0]}>
           <Input
-            placeholder={'Enter '}
+            placeholder={'Enter Room Number '}
             style={{marginTop: -hp(0.5)}}
             label="Room Number"
           />
@@ -55,7 +55,7 @@ const BookRoom = ({text, onOK}) => {
 
       <SignatureScreen />
 
-      <Block margin={[hp(10), 0]} center flex={false}>
+      <Block margin={[hp(5), 0]} center flex={false}>
         <Button
           style={{width: wp(50)}}
           uppercase
