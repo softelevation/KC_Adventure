@@ -2,7 +2,7 @@
 // https://aboutreact.com/react-native-geolocation/
 
 // import React in our code
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 
 import CommonStyles from 'src/assets/styles';
 import {StyleSheet} from 'react-native';
@@ -20,12 +20,17 @@ import CustomRatingBar from 'src/components/rating';
 import MapView, {AnimatedRegion} from 'react-native-maps';
 import {Marker, Callout} from 'react-native-maps';
 import Modal from 'react-native-modal';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 
 import {data} from './data';
 import {useDispatch, useSelector} from 'react-redux';
-// const latitudeDelta = 0.0922;
-// const longitudeDelta = 0.0421;
+import {
+  getCurrentLocation,
+  locationPermission,
+  requestPermission,
+} from 'src/utils/helper';
+const latitudeDelta = 0.0922;
+const longitudeDelta = 0.0421;
 const MapsScreen = () => {
   const [isModalVisible, setModalVisible] = useState(true);
   const {goBack, navigate} = useNavigation();
@@ -34,8 +39,8 @@ const MapsScreen = () => {
   const [state, setState] = useState({
     latitude: location.latitude || 0,
     longitude: location.longitude || 0,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    latitudeDelta: latitudeDelta,
+    longitudeDelta: longitudeDelta,
   });
 
   const mapView = React.createRef();
@@ -52,41 +57,40 @@ const MapsScreen = () => {
     );
   };
 
-  // const dispatch = useDispatch();
+  const getLiveLocation = async () => {
+    const checkPermission = await locationPermission();
+    console.log(checkPermission, 'checkPermission');
+    if (checkPermission) {
+      const request = await requestPermission();
+      if (request) {
+        const {latitude, longitude, heading} = await getCurrentLocation();
+        console.log(
+          'latitude, longitude, heading: ',
+          latitude,
+          longitude,
+          heading,
+        );
+        setState({
+          latitude: latitude,
+          longitude: longitude,
+        });
+        animateMap();
+      }
+    }
+  };
 
-  // const getLiveLocation = async () => {
-  //   const checkPermission = await locationPermission();
-  //   console.log(checkPermission, 'checkPermission');
-  //   if (checkPermission) {
-  //     const request = await requestPermission();
-  //     if (request) {
-  //       const {latitude, longitude, heading} = await getCurrentLocation();
-  //       console.log(
-  //         'latitude, longitude, heading: ',
-  //         latitude,
-  //         longitude,
-  //         heading,
-  //       );
-  //       setState({
-  //         latitude: latitude,
-  //         longitude: longitude,
-  //       });
-  //     }
-  //   }
-  // };
-
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     getLiveLocation();
-  //   }, []),
-  // );
+  useFocusEffect(
+    useCallback(() => {
+      getLiveLocation();
+    }, []),
+  );
 
   return (
     <Block safearea>
       <Block style={styles.container} flex={false}>
         <MapView
           style={styles.map}
-          onPress={animateMap}
+          // onPress={}
           zoomControlEnabled={false}
           showsUserLocation
           zoomEnabled={true}
@@ -103,6 +107,7 @@ const MapsScreen = () => {
               <Marker
                 coordinate={state}
                 icon={val.image}
+                image={val.image}
                 description={'RESTAURANT'}>
                 <Callout tooltip>
                   <Block

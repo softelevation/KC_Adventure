@@ -185,7 +185,7 @@ const Input = ({
   const placeholderColor = error ? 'red' : placeholderTextColor;
   if (primary) {
     return (
-      <Block header flex={false} borderRadius={8} margin={[hp(1), 0, 0]}>
+      <Block flex={false} borderRadius={8} margin={[hp(1), 0, 0]}>
         {renderLabel()}
         <Block
           flex={false}
