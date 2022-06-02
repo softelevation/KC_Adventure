@@ -5,9 +5,14 @@ import {useFormik} from 'formik';
 import CommonStyles from 'src/assets/styles';
 import {Block, Button, hp, ImageComponent, Input, Text, wp} from '_elements';
 import * as Yup from 'yup';
+import {useDispatch , useSelector} from 'react-redux';
+import {signRequest} from 'src/redux/signup/action';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
+
 const LoginScreen = () => {
+  const dispatch = useDispatch();
+  const loading = useSelector(state => state.auth.login.loading);
   const formik = useFormik({
     initialValues: {
       firstname: '',
@@ -29,7 +34,16 @@ const LoginScreen = () => {
         .required('Required')
         .oneOf([Yup.ref('password')], 'Passwords do not match'),
     }),
-    onSubmit: values => {},
+    onSubmit: values => {
+      dispatch(
+        signRequest({
+          firstname: values.firstname,
+          lastname: values.lastname,
+          email: values.email,
+          password: values.password,
+        }),
+      );
+    },
   });
   return (
     <ImageBackground source={images.bg} style={CommonStyles.defaultFlex}>
@@ -97,7 +111,13 @@ const LoginScreen = () => {
             </Block>
           </Block>
           <Block flex={false} center margin={[hp(2), 0, 0]}>
-            <Button style={{width: wp(35)}} uppercase color={'primary'}>
+            <Button
+              style={{width: wp(35)}}
+              onPress={() => formik.handleSubmit()}
+              disabled={!formik.isValid}
+              uppercase
+              isLoading={loading}
+              color={'primary'}>
               Confirm
             </Button>
           </Block>

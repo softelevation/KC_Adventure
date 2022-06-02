@@ -2,7 +2,7 @@
 // https://aboutreact.com/react-native-geolocation/
 
 // import React in our code
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
 import CommonStyles from 'src/assets/styles';
 import {StyleSheet} from 'react-native';
@@ -17,19 +17,19 @@ import {
 } from '_elements';
 import CustomRatingBar from 'src/components/rating';
 
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {AnimatedRegion} from 'react-native-maps';
 import {Marker, Callout} from 'react-native-maps';
 import Modal from 'react-native-modal';
 import {useNavigation} from '@react-navigation/native';
 
 import {data} from './data';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 // const latitudeDelta = 0.0922;
 // const longitudeDelta = 0.0421;
 const MapsScreen = () => {
   const [isModalVisible, setModalVisible] = useState(true);
   const {goBack, navigate} = useNavigation();
-    const location = useSelector(state => state.location.data);
+  const location = useSelector(state => state.location.data);
 
   const [state, setState] = useState({
     latitude: location.latitude || 0,
@@ -37,6 +37,20 @@ const MapsScreen = () => {
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   });
+
+  const mapView = React.createRef();
+  const animateMap = () => {
+    mapView.current.animateToRegion(
+      {
+        // Takes a region object as parameter
+        latitude: location.latitude,
+        longitude: location.longitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      },
+      1000,
+    );
+  };
 
   // const dispatch = useDispatch();
 
@@ -66,15 +80,17 @@ const MapsScreen = () => {
   //     getLiveLocation();
   //   }, []),
   // );
-  
+
   return (
     <Block safearea>
       <Block style={styles.container} flex={false}>
         <MapView
           style={styles.map}
+          onPress={animateMap}
           zoomControlEnabled={false}
           showsUserLocation
           zoomEnabled={true}
+          ref={mapView}
           initialRegion={state}
           // region={{
           //   ...state,

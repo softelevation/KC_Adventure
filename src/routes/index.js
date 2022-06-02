@@ -6,12 +6,13 @@ import SplashNavigator from './splashStack';
 import {defaultOptions} from './constants';
 import AuthNavigator from './authStack';
 import DashboardNavigator from './homeStack';
+import {navigationRef} from './navigation-service';
 
 const Stack = createNativeStackNavigator();
 
 const Routes = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{...defaultOptions}}>
         <Stack.Screen
           name={RoutesName.SPLASH_STACK_SCREEN}

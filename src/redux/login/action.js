@@ -1,6 +1,6 @@
 import {ActionConstants} from '../constants';
 // Agent List
-export const authRequest = (payload) => {
+export const authRequest = payload => {
   return {
     type: ActionConstants.LOGIN_REQUEST,
     payload,

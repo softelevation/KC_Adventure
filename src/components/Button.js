@@ -9,27 +9,24 @@ import {defaultFontSize, t1} from './theme/fontsize';
 
 const componentStyles = () => {
   return StyleSheet.create({
+    accent: {
+      backgroundColor: light.warning,
+      borderColor: light.warning,
+      paddingVertical: t1 * 1.5,
+    },
     button: {
+      alignItems: 'center',
       borderRadius: 30,
       justifyContent: 'center',
-      alignItems: 'center',
       marginVertical: t1,
-    },
-    shadow: {
-      shadowColor: Platform.OS === "ios" ? 'rgba(101, 131, 123, 0.15)' : 'rgba(101, 131, 123, 0.9)',
-      shadowOffset: {width: 0, height: 10},
-      shadowOpacity: 1,
-      shadowRadius: 10,
-
-      elevation: 5,
     },
     disabledButton: {
       backgroundColor: '#00000052',
       borderWidth: 0,
     },
-    accent: {
-      backgroundColor: light.warning,
-      borderColor: light.warning,
+    facebook: {
+      backgroundColor: light.facebook,
+      borderColor: light.facebook,
       paddingVertical: t1 * 1.5,
     },
     link: {
@@ -39,19 +36,22 @@ const componentStyles = () => {
     },
     primary: {
       backgroundColor: light.secondary,
-      paddingVertical: t1 * 1.7,
       borderColor: '#fff',
+      paddingVertical: t1 * 1.7,
     },
     secondary: {
       backgroundColor: light.white,
       borderColor: light.secondary,
-      paddingVertical: t1 * 1.5,
       borderWidth: 1,
-    },
-    facebook: {
-      backgroundColor: light.facebook,
-      borderColor: light.facebook,
       paddingVertical: t1 * 1.5,
+    },
+    shadow: {
+      elevation: 5,
+      shadowColor: Platform.OS === "ios" ? 'rgba(101, 131, 123, 0.15)' : 'rgba(101, 131, 123, 0.9)',
+      shadowOffset: {width: 0, height: 10},
+      shadowOpacity: 1,
+
+      shadowRadius: 10,
     },
   });
 };

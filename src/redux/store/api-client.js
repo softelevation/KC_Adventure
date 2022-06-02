@@ -26,10 +26,13 @@ client.interceptors.request.use(
   error => console.log(error),
 );
 
-export const apiCall = function (method, route, body = null, token = null) {
+export const apiCall = function (method, route, body = null) {
   const onSuccess = function (response) {
     console.log('Request Successful!', response);
-    return response.data;
+    return {
+      data: response.data,
+      status: response.status,
+    };
   };
 
   const onError = function (error) {
@@ -47,7 +50,7 @@ export const apiCall = function (method, route, body = null, token = null) {
     }
     const data = error.response.status === 401 ? '' : error.message;
 
-    return Promise.reject(error.response || data);
+    return Promise.reject(error.response.data || data);
   };
 
   return client({

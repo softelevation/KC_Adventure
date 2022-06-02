@@ -1,4 +1,4 @@
-import {DrawerActions, useNavigation} from '@react-navigation/native';
+import { useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {FlatList, ScrollView} from 'react-native';
 import {useDispatch} from 'react-redux';

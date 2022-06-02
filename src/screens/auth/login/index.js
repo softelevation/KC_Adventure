@@ -1,4 +1,3 @@
-import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {ImageBackground, SafeAreaView} from 'react-native';
 import {images} from 'src/assets';
@@ -7,14 +6,19 @@ import {Block, Button, hp, ImageComponent, Input, Text, wp} from '_elements';
 import {RoutesName} from '_routeName';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
+import {useDispatch, useSelector} from 'react-redux';
+import {authRequest} from 'src/redux/login/action';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { navigate } from 'src/routes/navigation-service';
 
 const LoginScreen = () => {
-  const {navigate} = useNavigation();
+  // const {navigate} = useNavigation();
+  const dispatch = useDispatch();
+ const loading = useSelector(state => state.auth.login.loading)
   const formik = useFormik({
     initialValues: {
-      password: '12345678',
-      email: 'bharat.chhabra339@gmail.com',
+      password: '',
+      email: '',
     },
     validationSchema: Yup.object().shape({
       password: Yup.string()
@@ -24,7 +28,11 @@ const LoginScreen = () => {
       email: Yup.string().email('Invalid email').required('Required'),
     }),
     onSubmit: values => {
-      navigate(RoutesName.DASHBOARD_STACK_SCREEN);
+      const data  = {
+        email: values.email,
+        password: values.password,
+      };
+       dispatch(authRequest(data));
     },
   });
   return (
@@ -69,6 +77,7 @@ const LoginScreen = () => {
               style={{width: wp(35)}}
               uppercase
               disabled={!formik.isValid}
+              isLoading={loading}
               color={'primary'}>
               Sign In
             </Button>
