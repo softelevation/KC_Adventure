@@ -5,14 +5,13 @@ import {useFormik} from 'formik';
 import CommonStyles from 'src/assets/styles';
 import {Block, Button, hp, ImageComponent, Input, Text, wp} from '_elements';
 import * as Yup from 'yup';
-import {useDispatch , useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {signRequest} from 'src/redux/signup/action';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
-
 const LoginScreen = () => {
   const dispatch = useDispatch();
-  const loading = useSelector(state => state.auth.login.loading);
+  const loading = useSelector(state => state.authSign.signup.loading);
   const formik = useFormik({
     initialValues: {
       firstname: '',
