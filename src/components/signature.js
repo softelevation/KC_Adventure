@@ -10,7 +10,6 @@ export const SignatureScreen = () => {
   const ref = useRef();
 
   const handleSignature = signature => {
-    console.log(signature, 'signature');
     setSign(signature);
   };
 

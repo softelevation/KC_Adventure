@@ -16,7 +16,6 @@ const SaveToken = async data => {
 
 export function* request(action) {
   try {
-    console.log(action.payload, 'action.payload');
     const response = yield call(
       apiCall,
       'GET',

@@ -1,14 +1,14 @@
 import {ActionConstants} from '../constants';
-import {authError, authSuccess, profileError, profileSuccess} from './action';
+import {authError, authSuccess} from './action';
 import {put, call, all, takeLatest} from 'redux-saga/effects';
 import {apiCall} from '../store/api-client';
-import {API_URL} from 'src/utils/config';
+import {API_URL, BASE_URL} from 'src/utils/config';
 import {navigate} from 'src/routes/navigation-service';
 import {RoutesName} from '_routeName';
 import {onDisplayNotification} from 'src/utils/mobile-utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {decrypted} from '../../utils/commonUtils';
-import { saveAsync } from 'src/utils/local-storage';
+import {saveAsync} from 'src/utils/local-storage';
 
 const SaveData = async data => {
   return await AsyncStorage.setItem('user', JSON.stringify(data));
@@ -22,7 +22,7 @@ export function* request(action) {
     const response = yield call(
       apiCall,
       'POST',
-      API_URL.lOGIN_URL,
+      BASE_URL + API_URL.lOGIN_URL,
       action.payload,
     ); //Get request
     const dataResponse = response.data;

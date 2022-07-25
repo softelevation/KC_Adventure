@@ -1,9 +1,10 @@
 export const API_URL = {
-  BASE_URL: 'https://0f40-112-196-35-18.in.ngrok.io//api',
+  BASE_URL: 'https://4561-112-196-35-18.in.ngrok.io',
   // BASE_URL: 'https://medicstag-back.softelevation.com',
   // BASE_URL: 'https://90ae-112-196-35-18.in.ngrok.io/api',
   lOGIN_URL: '/auth/signin',
   SIGNUP_URL: '/authSign/signup',
+  CATEGORY_URL: '/api/category',
   PROFILE_URL: '/authprofile/profile',
   UNIT_URL: '/driver/unit',
   UNIT_ACTION_URL: '/driver/unit-action',

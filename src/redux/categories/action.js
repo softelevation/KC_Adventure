@@ -1,0 +1,20 @@
+import {ActionConstants} from '../constants';
+
+export const categoryRequest = payload => {
+  return {
+    type: ActionConstants.CATEGORY_REQUEST,
+    payload,
+  };
+};
+export const categorySuccess = data => {
+  return {
+    type: ActionConstants.CATEGORY_SUCCESS,
+    data,
+  };
+};
+export const categoryError = error => {
+  return {
+    type: ActionConstants.CATEGORY_ERROR,
+    error,
+  };
+};

@@ -1,7 +1,7 @@
-import { useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
 import {FlatList, ScrollView} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import CommonStyles from 'src/assets/styles';
 import Header from 'src/common/header';
 import {locationRequest} from 'src/redux/location/action';
@@ -24,7 +24,11 @@ import {
 
 const Experiences = () => {
   const dispatch = useDispatch();
-
+  // const caterory_list = ['All', 'America', 'Europe', 'Asia', 'Osenia'];
+  const categories = useSelector(state => state.categoryReducer.category.data);
+  const caterory_list = categories.caterory_list;
+  console.log(caterory_list, 'ddhdhdhdhdhdhhdhd123');
+ 
   const getLiveLocation = async () => {
     const checkPermission = await locationPermission();
     console.log(checkPermission, 'checkPermission');
@@ -55,6 +59,14 @@ const Experiences = () => {
   const [active, setActive] = useState('All');
   const navigation = useNavigation();
   const _renderItem = ({item}) => {
+    // const myNvaigate = () => {
+    //   setActive(item);
+    //   dispatch(
+    //     categorySuccess({
+    //       item: caterory_list,
+    //     }),
+    //   );
+    // };
     return (
       <Block margin={[hp(3), wp(4), 0]} center flex={false}>
         <CustomButton onPress={() => setActive(item)} activeOpacity={1}>
@@ -173,7 +185,7 @@ const Experiences = () => {
         <Block flex={false}>
           <FlatList
             horizontal
-            data={['All', 'America', 'Europe', 'Asia', 'Osenia']}
+            data={caterory_list}
             renderItem={_renderItem}
             showsHorizontalScrollIndicator={false}
           />
@@ -188,7 +200,7 @@ const Experiences = () => {
                 keyExtractor={(item, index) => index.toString()}
                 contentContainerStyle={{paddingBottom: hp(3)}}
                 horizontal
-                data={['All', 'America', 'Europe', 'Asia', 'Osenia']}
+                data={caterory_list}
                 renderItem={_renderHorizontalItem}
                 showsHorizontalScrollIndicator={false}
               />
@@ -202,7 +214,7 @@ const Experiences = () => {
               <FlatList
                 scrollEnabled={false}
                 keyExtractor={(item, index) => index.toString()}
-                data={['All', 'America', 'Europe', 'Asia', 'Osenia']}
+                data={caterory_list}
                 renderItem={_renderVerticalItem}
                 showsHorizontalScrollIndicator={false}
               />

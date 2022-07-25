@@ -36,8 +36,8 @@ const LoginScreen = () => {
     onSubmit: values => {
       dispatch(
         signRequest({
-          firstname: values.firstname,
-          lastname: values.lastname,
+          first_name: values.firstname,
+          last_name: values.lastname,
           email: values.email,
           password: values.password,
         }),
