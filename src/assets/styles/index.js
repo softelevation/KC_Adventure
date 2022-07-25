@@ -8,6 +8,10 @@ const CommonStyles = {
     height: 50,
     width: 50,
   },
+  addPhoto: {
+    height: 85,
+    width: wp(82),
+  },
   modalStyle: {
     position: 'absolute',
     bottom: 0,
@@ -32,6 +36,14 @@ const CommonStyles = {
   inputWithBorder: {
     borderColor: '#A5A4A4',
     borderWidth: 1,
+  },
+  congratulationModal: {
+    bottom: 0,
+    right: 0,
+    left: 0,
+    position:'absolute',
+    borderRadius: 24,
+    margin:0,
   },
   dot: {
     height: 10,

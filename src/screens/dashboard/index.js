@@ -102,7 +102,7 @@ const Adventure = () => {
                 extrabold
                 center
                 color={'#FABB05'}>
-                Or
+                OR
               </Text>
               <Text margin={[hp(1), 0]} h5 semibold center info>
                 Browse experiences

@@ -7,7 +7,7 @@ const LocationDetails = () => {
     return (
       <Block safearea={true} primary>
         <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
-          <ImageComponent name="aboutus_img" width={wp(100)} height={208} />
+          <ImageComponent name="aboutus_img" width={wp(115)} height={208} />
           <Block flex={false} padding={[hp(2), wp(3)]}>
             <Text medium height={24} size={16} color={'#444444'}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non a leo

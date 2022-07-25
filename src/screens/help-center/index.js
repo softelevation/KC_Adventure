@@ -30,12 +30,14 @@ const HelpCenter = () => {
           <Input
             placeholder={'Primary Contact Number'}
             label="Primary Contact Number"
+            number
           />
         </Block>
         <Block flex={false} margin={[hp(1), 0, 0]}>
           <Input
             placeholder={'Secondary Contact Number'}
             label="Secondary Contact Number"
+            number
           />
         </Block>
       </Block>

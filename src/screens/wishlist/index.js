@@ -2,7 +2,11 @@ import React from 'react';
 import Header from 'src/common/header';
 import {Block, hp, ImageComponent, wp, Text} from '_elements';
 import {FlatList} from 'react-native';
+import { useSelector} from 'react-redux';
 const WishlistScreen = () => {
+  
+   const profile = useSelector(state => state.authprofile.profile.profile);
+   console.log(profile)
   const _renderVerticalItem = ({item}) => {
     return (
       <Block
@@ -13,7 +17,7 @@ const WishlistScreen = () => {
         borderRadius={20}
         flex={false}>
         <ImageComponent name="demo_icon" width={152} height={131} radius={14} />
-        <Block center flex={false} margin={[hp(3), 0, 0, wp(5)]}>
+        <Block center flex={false} margin={[hp(2), 0, 0, wp(5)]}>
           <Block style={{width: wp(50)}} space={'between'} row flex={false}>
             <Text h4 bold color={'#303030'}>
               Isola Bella
@@ -39,10 +43,7 @@ const WishlistScreen = () => {
             flex={false}>
             <ImageComponent name="star_icon" width={20} height={20} />
             <Text margin={[0, 0, 0, wp(3)]} h4 semibold color={'#303030'}>
-              4.2{'   '}
-              <Text h5 medium>
-                (2.1 km)
-              </Text>
+              4.2
             </Text>
           </Block>
         </Block>
@@ -51,7 +52,7 @@ const WishlistScreen = () => {
   };
   return (
     <Block safearea={true} primary>
-      <Header name="Wishlist" />
+      <Header name="my Wishlist" />
       <Block flex={1}>
         <FlatList
           contentContainerStyle={{marginBottom: hp(6), flexGrow: 1}}

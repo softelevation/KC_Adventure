@@ -51,4 +51,6 @@ export const images = {
   restaurant_icon: require('./icons/restaurant.png'),
   restaurant2_icon: require('./icons/restaurant2.png'),
   restaurant3_icon: require('./icons/restaurant3.png'),
+  share_icon: require('./icons/share.png'),
+  add_photo: require('./icons/addphoto.png'),
 };

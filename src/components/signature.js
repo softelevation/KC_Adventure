@@ -79,7 +79,7 @@ export const SignatureScreen = () => {
                   border-radius: 10px;
                   // border: none;
                   height:100px;
-                  width:340px;
+                  width:320px;
                   position:center;
                   margin-left:3px;
                 }
@@ -99,23 +99,23 @@ export const SignatureScreen = () => {
 
 const styles = StyleSheet.create({
   preview: {
-    width: 335,
-    height: 114,
-    backgroundColor: '#F8F8F8',
-    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#F8F8F8',
+    height: 114,
+    justifyContent: 'center',
     marginTop: 15,
+    width: 335,
   },
   previewText: {
+    backgroundColor: '#69B2FF',
     color: '#FFF',
     fontSize: 14,
     height: 40,
     lineHeight: 40,
+    marginTop: 10,
     paddingLeft: 10,
     paddingRight: 10,
-    backgroundColor: '#69B2FF',
-    width: 120,
     textAlign: 'center',
-    marginTop: 10,
+    width: 120,
   },
 });

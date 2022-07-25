@@ -1,14 +1,11 @@
 import {ActionConstants} from '../constants';
-import {authError, authSuccess, profileError, profileSuccess} from './action';
+import {profileError, profileSuccess} from './action';
 import {put, call, all, takeLatest} from 'redux-saga/effects';
 import {apiCall} from '../store/api-client';
 import {API_URL} from 'src/utils/config';
-import {navigate} from 'src/routes/navigation-service';
-import {RoutesName} from '_routeName';
 import {onDisplayNotification} from 'src/utils/mobile-utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {decrypted} from '../../utils/commonUtils';
-import { saveAsync } from 'src/utils/local-storage';
+import {saveAsync} from 'src/utils/local-storage';
 
 const SaveData = async data => {
   return await AsyncStorage.setItem('user', JSON.stringify(data));
@@ -19,28 +16,28 @@ const SaveToken = async data => {
 
 export function* request(action) {
   try {
+    console.log(action.payload, 'action.payload');
     const response = yield call(
       apiCall,
-      'POST',
-      API_URL.lOGIN_URL,
+      'GET',
+      API_URL.PROFILE_URL,
       action.payload,
     ); //Get request
     const dataResponse = response.data;
     if (response.status === 200) {
-      yield put(authSuccess(dataResponse));
-      navigate(RoutesName.DASHBOARD_STACK_SCREEN);
+      yield put(profileSuccess(dataResponse));
       yield call(SaveToken, dataResponse);
     } else {
       onDisplayNotification(response.message);
-      yield put(authError(response));
+      yield put(profileError(response));
     }
   } catch (err) {
     onDisplayNotification(err.message);
-    yield put(authError());
+    yield put(profileError());
   }
 }
 
 export function* authWatcher() {
-  yield all([takeLatest(ActionConstants.LOGIN_REQUEST, request)]);
+  yield all([takeLatest(ActionConstants.PROFILE_REQUEST, request)]);
 }
 export default authWatcher;

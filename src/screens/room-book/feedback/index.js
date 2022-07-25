@@ -50,12 +50,11 @@ const feedback = () => {
               margin={[hp(10), 0, 0, 0]}
               space={'between'}
               row>
-              <Button style={{width: wp(42)}} color={'secondary'}>
+              <Button style={{width: wp(40)}} color={'secondary'}>
                 dismiss
               </Button>
               <Button
-                style={{width: wp(42)}}
-                uppercase
+                style={{width: wp(40)}}
                 color={'primary'}
                 onPress={() => {
                   navigation.navigate(RoutesName.PAYMENT_OPTIONS);

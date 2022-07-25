@@ -92,7 +92,7 @@ const Experiences = () => {
             height={131}
             radius={14}
           />
-          <Block center flex={false} margin={[hp(3), 0, 0, wp(5)]}>
+          <Block center flex={false} margin={[hp(2), 0, 0, wp(5)]}>
             <Block style={{width: wp(40)}} space={'between'} row flex={false}>
               <Text h4 bold color={'#303030'}>
                 Isola Bella
