@@ -1,4 +1,4 @@
-import {ActionConstants} from '../constants';
+import {ActionConstants} from '../../constants';
 
 export const categoryRequest = payload => {
   return {

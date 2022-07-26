@@ -21,14 +21,19 @@ import {
   locationPermission,
   requestPermission,
 } from 'src/utils/helper';
+import {categoryRequest} from 'src/redux/dashboard/category/action';
+import category from 'src/redux/dashboard/category/reducer';
 
 const Experiences = () => {
   const dispatch = useDispatch();
   // const caterory_list = ['All', 'America', 'Europe', 'Asia', 'Osenia'];
-  const categories = useSelector(state => state.categoryReducer.category.data);
-  const caterory_list = categories.caterory_list;
-  console.log(caterory_list, 'ddhdhdhdhdhdhhdhd123');
- 
+  const caterory_list = useSelector(
+    state => state.dashboardReducer.category.data,
+  );
+  console.log('ddddddd', caterory_list);
+  // const caterory_list = categories.caterory_list;
+  // console.log(caterory_list, 'ddhdhdhdhdhdhhdhd123');
+
   const getLiveLocation = async () => {
     const checkPermission = await locationPermission();
     console.log(checkPermission, 'checkPermission');
@@ -54,19 +59,14 @@ const Experiences = () => {
   useFocusEffect(
     React.useCallback(() => {
       getLiveLocation();
+      dispatch(categoryRequest());
     }, []),
   );
+
   const [active, setActive] = useState('All');
   const navigation = useNavigation();
   const _renderItem = ({item}) => {
-    // const myNvaigate = () => {
-    //   setActive(item);
-    //   dispatch(
-    //     categorySuccess({
-    //       item: caterory_list,
-    //     }),
-    //   );
-    // };
+    console.log(category, 'ddddd');
     return (
       <Block margin={[hp(3), wp(4), 0]} center flex={false}>
         <CustomButton onPress={() => setActive(item)} activeOpacity={1}>

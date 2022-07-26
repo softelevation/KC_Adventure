@@ -1,13 +1,13 @@
-import {ActionConstants} from '../constants';
-import {authError, authSuccess} from './action';
+import {ActionConstants} from '../../constants';
+import {categoryError, categorySuccess} from './action';
 import {put, call, all, takeLatest} from 'redux-saga/effects';
-import {apiCall} from '../store/api-client';
-import {API_URL, BASE_URL} from 'src/utils/config';
+import {apiCall} from '../../store/api-client';
+import {API_URL} from 'src/utils/config';
 import {navigate} from 'src/routes/navigation-service';
 import {RoutesName} from '_routeName';
 import {onDisplayNotification} from 'src/utils/mobile-utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {decrypted} from '../../utils/commonUtils';
+import {decrypted} from '../../../utils/commonUtils';
 import {saveAsync} from 'src/utils/local-storage';
 
 const SaveData = async data => {
@@ -21,28 +21,26 @@ export function* request(action) {
   try {
     const response = yield call(
       apiCall,
-      'POST',
-      API_URL.lOGIN_URL,
+      'GET',
+      API_URL.CATEGORY_URL,
       action.payload,
     ); //Get request
     const dataResponse = response.data;
-    console.log(response, 'response');
     if (response.status === 200) {
-      yield put(authSuccess(dataResponse));
-      navigate(RoutesName.DASHBOARD_STACK_SCREEN);
+      yield put(categorySuccess(dataResponse));
+      // navigate(RoutesName.EXPERIENCES_DETAILS_SCREEN);
       yield call(SaveToken, dataResponse);
     } else {
       onDisplayNotification(response.message);
-      yield put(authError(response));
+      yield put(categoryError(response));
     }
   } catch (err) {
-    console.log(err, 'err');
     onDisplayNotification(err.message);
-    yield put(authError());
+    yield put(categoryError());
   }
 }
 
-export function* authWatcher() {
-  yield all([takeLatest(ActionConstants.LOGIN_REQUEST, request)]);
+export function* categoryWatcher() {
+  yield all([takeLatest(ActionConstants.CATEGORY_REQUEST, request)]);
 }
-export default authWatcher;
+export default categoryWatcher;

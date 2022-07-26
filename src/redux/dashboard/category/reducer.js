@@ -1,11 +1,10 @@
 import {combineReducers} from 'redux';
-import {ActionConstants} from '../constants';
+import {ActionConstants} from '../../constants';
 const initialState = {
   loading: false,
-  data: {},
+  data: [],
   error: '',
   isSuccess: false,
-  profile: {},
 };
 export function category(state = initialState, action) {
   switch (action.type) {
@@ -33,7 +32,7 @@ export function category(state = initialState, action) {
       return state;
   }
 }
-const categoryReducer = combineReducers({
+const dashboardReducer = combineReducers({
   category,
 });
-export default categoryReducer;
+export default dashboardReducer;
