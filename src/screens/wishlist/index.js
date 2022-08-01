@@ -2,11 +2,9 @@ import React from 'react';
 import Header from 'src/common/header';
 import {Block, hp, ImageComponent, wp, Text} from '_elements';
 import {FlatList} from 'react-native';
-import { useSelector} from 'react-redux';
+
 const WishlistScreen = () => {
-  
-   const profile = useSelector(state => state.authprofile.profile.profile);
-   console.log(profile)
+
   const _renderVerticalItem = ({item}) => {
     return (
       <Block

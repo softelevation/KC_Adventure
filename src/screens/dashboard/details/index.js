@@ -14,10 +14,14 @@ import {
 import Modal from 'react-native-modal';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {RoutesName} from '_routeName';
+import {API_URL} from 'src/utils/config';
 
-const ExperienceDetails = () => {
+const ExperienceDetails = ({route}) => {
   const [isModalVisible, setModalVisible] = useState(true);
   const {goBack, navigate} = useNavigation();
+  const {data} = route.params;
+
+
 
   useFocusEffect(
     React.useCallback(() => {
@@ -26,7 +30,7 @@ const ExperienceDetails = () => {
   );
   return (
     <ImageBackground
-      source={images.adventure_bg}
+      source={{uri: `${API_URL.BASE_URL_IMAGE}${data.image}`}}
       style={CommonStyles.defaultFlex}>
       <SafeAreaView />
       <Block
@@ -51,7 +55,11 @@ const ExperienceDetails = () => {
           borderRadius={40}
           primary
           style={CommonStyles.icon}>
-          <ImageComponent name="hearts_icon" width={20} height={20} />
+          <ImageComponent
+            name={data.is_wishlist ? 'hearts_icon' : 'heart_icon'}
+            width={20}
+            height={20}
+          />
         </CustomButton>
       </Block>
       <Modal
@@ -67,10 +75,10 @@ const ExperienceDetails = () => {
           flex={false}
           style={{height: hp(58)}}>
           <Text gutterBottom lightBlack bold h2>
-            Isola Bella
+            {data.location}
           </Text>
           <Text gutterBottom info medium size={20}>
-            Italy
+            {data.country}
           </Text>
           <Block
             margin={[hp(1), 0, hp(2)]}
@@ -80,18 +88,15 @@ const ExperienceDetails = () => {
             flex={false}>
             <ImageComponent name="star_icon" width={20} height={20} />
             <Text margin={[0, 0, 0, wp(3)]} h3 semibold color={'#303030'}>
-              4.2{'   '}
+              {data.rating}
+              {'   '}
               <Text size={16} medium>
-                (2.1 km)
+                ({data.distance} km)
               </Text>
             </Text>
           </Block>
           <Text size={16} medium color={'#444444'}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            vulputate libero et velit interdum, ac aliquet odio mattis. Class
-            aptent taciti sociosqu ad litora torquent per conubia nostra, per
-            inceptos himenaeos. Curabitur tempus urna at turpis condimentum
-            lobortis.
+            {data.description}
           </Text>
           <Block flex={false} center margin={[hp(3), 0, 0]}>
             <Button

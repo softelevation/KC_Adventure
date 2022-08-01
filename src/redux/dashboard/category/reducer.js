@@ -11,8 +11,7 @@ export function category(state = initialState, action) {
     case ActionConstants.CATEGORY_REQUEST:
       return {
         ...state,
-        data: action.data,
-        loading: false,
+        loading: true,
       };
     case ActionConstants.CATEGORY_SUCCESS:
       return {
@@ -32,7 +31,7 @@ export function category(state = initialState, action) {
       return state;
   }
 }
-const dashboardReducer = combineReducers({
-  category,
-});
-export default dashboardReducer;
+// const dashboardReducer = combineReducers({
+//   category,
+// });
+export default category;

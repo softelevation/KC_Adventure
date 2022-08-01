@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {FlatList, ScrollView} from 'react-native';
+import {FlatList, RefreshControl, ScrollView} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import CommonStyles from 'src/assets/styles';
 import Header from 'src/common/header';
@@ -22,18 +22,19 @@ import {
   requestPermission,
 } from 'src/utils/helper';
 import {categoryRequest} from 'src/redux/dashboard/category/action';
-import category from 'src/redux/dashboard/category/reducer';
+import {experienceRequest} from 'src/redux/dashboard/experience/action';
+import {API_URL} from 'src/utils/config';
+import DefaultSkeleton from 'src/components/defaultshimmer';
+import {wishlistRequest, wishlistSuccess} from 'src/redux/wishlist/action';
 
 const Experiences = () => {
   const dispatch = useDispatch();
-  // const caterory_list = ['All', 'America', 'Europe', 'Asia', 'Osenia'];
-  const caterory_list = useSelector(
-    state => state.dashboardReducer.category.data,
-  );
-  console.log('ddddddd', caterory_list);
-  // const caterory_list = categories.caterory_list;
-  // console.log(caterory_list, 'ddhdhdhdhdhdhhdhd123');
-
+  const [refreshing, setrefreshing] = useState(false);
+  const [caterory_list, loading] = useSelector(v => [
+    v.category.data,
+    v.category.loading,
+  ]);
+  const experience_list = useSelector(state => state.experience.data);
   const getLiveLocation = async () => {
     const checkPermission = await locationPermission();
     console.log(checkPermission, 'checkPermission');
@@ -56,17 +57,32 @@ const Experiences = () => {
       }
     }
   };
+
+  const currentApiCall = () => {
+    dispatch(categoryRequest());
+    dispatch(experienceRequest());
+  };
   useFocusEffect(
     React.useCallback(() => {
       getLiveLocation();
-      dispatch(categoryRequest());
     }, []),
   );
+
+  useEffect(() => {
+    currentApiCall();
+  }, []);
+
+  const onRefresh = () => {
+    setrefreshing(true);
+    setTimeout(() => {
+      setrefreshing(false);
+    }, 2000);
+    currentApiCall();
+  };
 
   const [active, setActive] = useState('All');
   const navigation = useNavigation();
   const _renderItem = ({item}) => {
-    console.log(category, 'ddddd');
     return (
       <Block margin={[hp(3), wp(4), 0]} center flex={false}>
         <CustomButton onPress={() => setActive(item)} activeOpacity={1}>
@@ -109,7 +125,9 @@ const Experiences = () => {
               <Text h4 bold color={'#303030'}>
                 Isola Bella
               </Text>
-              <ImageComponent name="hearts_icon" width={23} height={20} />
+              <CustomButton>
+                <ImageComponent name="hearts_icon" width={23} height={20} />
+              </CustomButton>
             </Block>
             <Block
               margin={[hp(1), 0, 0]}
@@ -146,7 +164,9 @@ const Experiences = () => {
       <CustomButton
         activeOpacity={0.9}
         onPress={() => {
-          navigation.navigate(RoutesName.EXPERIENCES_DETAILS_SCREEN);
+          navigation.navigate(RoutesName.EXPERIENCES_DETAILS_SCREEN, {
+            data: item,
+          });
         }}>
         <Block
           style={{width: wp(47)}}
@@ -158,7 +178,8 @@ const Experiences = () => {
           center
           flex={false}>
           <ImageComponent
-            name="demo1_icon"
+            isURL
+            name={`${API_URL.BASE_URL_IMAGE}${item.image}`}
             width={194}
             height={157}
             radius={14}
@@ -170,9 +191,22 @@ const Experiences = () => {
             flex={false}
             row>
             <Text style={{width: wp(38)}} h5 color={'#303030'}>
-              Mountain Biking and Gravel Cycling at Kingdom Trails, VT
+              {item.title}
             </Text>
-            <ImageComponent name="heart_icon" width={20} height={20} />
+            <CustomButton
+              onPress={() => {
+                dispatch(
+                  wishlistRequest({
+                    data: item.is_wishlist,
+                  }),
+                );
+              }}>
+              <ImageComponent
+                name={item.is_wishlist ? 'hearts_icon' : 'heart_icon'}
+                width={22}
+                height={22}
+              />
+            </CustomButton>
           </Block>
         </Block>
       </CustomButton>
@@ -183,43 +217,55 @@ const Experiences = () => {
       <Header name="Experiences" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Block flex={false}>
-          <FlatList
-            horizontal
-            data={caterory_list}
-            renderItem={_renderItem}
-            showsHorizontalScrollIndicator={false}
-          />
-        </Block>
-        <Block margin={[hp(3), 0]} flex={false} padding={[0, wp(4)]}>
-          <Text semibold h3>
-            Top Experiences
-          </Text>
-          <Block flex={false}>
-            <VirtualizedView>
+          {loading ? (
+            <DefaultSkeleton />
+          ) : (
+            <Block flex={false}>
               <FlatList
-                keyExtractor={(item, index) => index.toString()}
-                contentContainerStyle={{paddingBottom: hp(3)}}
                 horizontal
                 data={caterory_list}
-                renderItem={_renderHorizontalItem}
+                renderItem={_renderItem}
                 showsHorizontalScrollIndicator={false}
               />
-            </VirtualizedView>
-          </Block>
-          <Text semibold h3>
-            Top Rated
-          </Text>
-          <Block flex={false}>
-            <VirtualizedView>
-              <FlatList
-                scrollEnabled={false}
-                keyExtractor={(item, index) => index.toString()}
-                data={caterory_list}
-                renderItem={_renderVerticalItem}
-                showsHorizontalScrollIndicator={false}
-              />
-            </VirtualizedView>
-          </Block>
+              <Block margin={[hp(3), 0]} flex={false} padding={[0, wp(4)]}>
+                <Text semibold h3>
+                  Top Experiences
+                </Text>
+                <Block flex={false}>
+                  <VirtualizedView>
+                    <FlatList
+                      keyExtractor={(item, index) => index.toString()}
+                      contentContainerStyle={{paddingBottom: hp(3)}}
+                      horizontal
+                      data={experience_list}
+                      renderItem={_renderHorizontalItem}
+                      showsHorizontalScrollIndicator={false}
+                    />
+                  </VirtualizedView>
+                </Block>
+                <Text semibold h3>
+                  Top Rated
+                </Text>
+                <Block flex={false}>
+                  <VirtualizedView>
+                    <FlatList
+                      scrollEnabled={false}
+                      keyExtractor={(item, index) => index.toString()}
+                      data={caterory_list}
+                      renderItem={_renderVerticalItem}
+                      showsHorizontalScrollIndicator={false}
+                      refreshControl={
+                        <RefreshControl
+                          refreshing={refreshing}
+                          onRefresh={onRefresh}
+                        />
+                      }
+                    />
+                  </VirtualizedView>
+                </Block>
+              </Block>
+            </Block>
+          )}
         </Block>
       </ScrollView>
     </Block>
