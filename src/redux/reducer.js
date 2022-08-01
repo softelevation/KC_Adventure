@@ -4,7 +4,7 @@ import authSign from './signup/reducer';
 import location from './location/reducer';
 import authprofile from './profile/reducer';
 import category from './dashboard/category/reducer';
-import experience from './dashboard/experience/reducer';
+import experienceReducer from './dashboard/experience/reducer';
 import wishlists from './wishlist/reducer';
 import {ActionConstants} from './constants';
 const appReducer = combineReducers({
@@ -13,8 +13,8 @@ const appReducer = combineReducers({
   authSign,
   authprofile,
   category,
-  experience,
   wishlists,
+  experienceReducer,
 });
 const rootReducer = (state, action) => {
   if (action.type === ActionConstants.RESET_STORE) {

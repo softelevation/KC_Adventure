@@ -4,7 +4,6 @@ import {Block, hp, ImageComponent, wp, Text} from '_elements';
 import {FlatList} from 'react-native';
 
 const WishlistScreen = () => {
-
   const _renderVerticalItem = ({item}) => {
     return (
       <Block

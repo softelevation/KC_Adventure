@@ -9,7 +9,7 @@ export function* request(action) {
   try {
     const response = yield call(
       apiCall,
-      'POST',
+      'GET',
       API_URL.WISHLIST_URL,
       action.payload,
     ); //Get request

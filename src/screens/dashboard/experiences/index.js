@@ -22,10 +22,9 @@ import {
   requestPermission,
 } from 'src/utils/helper';
 import {categoryRequest} from 'src/redux/dashboard/category/action';
-import {experienceRequest} from 'src/redux/dashboard/experience/action';
+import {experienceTopRequest} from 'src/redux/dashboard/experience/action';
 import {API_URL} from 'src/utils/config';
 import DefaultSkeleton from 'src/components/defaultshimmer';
-import {wishlistRequest, wishlistSuccess} from 'src/redux/wishlist/action';
 
 const Experiences = () => {
   const dispatch = useDispatch();
@@ -34,7 +33,10 @@ const Experiences = () => {
     v.category.data,
     v.category.loading,
   ]);
-  const experience_list = useSelector(state => state.experience.data);
+  const experience_list = useSelector(
+    state => state.experienceReducer.experience.data,
+  );
+
   const getLiveLocation = async () => {
     const checkPermission = await locationPermission();
     console.log(checkPermission, 'checkPermission');
@@ -60,7 +62,7 @@ const Experiences = () => {
 
   const currentApiCall = () => {
     dispatch(categoryRequest());
-    dispatch(experienceRequest());
+    dispatch(experienceTopRequest());
   };
   useFocusEffect(
     React.useCallback(() => {
@@ -83,9 +85,14 @@ const Experiences = () => {
   const [active, setActive] = useState('All');
   const navigation = useNavigation();
   const _renderItem = ({item}) => {
+    const handleOnpress = (val) => {
+      setActive(val);
+      dispatch(experienceTopRequest({country: val}));
+      console.log(val,'kdkkddkkdk')
+    };
     return (
       <Block margin={[hp(3), wp(4), 0]} center flex={false}>
-        <CustomButton onPress={() => setActive(item)} activeOpacity={1}>
+        <CustomButton onPress={() => handleOnpress(item)} activeOpacity={1}>
           <Text
             bold={active === item}
             semibold={active !== item}
@@ -193,14 +200,7 @@ const Experiences = () => {
             <Text style={{width: wp(38)}} h5 color={'#303030'}>
               {item.title}
             </Text>
-            <CustomButton
-              onPress={() => {
-                dispatch(
-                  wishlistRequest({
-                    data: item.is_wishlist,
-                  }),
-                );
-              }}>
+            <CustomButton>
               <ImageComponent
                 name={item.is_wishlist ? 'hearts_icon' : 'heart_icon'}
                 width={22}
