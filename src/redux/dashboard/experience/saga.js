@@ -1,9 +1,9 @@
 import {ActionConstants} from '../../constants';
 import {
   experienceRatError,
-  experienceRatRequest,
   experienceTopError,
   experienceTopSuccess,
+  experienceRatSuccess,
 } from './action';
 import {put, call, all, takeLatest} from 'redux-saga/effects';
 import {apiCall} from '../../store/api-client';
@@ -34,12 +34,12 @@ export function* expRating(action) {
   try {
     const response = yield call(
       apiCall,
-      'POST',
-       `${API_URL.EXPERIENCE_URL}?country=${action.data.country}&rating=5`,
+      'GET',
+      `${API_URL.EXPERIENCE_URL}?country=${action.data.country}&rating=5`,
     ); //Get request
     const dataResponse = response.data;
     if (response.status === 200) {
-      yield put(experienceRatRequest(dataResponse));
+      yield put(experienceRatSuccess(dataResponse));
     } else {
       onDisplayNotification(response.message);
       yield put(experienceRatError(response));

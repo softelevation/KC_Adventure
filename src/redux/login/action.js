@@ -6,13 +6,13 @@ export const authRequest = payload => {
     payload,
   };
 };
-export const authSuccess = (data) => {
+export const authSuccess = data => {
   return {
     type: ActionConstants.LOGIN_SUCCESS,
     data,
   };
 };
-export const authError = (error) => {
+export const authError = error => {
   return {
     type: ActionConstants.LOGIN_ERROR,
     error,

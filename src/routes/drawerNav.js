@@ -26,7 +26,7 @@ import DrawerScreen from 'src/common/drawer';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const Drawer = createDrawerNavigator();
 const DrawerStack = createNativeStackNavigator();
-const ExperinceStackNavigator = () => {
+export const ExperinceStackNavigator = () => {
   return (
     <DrawerStack.Navigator
       initialRouteName={RoutesName.EXPERIENCES_SCREEN}
@@ -50,7 +50,10 @@ const ExperinceStackNavigator = () => {
       />
       <DrawerStack.Screen name={RoutesName.ROOM_BOOK} component={BookRoom} />
       <DrawerStack.Screen name={RoutesName.FEED_BACK} component={feedback} />
-      <DrawerStack.Screen name={RoutesName.PAYMENT_OPTIONS} component={payment} />
+      <DrawerStack.Screen
+        name={RoutesName.PAYMENT_OPTIONS}
+        component={payment}
+      />
     </DrawerStack.Navigator>
   );
 };

@@ -1,9 +1,8 @@
 import {ActionConstants} from '../../constants';
 
-export const categoryRequest = payload => {
+export const categoryRequest = () => {
   return {
     type: ActionConstants.CATEGORY_REQUEST,
-    payload,
   };
 };
 export const categorySuccess = data => {

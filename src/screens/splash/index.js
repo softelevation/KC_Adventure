@@ -9,15 +9,18 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import {RoutesName} from '_routeName';
-import { getAsync } from 'src/utils/local-storage';
+import {getAsync} from 'src/utils/local-storage';
+import {categoryRequest} from 'src/redux/dashboard/category/action';
+import {useDispatch} from 'react-redux';
 
 const SplashScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
-  const checkAuth = async() => {
-    const data= await getAsync('token')
-    console.log(data, 'data');
-    if(data){
+  const checkAuth = async () => {
+    const data = await getAsync('token');
+    dispatch(categoryRequest());
+    if (data) {
       setTimeout(() => {
         navigation.dispatch(
           CommonActions.reset({
@@ -26,8 +29,7 @@ const SplashScreen = () => {
           }),
         );
       }, 3000);
-    }
-    else{
+    } else {
       setTimeout(() => {
         navigation.dispatch(
           CommonActions.reset({
@@ -37,11 +39,10 @@ const SplashScreen = () => {
         );
       }, 3000);
     }
-  }
+  };
   useFocusEffect(
     React.useCallback(() => {
       checkAuth();
-  
     }, []),
   );
   return (

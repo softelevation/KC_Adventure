@@ -12,7 +12,6 @@ export function login(state = initialState, action) {
     case ActionConstants.LOGIN_REQUEST:
       return {
         ...state,
-        data:action.data,
         loading: true,
       };
     case ActionConstants.LOGIN_SUCCESS:

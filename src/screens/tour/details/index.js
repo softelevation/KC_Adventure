@@ -4,9 +4,7 @@ import {images} from 'src/assets';
 import CommonStyles from 'src/assets/styles';
 import Header from 'src/common/header';
 import {useNavigation} from '@react-navigation/core';
-import {RoutesName} from '_routeName';
 import {Block, Button, hp, ImageComponent, Text, wp} from '_elements';
-import {navigationRef} from 'src/routes/navigation-service';
 
 const TourDetails = () => {
   const {navigate} = useNavigation();

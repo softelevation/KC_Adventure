@@ -6,13 +6,10 @@ import {API_URL} from 'src/utils/config';
 import {onDisplayNotification} from 'src/utils/mobile-utils';
 
 export function* request(action) {
+  // onDisplayNotification('action call');
+  console.log('action call');
   try {
-    const response = yield call(
-      apiCall,
-      'GET',
-      API_URL.CATEGORY_URL,
-      action.payload,
-    ); //Get request
+    const response = yield call(apiCall, 'GET', API_URL.CATEGORY_URL); //Get request
     const dataResponse = response.data;
     if (response.status === 200) {
       yield put(categorySuccess(dataResponse));
@@ -25,7 +22,6 @@ export function* request(action) {
     yield put(categoryError());
   }
 }
-
 export function* categoryWatcher() {
   yield all([takeLatest(ActionConstants.CATEGORY_REQUEST, request)]);
 }

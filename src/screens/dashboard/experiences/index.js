@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {FlatList, RefreshControl, ScrollView} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import CommonStyles from 'src/assets/styles';
 import Header from 'src/common/header';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {locationRequest} from 'src/redux/location/action';
 import {
   Block,
@@ -22,24 +24,33 @@ import {
   requestPermission,
 } from 'src/utils/helper';
 import {categoryRequest} from 'src/redux/dashboard/category/action';
-import {experienceTopRequest} from 'src/redux/dashboard/experience/action';
+import {
+  experienceRatRequest,
+  experienceTopRequest,
+} from 'src/redux/dashboard/experience/action';
 import {API_URL} from 'src/utils/config';
 import DefaultSkeleton from 'src/components/defaultshimmer';
+import {images} from 'src/assets';
+// import DefaultSkeleton from 'src/components/defaultshimmer';
 
 const Experiences = () => {
   const dispatch = useDispatch();
   const [refreshing, setrefreshing] = useState(false);
-  const [caterory_list, loading] = useSelector(v => [
+  const [active, setActive] = useState('All');
+  const navigation = useNavigation();
+  // const heart = images.heart_icon;
+  // const hearts = images.hearts_icon;
+  // const myhearts = {heart, hearts};
+  // const [selected, setSelected] = useState(myhearts.heart);
+  const [caterory_list, loading, experience_list, top_list] = useSelector(v => [
     v.category.data,
     v.category.loading,
+    v.experienceReducer.experience.data,
+    v.experienceReducer.experienceRating.data,
   ]);
-  const experience_list = useSelector(
-    state => state.experienceReducer.experience.data,
-  );
 
   const getLiveLocation = async () => {
     const checkPermission = await locationPermission();
-    console.log(checkPermission, 'checkPermission');
     if (checkPermission) {
       const request = await requestPermission();
       if (request) {
@@ -61,8 +72,12 @@ const Experiences = () => {
   };
 
   const currentApiCall = () => {
+    const data = {
+      country: active,
+    };
     dispatch(categoryRequest());
-    dispatch(experienceTopRequest());
+    dispatch(experienceTopRequest(data));
+    dispatch(experienceRatRequest(data));
   };
   useFocusEffect(
     React.useCallback(() => {
@@ -71,6 +86,7 @@ const Experiences = () => {
   );
 
   useEffect(() => {
+    console.log('call api');
     currentApiCall();
   }, []);
 
@@ -82,14 +98,13 @@ const Experiences = () => {
     currentApiCall();
   };
 
-  const [active, setActive] = useState('All');
-  const navigation = useNavigation();
+  const handleOnpress = val => {
+    setActive(val);
+    dispatch(experienceTopRequest({country: val}));
+    dispatch(experienceRatRequest({rating: val, country: val}));
+  };
+
   const _renderItem = ({item}) => {
-    const handleOnpress = (val) => {
-      setActive(val);
-      dispatch(experienceTopRequest({country: val}));
-      console.log(val,'kdkkddkkdk')
-    };
     return (
       <Block margin={[hp(3), wp(4), 0]} center flex={false}>
         <CustomButton onPress={() => handleOnpress(item)} activeOpacity={1}>
@@ -122,7 +137,8 @@ const Experiences = () => {
           borderRadius={20}
           flex={false}>
           <ImageComponent
-            name="demo_icon"
+            isURL
+            name={`${API_URL.BASE_URL_IMAGE}${item.image}`}
             width={152}
             height={131}
             radius={14}
@@ -130,10 +146,14 @@ const Experiences = () => {
           <Block center flex={false} margin={[hp(2), 0, 0, wp(5)]}>
             <Block style={{width: wp(40)}} space={'between'} row flex={false}>
               <Text h4 bold color={'#303030'}>
-                Isola Bella
+                {item.location}
               </Text>
               <CustomButton>
-                <ImageComponent name="hearts_icon" width={23} height={20} />
+                <ImageComponent
+                  name={item.is_wishlist ? 'hearts_icon' : 'heart_icon'}
+                  width={23}
+                  height={20}
+                />
               </CustomButton>
             </Block>
             <Block
@@ -144,7 +164,7 @@ const Experiences = () => {
               flex={false}>
               <ImageComponent name="location_icon" width={16} height={16} />
               <Text margin={[0, 0, 0, wp(3)]} h4 medium color={'#303030'}>
-                Italy
+                {item.country}
               </Text>
             </Block>
             <Block
@@ -155,9 +175,10 @@ const Experiences = () => {
               flex={false}>
               <ImageComponent name="star_icon" width={20} height={20} />
               <Text margin={[0, 0, 0, wp(3)]} h4 semibold color={'#303030'}>
-                4.2{'   '}
+                {item.rating}
+                {'   '}
                 <Text h5 medium>
-                  (2.1 km)
+                  ({item.distance} km)
                 </Text>
               </Text>
             </Block>
@@ -187,7 +208,7 @@ const Experiences = () => {
           <ImageComponent
             isURL
             name={`${API_URL.BASE_URL_IMAGE}${item.image}`}
-            width={194}
+            width={180}
             height={157}
             radius={14}
           />
@@ -251,7 +272,7 @@ const Experiences = () => {
                     <FlatList
                       scrollEnabled={false}
                       keyExtractor={(item, index) => index.toString()}
-                      data={caterory_list}
+                      data={top_list}
                       renderItem={_renderVerticalItem}
                       showsHorizontalScrollIndicator={false}
                       refreshControl={
@@ -273,3 +294,24 @@ const Experiences = () => {
 };
 
 export default Experiences;
+
+// import {View, Text} from 'react-native';
+// import React, {useEffect} from 'react';
+// import {useDispatch} from 'react-redux';
+// import {categoryRequest} from 'src/redux/dashboard/category/action';
+
+// const Experiences = () => {
+//   const dispatch = useDispatch();
+
+//   useEffect(() => {
+//     dispatch(categoryRequest());
+//   }, []);
+
+//   return (
+//     <View>
+//       <Text>Experiences</Text>
+//     </View>
+//   );
+// };
+
+// export default Experiences;

@@ -1,4 +1,3 @@
-import {combineReducers} from 'redux';
 import {ActionConstants} from '../../constants';
 const initialState = {
   loading: false,
@@ -26,12 +25,8 @@ export function category(state = initialState, action) {
         error: action.error,
         loading: false,
       };
-
     default:
       return state;
   }
 }
-// const dashboardReducer = combineReducers({
-//   category,
-// });
 export default category;

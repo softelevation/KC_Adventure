@@ -20,9 +20,6 @@ const ExperienceDetails = ({route}) => {
   const [isModalVisible, setModalVisible] = useState(true);
   const {goBack, navigate} = useNavigation();
   const {data} = route.params;
-
-
-
   useFocusEffect(
     React.useCallback(() => {
       setModalVisible(true);

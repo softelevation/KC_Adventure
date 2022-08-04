@@ -7,6 +7,7 @@ import {defaultOptions} from './constants';
 import AuthNavigator from './authStack';
 import DashboardNavigator from './homeStack';
 import {navigationRef} from './navigation-service';
+import DrawerNavigator from './drawerNav';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,7 +25,7 @@ const Routes = () => {
         />
         <Stack.Screen
           name={RoutesName.DASHBOARD_STACK_SCREEN}
-          component={DashboardNavigator}
+          component={DrawerNavigator}
         />
       </Stack.Navigator>
     </NavigationContainer>

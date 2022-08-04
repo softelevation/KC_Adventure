@@ -22,7 +22,6 @@ export function* request(action) {
       BASE_URL + API_URL.SIGNUP_URL,
       action.payload,
     ); //Get request
-    // console.log(response);
     const dataResponse = response.data;
     if (response.status === 200) {
       yield put(signSuccess(dataResponse));

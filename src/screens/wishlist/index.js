@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Header from 'src/common/header';
 import {Block, hp, ImageComponent, wp, Text} from '_elements';
 import {FlatList} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {wishlistRequest} from 'src/redux/wishlist/action';
 
 const WishlistScreen = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(wishlistRequest());
+  }, []);
+
   const _renderVerticalItem = ({item}) => {
     return (
       <Block
@@ -54,7 +61,7 @@ const WishlistScreen = () => {
         <FlatList
           contentContainerStyle={{marginBottom: hp(6), flexGrow: 1}}
           // horizontal
-          data={['All', 'America', 'Europe', 'Asia', 'Osenia']}
+          data={['All', 'hggg']}
           renderItem={_renderVerticalItem}
           showsVerticalScrollIndicator={false}
         />

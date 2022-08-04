@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
 import {ActionConstants} from '../../constants';
+
 const initialState = {
   loading: false,
   data: [],
@@ -7,13 +8,7 @@ const initialState = {
   isSuccess: false,
 };
 
-const ratedState = {
-  loading: false,
-  data: [],
-  error: '',
-  isSuccess: false,
-};
-export function experience(state = initialState, action) {
+function experience(state = initialState, action) {
   switch (action.type) {
     case ActionConstants.EXPERIENCE_REQUEST:
       return {
@@ -39,7 +34,7 @@ export function experience(state = initialState, action) {
   }
 }
 
-export function experienceRating(state = ratedState, action) {
+function experienceRating(state = initialState, action) {
   switch (action.type) {
     case ActionConstants.EXPERIENCE_RAT_REQUEST:
       return {

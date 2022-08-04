@@ -5,6 +5,7 @@ import {Block, Button, hp, Input, Text, wp, ImageComponent} from '_elements';
 import Checkbox from 'src/components/checkbox';
 import CommonStyles from 'src/assets/styles';
 import {light} from 'src/components/theme/colors';
+import {images} from 'src/assets';
 import {AccordionList} from 'accordion-collapse-react-native';
 import {
   strictValidArrayWithLength,
@@ -13,6 +14,9 @@ import {
 import {Bold} from 'src/components/theme/fontsize';
 
 const payment = () => {
+  const up = images.up_arrow;
+  const down = images.down_arrow;
+  const arrow = {up, down};
   const items = [
     {
       id: 1,
@@ -141,7 +145,7 @@ const payment = () => {
                   uncheckedComponent={
                     <ImageComponent name="radio_off" height={40} width={40} />
                   }
-                  checked={i === 1 ? true : false}
+                  checked={i === 2 ? true : false}
                   label={a.name}
                 />
                 <ImageComponent
