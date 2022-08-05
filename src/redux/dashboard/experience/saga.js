@@ -12,11 +12,11 @@ import {onDisplayNotification} from 'src/utils/mobile-utils';
 
 export function* toprequest(action) {
   try {
-    const response = yield call(
-      apiCall,
-      'GET',
+    const response = yield call(apiCall, 'GET', `${API_URL.EXPERIENCE_URL}`); //Get request
+    console.log(
       `${API_URL.EXPERIENCE_URL}?country=${action.data.country}`,
-    ); //Get request
+      'gddbbdd dbd',
+    );
     const dataResponse = response.data;
     if (response.status === 200) {
       yield put(experienceTopSuccess(dataResponse));
@@ -35,7 +35,8 @@ export function* expRating(action) {
     const response = yield call(
       apiCall,
       'GET',
-      `${API_URL.EXPERIENCE_URL}?country=${action.data.country}&rating=5`,
+      `${API_URL.EXPERIENCE_URL}`,
+      // `${API_URL.EXPERIENCE_URL}?country=${action.data.country}&rating=5`,
     ); //Get request
     const dataResponse = response.data;
     if (response.status === 200) {

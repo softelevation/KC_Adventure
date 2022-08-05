@@ -1,16 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Header from 'src/common/header';
 import {Block, hp, ImageComponent, wp, Text} from '_elements';
 import {FlatList} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {wishlistRequest} from 'src/redux/wishlist/action';
 
 const WishlistScreen = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(wishlistRequest());
-  }, []);
-
   const _renderVerticalItem = ({item}) => {
     return (
       <Block

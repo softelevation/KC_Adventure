@@ -5,7 +5,6 @@ import {FlatList, RefreshControl, ScrollView} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import CommonStyles from 'src/assets/styles';
 import Header from 'src/common/header';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {locationRequest} from 'src/redux/location/action';
 import {
   Block,
@@ -30,18 +29,13 @@ import {
 } from 'src/redux/dashboard/experience/action';
 import {API_URL} from 'src/utils/config';
 import DefaultSkeleton from 'src/components/defaultshimmer';
-import {images} from 'src/assets';
-// import DefaultSkeleton from 'src/components/defaultshimmer';
 
 const Experiences = () => {
   const dispatch = useDispatch();
   const [refreshing, setrefreshing] = useState(false);
   const [active, setActive] = useState('All');
   const navigation = useNavigation();
-  // const heart = images.heart_icon;
-  // const hearts = images.hearts_icon;
-  // const myhearts = {heart, hearts};
-  // const [selected, setSelected] = useState(myhearts.heart);
+
   const [caterory_list, loading, experience_list, top_list] = useSelector(v => [
     v.category.data,
     v.category.loading,
