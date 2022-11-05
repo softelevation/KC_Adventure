@@ -33,14 +33,14 @@ import {
   requestPermission,
 } from 'src/utils/helper';
 import {light} from 'src/components/theme/colors';
-import { RoutesName } from '_routeName';
+import {RoutesName} from '_routeName';
 const latitudeDelta = 0.0922;
 const longitudeDelta = 0.0421;
 const MapsScreen = () => {
   const [isModalVisible, setModalVisible] = useState(true);
   const [isEmergencyModalVisible, setEmergencyModalVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const {goBack , navigate} = useNavigation();
+  const {goBack, navigate} = useNavigation();
   const location = useSelector(state => state.location.data);
   const [defaultHeight, setDefaultHeight] = useState(40);
   console.log('isEmergencyModalVisible: ', isEmergencyModalVisible);
@@ -145,8 +145,7 @@ const MapsScreen = () => {
           zoomEnabled={true}
           showsMyLocationButton={false}
           ref={mapView}
-          initialRegion={state}
-        >
+          initialRegion={state}>
           {data.map((val, i) => {
             return (
               <Marker
@@ -273,7 +272,7 @@ const MapsScreen = () => {
                   onPress={() => onSubmit()}
                   style={{width: wp(70)}}
                   color={'primary'}>
-                  Emergency contact
+                  Get Help
                 </Button>
               </Block>
             </Block>
@@ -311,7 +310,7 @@ const MapsScreen = () => {
                 </Text>
               </Block>
               <Block flex={false} row space="between">
-                <Block flex={false} row center  padding={[hp(0),wp(1)]}>
+                <Block flex={false} row center padding={[hp(0), wp(1)]}>
                   <CustomRatingBar />
                 </Block>
                 <Block flex={false}>

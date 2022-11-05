@@ -92,16 +92,18 @@ const Experiences = () => {
   //   currentApiCall();
   // };
 
-  const handleOnpress = val => {
-    setActive(val);
-    dispatch(experienceTopRequest({country: val}));
-    dispatch(experienceRatRequest({rating: val, country: val}));
-  };
+  // const handleOnpress = val => {
+  //   setActive(val);
+  //   dispatch(experienceTopRequest({country: val}));
+  //   dispatch(experienceRatRequest({rating: val, country: val}));
+  // };
 
   const _renderItem = ({item}) => {
     return (
       <Block margin={[hp(3), wp(4), 0]} center flex={false}>
-        <CustomButton onPress={() => handleOnpress(item)} activeOpacity={1}>
+        <CustomButton
+          // onPress={() => handleOnpress(item)}
+          activeOpacity={1}>
           <Text
             bold={active === item}
             semibold={active !== item}
@@ -132,7 +134,8 @@ const Experiences = () => {
           flex={false}>
           <ImageComponent
             isURL
-            name={`${API_URL.BASE_URL_IMAGE}${item.image}`}
+            // name={`${API_URL.BASE_URL_IMAGE}${item.image}`}
+            name="demo_icon"
             width={152}
             height={131}
             radius={14}
@@ -140,7 +143,8 @@ const Experiences = () => {
           <Block center flex={false} margin={[hp(2), 0, 0, wp(5)]}>
             <Block style={{width: wp(40)}} space={'between'} row flex={false}>
               <Text h4 bold color={'#303030'}>
-                {item.location}
+                {/* {item.location} */}
+                New Preston
               </Text>
               <CustomButton>
                 <ImageComponent
@@ -158,7 +162,7 @@ const Experiences = () => {
               flex={false}>
               <ImageComponent name="location_icon" width={16} height={16} />
               <Text margin={[0, 0, 0, wp(3)]} h4 medium color={'#303030'}>
-                {item.country}
+                CT {/* {item.country} */}
               </Text>
             </Block>
             <Block
@@ -169,7 +173,7 @@ const Experiences = () => {
               flex={false}>
               <ImageComponent name="star_icon" width={20} height={20} />
               <Text margin={[0, 0, 0, wp(3)]} h4 semibold color={'#303030'}>
-                {item.rating}
+                5{/* {item.rating} */}
                 {'   '}
                 <Text h5 medium>
                   ({item.distance} km)
@@ -201,7 +205,8 @@ const Experiences = () => {
           flex={false}>
           <ImageComponent
             isURL
-            name={`${API_URL.BASE_URL_IMAGE}${item.image}`}
+            // name={`${API_URL.BASE_URL_IMAGE}${item.image}`}
+            name="demo1_icon"
             width={180}
             height={157}
             radius={14}
@@ -236,13 +241,13 @@ const Experiences = () => {
             <DefaultSkeleton />
           ) : (
             <Block flex={false}>
-              {/* <FlatList
+              <FlatList
                 horizontal
-                data={['1']}
                 // data={caterory_list}
+                data={['All', 'America', 'Europe', 'Aisa', 'Osenia']}
                 renderItem={_renderItem}
                 showsHorizontalScrollIndicator={false}
-              /> */}
+              />
               <Block margin={[hp(3), 0]} flex={false} padding={[0, wp(4)]}>
                 <Text semibold h3>
                   Top Experiences
@@ -268,8 +273,7 @@ const Experiences = () => {
                     <FlatList
                       scrollEnabled={false}
                       keyExtractor={(item, index) => index.toString()}
-                      // data={top_list}
-                      data={['1', '2']}
+                      data={['1']}
                       renderItem={_renderVerticalItem}
                       showsHorizontalScrollIndicator={false}
                       // refreshControl={

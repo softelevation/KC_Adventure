@@ -22,7 +22,7 @@ export const images = {
   terms_icon: require('./icons/privacy_tip.png'),
   about_icon: require('./icons/view_list.png'),
   notifi_icon: require('./icons/fi-ss-bell.png'),
-  aboutus_img: require('./icons/aboutus-img.png'),
+  aboutus_img: require('./icons/aboutimage.jpg'),
   terms_img: require('./icons/terms-img.png'),
   guide_img: require('./icons/guide_post.png'),
   done_icon: require('./icons/done.png'),

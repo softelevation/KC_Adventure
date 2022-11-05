@@ -44,7 +44,7 @@ const LoginScreen = () => {
             Sign In
           </Text>
           <Text medium h3 margin={[hp(1), 0, 0]}>
-            Welcome to the KC&E
+            KC&E Adventures
           </Text>
           <Block flex={false} margin={[hp(2), 0, 0]}>
             <Input
@@ -73,7 +73,8 @@ const LoginScreen = () => {
           </Text>
           <Block flex={false} center>
             <Button
-              onPress={() => formik.handleSubmit()}
+              // onPress={() => formik.handleSubmit()}
+              onPress={() => navigate(RoutesName.DASHBOARD_STACK_SCREEN)}
               style={{width: wp(35)}}
               uppercase
               disabled={!formik.isValid}
@@ -126,7 +127,7 @@ const LoginScreen = () => {
               onPress={() => navigate(RoutesName.SIGNUP_SCREEN)}
               secondary={true}
               bold>
-              SignUp!
+              Sign Up!
             </Text>
           </Text>
         </Block>
