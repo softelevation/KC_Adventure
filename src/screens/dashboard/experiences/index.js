@@ -43,54 +43,54 @@ const Experiences = () => {
     v.experienceReducer.experienceRating.data,
   ]);
 
-  const getLiveLocation = async () => {
-    const checkPermission = await locationPermission();
-    if (checkPermission) {
-      const request = await requestPermission();
-      if (request) {
-        const {latitude, longitude, heading} = await getCurrentLocation();
-        console.log(
-          'latitude, longitude, heading: ',
-          latitude,
-          longitude,
-          heading,
-        );
-        dispatch(
-          locationRequest({
-            latitude: latitude,
-            longitude: longitude,
-          }),
-        );
-      }
-    }
-  };
+  // const getLiveLocation = async () => {
+  //   const checkPermission = await locationPermission();
+  //   if (checkPermission) {
+  //     const request = await requestPermission();
+  //     if (request) {
+  //       const {latitude, longitude, heading} = await getCurrentLocation();
+  //       console.log(
+  //         'latitude, longitude, heading: ',
+  //         latitude,
+  //         longitude,
+  //         heading,
+  //       );
+  //       dispatch(
+  //         locationRequest({
+  //           latitude: latitude,
+  //           longitude: longitude,
+  //         }),
+  //       );
+  //     }
+  //   }
+  // };
 
-  const currentApiCall = () => {
-    const data = {
-      country: active,
-    };
-    dispatch(categoryRequest());
-    dispatch(experienceTopRequest(data));
-    dispatch(experienceRatRequest(data));
-  };
-  useFocusEffect(
-    React.useCallback(() => {
-      getLiveLocation();
-    }, []),
-  );
+  // const currentApiCall = () => {
+  //   const data = {
+  //     country: active,
+  //   };
+  //   dispatch(categoryRequest());
+  //   dispatch(experienceTopRequest(data));
+  //   dispatch(experienceRatRequest(data));
+  // };
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     getLiveLocation();
+  //   }, []),
+  // );
 
-  useEffect(() => {
-    console.log('call api');
-    currentApiCall();
-  }, []);
+  // useEffect(() => {
+  //   console.log('call api');
+  //   currentApiCall();
+  // }, []);
 
-  const onRefresh = () => {
-    setrefreshing(true);
-    setTimeout(() => {
-      setrefreshing(false);
-    }, 2000);
-    currentApiCall();
-  };
+  // const onRefresh = () => {
+  //   setrefreshing(true);
+  //   setTimeout(() => {
+  //     setrefreshing(false);
+  //   }, 2000);
+  //   currentApiCall();
+  // };
 
   const handleOnpress = val => {
     setActive(val);
@@ -236,12 +236,13 @@ const Experiences = () => {
             <DefaultSkeleton />
           ) : (
             <Block flex={false}>
-              <FlatList
+              {/* <FlatList
                 horizontal
-                data={caterory_list}
+                data={['1']}
+                // data={caterory_list}
                 renderItem={_renderItem}
                 showsHorizontalScrollIndicator={false}
-              />
+              /> */}
               <Block margin={[hp(3), 0]} flex={false} padding={[0, wp(4)]}>
                 <Text semibold h3>
                   Top Experiences
@@ -252,7 +253,8 @@ const Experiences = () => {
                       keyExtractor={(item, index) => index.toString()}
                       contentContainerStyle={{paddingBottom: hp(3)}}
                       horizontal
-                      data={experience_list}
+                      data={['1']}
+                      // data={experience_list}
                       renderItem={_renderHorizontalItem}
                       showsHorizontalScrollIndicator={false}
                     />
@@ -266,15 +268,16 @@ const Experiences = () => {
                     <FlatList
                       scrollEnabled={false}
                       keyExtractor={(item, index) => index.toString()}
-                      data={top_list}
+                      // data={top_list}
+                      data={['1', '2']}
                       renderItem={_renderVerticalItem}
                       showsHorizontalScrollIndicator={false}
-                      refreshControl={
-                        <RefreshControl
-                          refreshing={refreshing}
-                          onRefresh={onRefresh}
-                        />
-                      }
+                      // refreshControl={
+                      //   <RefreshControl
+                      //     refreshing={refreshing}
+                      //     onRefresh={onRefresh}
+                      //   />
+                      // }
                     />
                   </VirtualizedView>
                 </Block>
