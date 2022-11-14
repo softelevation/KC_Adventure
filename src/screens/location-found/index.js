@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {FlatList, ScrollView} from 'react-native';
+import {FlatList, Image, ScrollView} from 'react-native';
 import {
   Block,
   CustomButton,
@@ -22,6 +22,7 @@ const LocationFound = () => {
       Description:
         'The short lake tour will take you from the picturesque village of New Preston around Lake Waramaug, named for Chief Waramaug of the Potatuck Native American tribe who wintered in the area. Along the way, you will pass Lake Waramaug State Park, and the renowned Hopkins Inn & Restaurant and the Hopkins Vineyard. At the end, you can lunch at The Smithy Café just steps from the KC&E office!',
       image: images.short_lake,
+      // name: require('../../assets/icons/'),
     },
     {
       id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
@@ -34,7 +35,8 @@ const LocationFound = () => {
       id: '58694a0f-3da1-471f-bd96-145571e29d72',
       title: 'Lake to Warren Tour',
       Description:
-        ' The Tanner Hill Tour will take you along the southern edge of Lake Waramaug before you turn inland toward Kent where you will pass picturesque properties, stonewalls, and forests. Along the way, you will pass the renowned Kent Falls Brewing. You will also pass Anderson Acres Flower Farm before you meet back up with the lakeshore. After passing The Hopkins Inn & Restaurant and the Hopkins Vineyard, you will ride to Warren, home to delicious sandwiches at Warren General Store. You will return home by way of Tanner Hill to take in views of Lake Waramaug, before having the option to enjoy a lunch at The Smithy Café if you did not get something in Warren!',
+        'The Tanner Hill Tour will take you along the southern edge of Lake Waramaug before you turn inland toward Kent where you will pass picturesque properties, stonewalls, and forests. Along the way, you will pass the renowned Kent Falls Brewing. You will also pass Anderson Acres Flower Farm before you meet back up with the lakeshore. After passing The Hopkins Inn & Restaurant and the Hopkins Vineyard, you will ride to Warren, home to delicious sandwiches at Warren General Store. You will return home by way of Tanner Hill to take in views of Lake Waramaug, before having the option to enjoy a lunch at The Smithy Café if you did not get something in Warren!',
+      // image: images.lake_warren,
       image: images.lake_warren,
     },
   ];
@@ -53,14 +55,19 @@ const LocationFound = () => {
           padding={[hp(2), wp(3)]}
           borderRadius={20}
           flex={false}>
-          <ImageComponent
+          <Image
+            style={{height: 130, width: 330, borderRadius: 15}}
+            source={item.image}
+          />
+          {/* <ImageComponent
             // name="Location_Detail"
+            // isURL
             name={item.image}
             width={330}
             height={130}
             radius={15}
-          />
-          <Block flex={false} margin={[hp(0.7), 0, 0, wp(5)]}>
+          /> */}
+          <Block flex={false} margin={[hp(0.7), 0, 0, wp(2)]}>
             <Block center space={'between'} row flex={false}>
               <Text h3 bold color={'#323232'}>
                 {item.title}
@@ -78,8 +85,8 @@ const LocationFound = () => {
 
             <Block
               margin={[hp(1), 0, 0]}
-              style={{width: wp(75)}}
-              middle
+              style={{width: wp(80)}}
+              // middle
               flex={false}>
               <Text h4 color={'#323232'} style={{backgroundcolor: 'black'}}>
                 {item.Description}

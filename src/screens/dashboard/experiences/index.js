@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {FlatList, RefreshControl, ScrollView} from 'react-native';
+import {FlatList, Image, RefreshControl, ScrollView} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import CommonStyles from 'src/assets/styles';
 import Header from 'src/common/header';
@@ -29,6 +29,7 @@ import {
 } from 'src/redux/dashboard/experience/action';
 import {API_URL} from 'src/utils/config';
 import DefaultSkeleton from 'src/components/defaultshimmer';
+import {images} from 'src/assets';
 
 const Experiences = () => {
   const dispatch = useDispatch();
@@ -133,7 +134,7 @@ const Experiences = () => {
           borderRadius={20}
           flex={false}>
           <ImageComponent
-            isURL
+            // isURL
             // name={`${API_URL.BASE_URL_IMAGE}${item.image}`}
             name="demo_icon"
             width={152}
@@ -192,6 +193,7 @@ const Experiences = () => {
         onPress={() => {
           navigation.navigate(RoutesName.EXPERIENCES_DETAILS_SCREEN, {
             data: item,
+            image: images.demo1_icon,
           });
         }}>
         <Block
@@ -203,8 +205,12 @@ const Experiences = () => {
           borderRadius={20}
           center
           flex={false}>
+          {/* <Image
+            style={{height: 157, width: 180}}
+            source={require('../../../assets/icons/image1.png')}
+          /> */}
           <ImageComponent
-            isURL
+            // isURL
             // name={`${API_URL.BASE_URL_IMAGE}${item.image}`}
             name="demo1_icon"
             width={180}
@@ -218,8 +224,11 @@ const Experiences = () => {
             flex={false}
             row>
             <Text style={{width: wp(38)}} h5 color={'#303030'}>
-              {item.title}
+              Mountain Biking and Gravel Cycling at Kingdom Trails,VT
             </Text>
+            {/* <Text style={{width: wp(38)}} h5 color={'#303030'}>
+              {item.title}
+            </Text> */}
             <CustomButton>
               <ImageComponent
                 name={item.is_wishlist ? 'hearts_icon' : 'heart_icon'}

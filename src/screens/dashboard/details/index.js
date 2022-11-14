@@ -1,4 +1,4 @@
-import {ImageBackground, SafeAreaView} from 'react-native';
+import {ImageBackground, SafeAreaView, ScrollView} from 'react-native';
 import React, {useState} from 'react';
 import {images} from 'src/assets';
 import CommonStyles from 'src/assets/styles';
@@ -15,12 +15,12 @@ import Modal from 'react-native-modal';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {RoutesName} from '_routeName';
 import {API_URL} from 'src/utils/config';
-import {ScrollView} from 'react-native-gesture-handler';
+// import {ScrollView} from 'react-native-gesture-handler';
 
 const ExperienceDetails = ({route}) => {
   const [isModalVisible, setModalVisible] = useState(true);
   const {goBack, navigate} = useNavigation();
-  const {data} = route.params;
+  const {data, image} = route.params;
   useFocusEffect(
     React.useCallback(() => {
       setModalVisible(true);
@@ -28,7 +28,8 @@ const ExperienceDetails = ({route}) => {
   );
   return (
     <ImageBackground
-      source={{uri: `${API_URL.BASE_URL_IMAGE}${data.image}`}}
+      // source={{uri: `${API_URL.BASE_URL_IMAGE}${data.image}`}}
+      source={image}
       style={CommonStyles.defaultFlex}>
       <SafeAreaView />
       <Block
@@ -62,7 +63,9 @@ const ExperienceDetails = ({route}) => {
       </Block>
       <Modal
         coverScreen={false}
+        propagateSwipe={true}
         hasBackdrop={false}
+        // style={{marginTop: hp(20), height: hp(70),wif}}
         style={CommonStyles.modalWithoutMarginStyle}
         avoidKeyboard
         isVisible={isModalVisible}>

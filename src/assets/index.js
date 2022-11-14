@@ -55,4 +55,7 @@ export const images = {
   add_photo: require('./icons/addphoto.png'),
   down_arrow: require('./icons/downarrow.png'),
   up_arrow: require('./icons/uparrow.png'),
+  short_lake: require('./icons/lakeshort.jpg'),
+  tanner_hill: require('./icons/hilltanner.jpg'),
+  lake_warren: require('./icons/warrentour.jpg'),
 };

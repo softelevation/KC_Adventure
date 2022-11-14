@@ -18,7 +18,7 @@ const AboutScreen = () => {
             passions and unending curiosity for travel, outdoor adventure, and
             the perspective and freedom they provide!
             {'\n'}
-            {'\n'} The owners, Caitlin and Collin, both grew up in Connecticut
+            {'\n'}The owners, Caitlin and Collin, both grew up in Connecticut
             only miles away from one another but did not intersect until their
             mid-twenties. Both had a deep passion for travel and exploration
             from an early age. Caitlin’s grandparents are from a small town
@@ -27,7 +27,7 @@ const AboutScreen = () => {
             work, and explore for 7 years, even owning her own travel company
             along the way!
             {'\n'}
-            {'\n'} Collin grew up with a pilot as a father. He was both a naval
+            {'\n'}Collin grew up with a pilot as a father. He was both a naval
             aviator and an airline pilot. In his formative years, Collin’s
             family traveled constantly throughout the United States and Europe.
             His extended family also happened to be based in Italy and Greece,
@@ -35,7 +35,7 @@ const AboutScreen = () => {
             completed his undergraduate degree in the midwest and then spent
             years traveling through the west re-exploring some of his favorite
             places under his own power and often on two wheels.{'\n'}
-            {'\n'} Both Caitlin and Collin returned to CT coincidently at the
+            {'\n'}Both Caitlin and Collin returned to CT coincidently at the
             same time to start the next chapters of their lives, not knowing
             where these new paths would lead them. Upon meeting, they quickly
             realized that they had just met their other half and moved to

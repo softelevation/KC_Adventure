@@ -24,14 +24,14 @@ const TermsAndConditions = () => {
             malesuada in netus odio sed congue. Arcu, tempor ut posuere urna
             mauris. Est a risus, nisi nisi. Odio at vitae in massa diam habitant
             ullamcorper volutpat non.{'\n'}
-            {'\n'} Lorem quam semper felis id quis laoreet pulvinar nunc proin.
+            {'\n'}Lorem quam semper felis id quis laoreet pulvinar nunc proin.
             Ac ultrices imperdiet dictum aliquet eros egestas ultrices.
             Pellentesque lorem nunc quis posuere posuere. In volutpat.{'\n'}
-            {'\n'} Duis at posuere ut morbi. Ac purus id donec vitae amet
+            {'\n'}Duis at posuere ut morbi. Ac purus id donec vitae amet
             facilisi. Arcu ac volutpat, non eget integer pharetra in neque.
             Egestas habitant ultrices ac elit suscipit mattis morbi habitasse
             lorem.{'\n'}
-            {'\n'} Interdum posuere neque in feugiat. Parturient ac accumsan
+            {'\n'}Interdum posuere neque in feugiat. Parturient ac accumsan
             ultrices suscipit enim nisl viverra dolor fames. Semper parturient
             pulvinar nec auctor lectus tempus quam. Dapibus eget sollicitudin
             dignissim pretium miInterdum posuere neque in feugiat. Parturient ac
