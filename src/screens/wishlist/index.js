@@ -17,7 +17,7 @@ const WishlistScreen = () => {
         <Block center flex={false} margin={[hp(2), 0, 0, wp(5)]}>
           <Block style={{width: wp(50)}} space={'between'} row flex={false}>
             <Text h4 bold color={'#303030'}>
-              Isola Bella
+              New Preston
             </Text>
             <ImageComponent name="hearts_icon" width={23} height={20} />
           </Block>
@@ -29,7 +29,7 @@ const WishlistScreen = () => {
             flex={false}>
             <ImageComponent name="location_icon" width={16} height={16} />
             <Text margin={[0, 0, 0, wp(3)]} h4 medium color={'#303030'}>
-              Italy
+              CT
             </Text>
           </Block>
           <Block
@@ -40,7 +40,7 @@ const WishlistScreen = () => {
             flex={false}>
             <ImageComponent name="star_icon" width={20} height={20} />
             <Text margin={[0, 0, 0, wp(3)]} h4 semibold color={'#303030'}>
-              4.2
+              5
             </Text>
           </Block>
         </Block>
@@ -54,7 +54,7 @@ const WishlistScreen = () => {
         <FlatList
           contentContainerStyle={{marginBottom: hp(6), flexGrow: 1}}
           // horizontal
-          data={['All', 'hggg']}
+          data={['All']}
           renderItem={_renderVerticalItem}
           showsVerticalScrollIndicator={false}
         />
