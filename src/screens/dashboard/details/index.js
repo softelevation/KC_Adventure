@@ -63,19 +63,18 @@ const ExperienceDetails = ({route}) => {
       </Block>
       <Modal
         coverScreen={false}
-        propagateSwipe={true}
+        propagateSwipe
         hasBackdrop={false}
-        // style={{marginTop: hp(20), height: hp(70),wif}}
         style={CommonStyles.modalWithoutMarginStyle}
         avoidKeyboard
         isVisible={isModalVisible}>
-        <ScrollView>
-          <Block
-            padding={[hp(3), wp(5)]}
-            borderRadius={24}
-            primary
-            flex={false}
-            style={{height: hp(58)}}>
+        <Block
+          padding={[hp(3), wp(5)]}
+          borderRadius={24}
+          primary
+          flex={false}
+          style={{height: hp(58)}}>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <Text gutterBottom lightBlack bold h2>
               New Preston{/* {data.location} */}
             </Text>
@@ -124,8 +123,8 @@ const ExperienceDetails = ({route}) => {
                 View Map
               </Button>
             </Block>
-          </Block>
-        </ScrollView>
+          </ScrollView>
+        </Block>
       </Modal>
     </ImageBackground>
   );
