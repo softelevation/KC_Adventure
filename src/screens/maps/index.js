@@ -46,8 +46,10 @@ const MapsScreen = () => {
   console.log('isEmergencyModalVisible: ', isEmergencyModalVisible);
 
   const [state, setState] = useState({
-    latitude: location.latitude || 0,
-    longitude: location.longitude || 0,
+    // latitude: location.latitude || 0,
+    // longitude: location.longitude || 0,
+    latitude: 30.682414,
+    longitude: 76.725572,
     latitudeDelta: latitudeDelta,
     longitudeDelta: longitudeDelta,
   });
@@ -140,6 +142,7 @@ const MapsScreen = () => {
       <Block style={styles.container} flex={false}>
         <MapView
           style={styles.map}
+          mapType="hybrid"
           zoomControlEnabled={false}
           showsUserLocation
           zoomEnabled={true}
