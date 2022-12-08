@@ -41,9 +41,9 @@ const CommonStyles = {
     bottom: 0,
     right: 0,
     left: 0,
-    position:'absolute',
+    position: 'absolute',
     borderRadius: 24,
-    margin:0,
+    margin: 0,
   },
   dot: {
     height: 10,

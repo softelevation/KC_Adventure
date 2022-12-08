@@ -380,8 +380,8 @@ const MapsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
-    height: '100%',
-    width: '100%',
+    height: hp(100),
+    width: wp(100),
   },
   map: {
     ...StyleSheet.absoluteFillObject,

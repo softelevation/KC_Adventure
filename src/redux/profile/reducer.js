@@ -19,7 +19,7 @@ export function profile(state = initialState, action) {
       return {
         ...state,
         data: action.data,
-        isSuccess:true,
+        isSuccess: true,
         loading: false,
       };
     case ActionConstants.PROFILE_ERROR:

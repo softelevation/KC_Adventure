@@ -8,8 +8,8 @@ import {
   Platform,
   TouchableWithoutFeedback,
 } from 'react-native';
-import { images } from 'src/assets';
-import {Text} from './index'
+import {images} from 'src/assets';
+import {Text} from './index';
 class Checkbox extends PureComponent {
   state = {
     checked: this.props.checked,
@@ -129,7 +129,8 @@ const Label = ({labelStyle, numberOfLabelLines, label, customLabel}) => {
   return !customLabel ? (
     <View style={styles.labelContainer}>
       <Text
-        semibold color="#374957"
+        semibold
+        color="#374957"
         style={[styles.label, labelStyle]}
         numberOfLines={numberOfLabelLines}>
         {label}

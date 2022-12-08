@@ -33,7 +33,8 @@ const componentStyles = () => {
       justifyContent: 'flex-end',
     },
     shadow: {
-      shadowColor: Platform.OS === "ios" ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0.5)',
+      shadowColor:
+        Platform.OS === 'ios' ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0.5)',
       shadowOffset: {width: 0, height: 10},
       shadowOpacity: 1,
       shadowRadius: 10,

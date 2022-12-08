@@ -35,13 +35,13 @@ export default class CollapsibleList extends Component {
     };
   }
 
-  setMinHeight = (event) => {
+  setMinHeight = event => {
     const {height: minHeight} = event.nativeEvent.layout;
 
     this.setState({minHeight}, () => {
       this.setState({initialized: true, currentHeight: minHeight});
     });
-  }
+  };
 
   toggle = () => {
     const {minHeight, collapsed} = this.state;
@@ -63,25 +63,23 @@ export default class CollapsibleList extends Component {
         onToggle(this.state.collapsed);
       }
     });
-  }
+  };
 
   renderButton = () => {
-    const {
-      numberOfVisibleItems,
-      buttonContent,
-      children
-    } = this.props
+    const {numberOfVisibleItems, buttonContent, children} = this.props;
 
-    if (numberOfVisibleItems > React.Children.count(children)) return null
-  
+    if (numberOfVisibleItems > React.Children.count(children)) {
+      return null;
+    }
+
     return (
       <View>
         <TouchableOpacity onPress={this.toggle} activeOpacity={0.8}>
           {buttonContent}
         </TouchableOpacity>
       </View>
-    )
-  }
+    );
+  };
 
   render() {
     const {initialized, currentHeight} = this.state;

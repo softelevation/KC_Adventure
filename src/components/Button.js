@@ -1,5 +1,10 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
+  Platform,
+} from 'react-native';
 import Block from './Block';
 import ImageComponent from './ImageComponent';
 import {wp} from './responsive';
@@ -47,7 +52,10 @@ const componentStyles = () => {
     },
     shadow: {
       elevation: 5,
-      shadowColor: Platform.OS === "ios" ? 'rgba(101, 131, 123, 0.15)' : 'rgba(101, 131, 123, 0.9)',
+      shadowColor:
+        Platform.OS === 'ios'
+          ? 'rgba(101, 131, 123, 0.15)'
+          : 'rgba(101, 131, 123, 0.9)',
       shadowOffset: {width: 0, height: 10},
       shadowOpacity: 1,
 

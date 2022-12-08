@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {Image, TouchableOpacity, View, StyleSheet} from 'react-native';
-import {Block, hp, ImageComponent, Text, wp} from '_elements';
-import {images} from 'src/assets';
+import React, {useState} from 'react';
+import {TouchableOpacity} from 'react-native';
+import {hp, ImageComponent, Text, wp} from '_elements';
 
 const CustomRatingBar = () => {
   const [defaultRating, setDefaultRating] = useState(0);

@@ -10,7 +10,7 @@ const GuideScreen = () => {
         header
         shadow
         margin={[hp(3), wp(2), 0]}
-        padding={[hp(2), wp(2),hp(1,wp(2))]}
+        padding={[hp(2), wp(2), hp(1, wp(2))]}
         borderRadius={20}
         flex={false}>
         <ImageComponent name="guide_img" width={120} height={120} radius={14} />
