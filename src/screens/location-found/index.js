@@ -23,6 +23,7 @@ const LocationFound = () => {
       Description:
         'The short lake tour will take you from the picturesque village of New Preston around Lake Waramaug, named for Chief Waramaug of the Potatuck Native American tribe who wintered in the area. Along the way, you will pass Lake Waramaug State Park, and the renowned Hopkins Inn & Restaurant and the Hopkins Vineyard. At the end, you can lunch at The Smithy Café just steps from the KC&E office!',
       image: images.short_lake,
+      rate: 1,
       // name: require('../../assets/icons/'),
     },
     {
