@@ -19,7 +19,7 @@ export function* request(action) {
     const response = yield call(
       apiCall,
       'POST',
-      BASE_URL + API_URL.SIGNUP_URL,
+      API_URL.SIGNUP_URL,
       action.payload,
     ); //Get request
     const dataResponse = response.data;

@@ -45,9 +45,11 @@ const LocationFound = () => {
     return (
       <CustomButton
         activeOpacity={0.9}
-        onPress={() => {
-          navigation.navigate(RoutesName.ROOM_BOOK);
-        }}>
+        onPress={() =>
+          navigation.navigate(RoutesName.LOCATION_DETAILS, {
+            type: item.title,
+          })
+        }>
         <Block
           header
           shadow
@@ -74,9 +76,11 @@ const LocationFound = () => {
               </Text>
               <Button
                 shadow
-                onPress={() => navigation.navigate(RoutesName.LOCATION_DETAILS)}
                 style={{width: wp(23), paddingVertical: hp(1)}}
                 textStyle={{lineHeight: 15, marginTop: hp(0.3)}}
+                onPress={() => {
+                  navigation.navigate(RoutesName.ROOM_BOOK);
+                }}
                 size={13}
                 color={'secondary'}>
                 book

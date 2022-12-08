@@ -73,8 +73,8 @@ const LoginScreen = () => {
           </Text>
           <Block flex={false} center>
             <Button
-              // onPress={() => formik.handleSubmit()}
-              onPress={() => navigate(RoutesName.DASHBOARD_STACK_SCREEN)}
+              onPress={() => formik.handleSubmit()}
+              // onPress={() => navigate(RoutesName.DASHBOARD_STACK_SCREEN)}
               style={{width: wp(35)}}
               uppercase
               disabled={!formik.isValid}
