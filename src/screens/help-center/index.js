@@ -43,7 +43,7 @@ const HelpCenter = () => {
       </Block>
       <Block flex={false} center margin={[hp(4), 0, 0]}>
         <Button
-          onPress={() => navigate(RoutesName.TOUR_DETAILS_SCREEN)}
+          // onPress={() => navigate(RoutesName.TOUR_DETAILS_SCREEN)}
           style={{width: wp(35)}}
           uppercase
           color={'primary'}>
