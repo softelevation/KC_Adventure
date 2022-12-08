@@ -177,7 +177,7 @@ const Experiences = () => {
                 5{/* {item.rating} */}
                 {'   '}
                 <Text h5 medium>
-                  ({item.distance} km)
+                  (10 km)
                 </Text>
               </Text>
             </Block>
