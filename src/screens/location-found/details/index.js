@@ -12,6 +12,7 @@ const LocationDetails = () => {
       type: 'Short Lake Tour',
       text: 'A short drive from Lake Waramaug, the New Preston Fall is a beautiful waterfall located on the Aspetuck River, behind the lovely shops of New Preston. It is easily visible from the roadside, but those who want a more in-depth view can walk to the small observation platform that is off of route 45. Visitors can get within 20 feet of the fall’s base and fully enjoy its natural beauty. Nearby picnic tables offer the perfect perch to enjoy the view.',
       image: images.short_lake,
+      title: '',
     },
     {
       id: 2,
@@ -157,7 +158,11 @@ const LocationDetails = () => {
             height={208}
           /> */}
           <Image style={{height: 208, width: wp(100)}} source={item.image} />
+
           <Block flex={false} padding={[hp(2), wp(3)]}>
+            <Text gutterBottom h3 bold color={'#323232'}>
+              {item.type}
+            </Text>
             <Text medium height={24} size={16} color={'#444444'}>
               {item.text}
             </Text>
