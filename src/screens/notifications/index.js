@@ -9,7 +9,7 @@ const Notifications = () => {
         row
         header
         shadow
-        margin={[hp(3), wp(2), 0, wp(2)]}
+        margin={[hp(1.5), wp(2), 0, wp(2)]}
         borderRadius={14}
         center
         padding={[hp(1.2), 0]}

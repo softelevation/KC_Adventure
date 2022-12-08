@@ -91,9 +91,9 @@ const ExperienceDetails = ({route}) => {
               <Text margin={[0, 0, 0, wp(3)]} h3 semibold color={'#303030'}>
                 5{/* {data.rating} */}
                 {'   '}
-                {/* <Text size={16} medium>
-                ({data.distance} km)
-              </Text> */}
+                <Text size={16} medium>
+                  (10 km)
+                </Text>
               </Text>
             </Block>
             <Text size={16} medium color={'#444444'}>

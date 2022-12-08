@@ -12,6 +12,7 @@ import {
 } from '_elements';
 import {RoutesName} from '_routeName';
 import {images} from 'src/assets';
+import Header from 'src/common/header';
 
 const LocationFound = () => {
   const navigation = useNavigation();
@@ -104,6 +105,7 @@ const LocationFound = () => {
 
   return (
     <Block safearea={true} primary>
+      <Header menuIcon={false} name="New Preston" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Block center flex={false} padding={[0, wp(4)]}>
           <Block
