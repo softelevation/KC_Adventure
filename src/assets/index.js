@@ -58,4 +58,10 @@ export const images = {
   short_lake: require('./icons/lakeshort.jpg'),
   tanner_hill: require('./icons/hilltanner.jpg'),
   lake_warren: require('./icons/warrentour.jpg'),
+  andreson_acres: require('./icons/andresonacres.jpeg'),
+  hopkins_restaurant: require('./icons/hopkinsrestaurant.png'),
+  hopkins_Vineyard: require('./icons/hopkinsVineyard.jpeg'),
+  smithy_cafe: require('./icons/smithycafe.png'),
+  kent_falls: require('./icons/kentfalls.png'),
+  hopkins_inn: require('./icons/hopkinsinn.png'),
 };
