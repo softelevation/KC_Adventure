@@ -182,7 +182,7 @@ const LocationDetails = () => {
           <Image style={{height: 208, width: wp(100)}} source={item.image} />
 
           <Block flex={false} padding={[hp(1), wp(3)]}>
-            <Text h3 bold color={'#323232'}>
+            <Text margin={[0, 0, hp(0.5)]} h3 bold color={'#323232'}>
               {item.title}
             </Text>
             <Text medium height={24} size={16} color={'#444444'}>

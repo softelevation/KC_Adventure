@@ -23,7 +23,10 @@ const LocationFound = () => {
       Description:
         'The short lake tour will take you from the picturesque village of New Preston around Lake Waramaug, named for Chief Waramaug of the Potatuck Native American tribe who wintered in the area. Along the way, you will pass Lake Waramaug State Park, and the renowned Hopkins Inn & Restaurant and the Hopkins Vineyard. At the end, you can lunch at The Smithy Café just steps from the KC&E office!',
       image: images.short_lake,
-      rate: 1,
+      rating: 1,
+      Length: '10.5 miles',
+      Elevation: '600 feet',
+      Estimated: '2 Hours',
       // name: require('../../assets/icons/'),
     },
     {
@@ -32,6 +35,10 @@ const LocationFound = () => {
       Description:
         'The Tanner Hill Tour will take you along the southern edge of Lake Waramaug before you turn inland toward Kent where you will pass picturesque properties, stonewalls, and forests. Along the way, you will pass the renowned Kent Falls Brewing. You will also pass Anderson Acres Flower Farm before you meet back up with the lakeshore. After passing The Hopkins Inn & Restaurant and the Hopkins Vineyard, you will climb to the top of Tanner Hill where you will gaze over picturesque vistas of the lake. At the end, you can lunch at The Smithy Café just steps from the KC&E office!',
       image: images.tanner_hill,
+      rating: 3,
+      Length: '16 miles',
+      Elevation: '1000 feet',
+      Estimated: '2 Hours 30 Minutes',
     },
     {
       id: '58694a0f-3da1-471f-bd96-145571e29d72',
@@ -40,8 +47,23 @@ const LocationFound = () => {
         'The Tanner Hill Tour will take you along the southern edge of Lake Waramaug before you turn inland toward Kent where you will pass picturesque properties, stonewalls, and forests. Along the way, you will pass the renowned Kent Falls Brewing. You will also pass Anderson Acres Flower Farm before you meet back up with the lakeshore. After passing The Hopkins Inn & Restaurant and the Hopkins Vineyard, you will ride to Warren, home to delicious sandwiches at Warren General Store. You will return home by way of Tanner Hill to take in views of Lake Waramaug, before having the option to enjoy a lunch at The Smithy Café if you did not get something in Warren!',
       // image: images.lake_warren,
       image: images.lake_warren,
+      rating: 4,
+      Length: '22 miles',
+      Elevation: '2000 feet',
+      Estimated: '3 Hours',
     },
   ];
+  const renderContent = (title, subtitle, star = false) => {
+    return (
+      <Block margin={[hp(0.3), 0]} flex={false} row>
+        <Text style={{width: wp(50)}}>{title}</Text>
+        <Block style={{width: wp(30)}} row flex={false}>
+          <Text>{subtitle}</Text>
+          {star && <ImageComponent name="star_icon" width={20} height={20} />}
+        </Block>
+      </Block>
+    );
+  };
 
   const _renderVerticalItem = ({item}) => {
     return (
@@ -63,14 +85,6 @@ const LocationFound = () => {
             style={{height: 130, width: 330, borderRadius: 15}}
             source={item.image}
           />
-          {/* <ImageComponent
-            // name="Location_Detail"
-            // isURL
-            name={item.image}
-            width={330}
-            height={130}
-            radius={15}
-          /> */}
           <Block flex={false} margin={[hp(0.7), 0, 0, wp(2)]}>
             <Block center space={'between'} row flex={false}>
               <Text h3 bold color={'#323232'}>
@@ -88,7 +102,12 @@ const LocationFound = () => {
                 book
               </Button>
             </Block>
-
+            <Block flex={false}>
+              {renderContent('Difficulty Rating :', item.rating, true)}
+              {renderContent('Length :', item.Length)}
+              {renderContent('Elevation gain :', item.Elevation)}
+              {renderContent('Estimated duration :', item.Estimated)}
+            </Block>
             <Block
               margin={[hp(1), 0, 0]}
               style={{width: wp(80)}}
