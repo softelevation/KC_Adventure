@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import Header from 'src/common/header';
 import {FlatList, ScrollView} from 'react-native';
 import {Block, Button, hp, Input, Text, wp} from '_elements';
@@ -6,7 +6,7 @@ import {RoutesName} from '_routeName';
 import Checkbox from 'src/components/checkbox';
 import {useNavigation} from '@react-navigation/native';
 
-const feedback = () => {
+const Feedback = () => {
   const navigation = useNavigation();
   const _renderVerticalItem = ({item, index}) => {
     return (
@@ -22,7 +22,7 @@ const feedback = () => {
   };
   return (
     <Block safearea={true} primary>
-      <Header menuIcon={false} name="feedback" />
+      <Header menuIcon={false} name="Feedback" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Block flex={false} margin={[hp(6), 0, 0, wp(5)]}>
           <Text h5 bold color="#444444">
@@ -69,4 +69,4 @@ const feedback = () => {
   );
 };
 
-export default feedback;
+export default Feedback;

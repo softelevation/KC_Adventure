@@ -16,8 +16,8 @@ import LoacationFound from './location-found';
 import LoacationDetails from './location-found/details';
 import MapsScreen from './maps';
 import BookRoom from './room-book';
-import feedback from './room-book/feedback';
-import payment from './payment';
+import Feedback from './room-book/feedback';
+import PaymentScreen from './payment';
 
 export {
   SplashScreen,
@@ -38,6 +38,6 @@ export {
   LoacationDetails,
   MapsScreen,
   BookRoom,
-  feedback,
-  payment,
+  Feedback,
+  PaymentScreen,
 };

@@ -13,7 +13,7 @@ import {
 } from 'src/utils/commonUtils';
 import {Bold} from 'src/components/theme/fontsize';
 
-const payment = () => {
+const PaymentScreen = () => {
   const up = images.up_arrow;
   const down = images.down_arrow;
   const arrow = {up, down};
@@ -164,7 +164,7 @@ const payment = () => {
   };
   return (
     <Block safearea={true} primary>
-      <Header menuIcon={false} name="payment option" />
+      <Header menuIcon={false} name="Payment option" />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{backgroundColor: light.primary}}>
@@ -240,4 +240,4 @@ const payment = () => {
   );
 };
 
-export default payment;
+export default PaymentScreen;

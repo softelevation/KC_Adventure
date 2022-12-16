@@ -113,7 +113,7 @@ const LocationFound = () => {
               style={{width: wp(80)}}
               // middle
               flex={false}>
-              <Text h4 color={'#323232'} style={{backgroundcolor: 'black'}}>
+              <Text h4 color={'#323232'}>
                 {item.Description}
               </Text>
             </Block>
@@ -126,7 +126,9 @@ const LocationFound = () => {
   return (
     <Block safearea={true} primary>
       <Header menuIcon={false} name="New Preston" />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        nestedScrollEnabled={true}
+        showsVerticalScrollIndicator={false}>
         <Block center flex={false} padding={[0, wp(4)]}>
           <Block
             padding={[0, 0, hp(4), 0]}

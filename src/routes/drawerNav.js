@@ -17,8 +17,8 @@ import {
   LoacationFound,
   LoacationDetails,
   BookRoom,
-  feedback,
-  payment,
+  Feedback,
+  PaymentScreen,
 } from '_screens';
 import {defaultOptions} from './constants';
 import {RoutesName} from '_routeName';
@@ -49,10 +49,10 @@ export const ExperinceStackNavigator = () => {
         component={LoacationDetails}
       />
       <DrawerStack.Screen name={RoutesName.ROOM_BOOK} component={BookRoom} />
-      <DrawerStack.Screen name={RoutesName.FEED_BACK} component={feedback} />
+      <DrawerStack.Screen name={RoutesName.FEED_BACK} component={Feedback} />
       <DrawerStack.Screen
         name={RoutesName.PAYMENT_OPTIONS}
-        component={payment}
+        component={PaymentScreen}
       />
     </DrawerStack.Navigator>
   );

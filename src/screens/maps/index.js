@@ -34,6 +34,8 @@ import {
 } from 'src/utils/helper';
 import {light} from 'src/components/theme/colors';
 import {RoutesName} from '_routeName';
+import MapViewDirections from 'react-native-maps-directions';
+
 const latitudeDelta = 0.0922;
 const longitudeDelta = 0.0421;
 const MapsScreen = () => {
@@ -53,6 +55,16 @@ const MapsScreen = () => {
     latitudeDelta: latitudeDelta,
     longitudeDelta: longitudeDelta,
   });
+  const [coordinates] = useState([
+    {
+      latitude: 48.8587741,
+      longitude: 2.2069771,
+    },
+    {
+      latitude: 48.8323785,
+      longitude: 2.3361663,
+    },
+  ]);
 
   const mapView = React.createRef();
   const animateMap = () => {
@@ -192,6 +204,11 @@ const MapsScreen = () => {
               </Marker>
             );
           })}
+          <MapViewDirections
+            origin={coordinates[0]}
+            destination={coordinates[0]}
+            // apikey={GOOGLE_MAPS_APIKEY}
+          />
         </MapView>
       </Block>
       <Block flex={false} space="between" row margin={[hp(2)]}>

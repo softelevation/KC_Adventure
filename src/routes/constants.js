@@ -25,7 +25,7 @@ const RoutesName = {
   LOCATION_FOUND_SCREEN: 'LocationFoundScreen',
   LOCATION_DETAILS: 'LocationDetails',
   ROOM_BOOK: 'RoomBook',
-  FEED_BACK: 'feedback',
-  PAYMENT_OPTIONS: 'paymentoptions',
+  FEED_BACK: 'Feedback',
+  PAYMENT_OPTIONS: 'PaymentScreen',
 };
 export {defaultOptions, RoutesName};
