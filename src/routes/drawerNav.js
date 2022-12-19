@@ -11,7 +11,6 @@ import {
   Tour,
   TourDetails,
   Wishlist,
-  GuideScreen,
   ExperienceDetail,
   MapsScreen,
   LoacationFound,
@@ -19,6 +18,7 @@ import {
   BookRoom,
   Feedback,
   PaymentScreen,
+  Bikedetails,
 } from '_screens';
 import {defaultOptions} from './constants';
 import {RoutesName} from '_routeName';
@@ -50,6 +50,7 @@ export const ExperinceStackNavigator = () => {
       />
       <DrawerStack.Screen name={RoutesName.ROOM_BOOK} component={BookRoom} />
       <DrawerStack.Screen name={RoutesName.FEED_BACK} component={Feedback} />
+
       <DrawerStack.Screen
         name={RoutesName.PAYMENT_OPTIONS}
         component={PaymentScreen}
@@ -74,6 +75,7 @@ function DrawerNavigator() {
       />
       <Drawer.Screen name={RoutesName.WISHLIST_SCREEN} component={Wishlist} />
       <Drawer.Screen name={RoutesName.ABOUT_US_SCREEN} component={AboutUs} />
+
       <Drawer.Screen
         name={RoutesName.TERMS_SCREEN}
         component={TermsAndConditions}
@@ -83,12 +85,15 @@ function DrawerNavigator() {
         component={NotificationScreen}
       />
       <Drawer.Screen name={RoutesName.HELP_SCREEN} component={HelpCenter} />
+      <DrawerStack.Screen
+        name={RoutesName.BIKE_DETAILS}
+        component={Bikedetails}
+      />
       <Drawer.Screen name={RoutesName.TOUR_SCREEN} component={Tour} />
       <Drawer.Screen
         name={RoutesName.TOUR_DETAILS_SCREEN}
         component={TourDetails}
       />
-      <Drawer.Screen name={RoutesName.GUIDE_SCREEN} component={GuideScreen} />
     </Drawer.Navigator>
   );
 }

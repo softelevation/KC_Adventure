@@ -64,4 +64,6 @@ export const images = {
   smithy_cafe: require('./icons/smithycafe.png'),
   kent_falls: require('./icons/kentfalls.png'),
   hopkins_inn: require('./icons/hopkinsinn.png'),
+  bike_icon: require('./icons/bikeicon.png'),
+  search_loc: require('./icons/searchloc.png'),
 };

@@ -44,27 +44,27 @@ const Experiences = () => {
     v.experienceReducer.experienceRating.data,
   ]);
 
-  // const getLiveLocation = async () => {
-  //   const checkPermission = await locationPermission();
-  //   if (checkPermission) {
-  //     const request = await requestPermission();
-  //     if (request) {
-  //       const {latitude, longitude, heading} = await getCurrentLocation();
-  //       console.log(
-  //         'latitude, longitude, heading: ',
-  //         latitude,
-  //         longitude,
-  //         heading,
-  //       );
-  //       dispatch(
-  //         locationRequest({
-  //           latitude: latitude,
-  //           longitude: longitude,
-  //         }),
-  //       );
-  //     }
-  //   }
-  // };
+  const getLiveLocation = async () => {
+    const checkPermission = await locationPermission();
+    if (checkPermission) {
+      const request = await requestPermission();
+      if (request) {
+        const {latitude, longitude, heading} = await getCurrentLocation();
+        console.log(
+          'latitude, longitude, heading: ',
+          latitude,
+          longitude,
+          heading,
+        );
+        dispatch(
+          locationRequest({
+            latitude: latitude,
+            longitude: longitude,
+          }),
+        );
+      }
+    }
+  };
 
   // const currentApiCall = () => {
   //   const data = {
@@ -74,11 +74,11 @@ const Experiences = () => {
   //   dispatch(experienceTopRequest(data));
   //   dispatch(experienceRatRequest(data));
   // };
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     getLiveLocation();
-  //   }, []),
-  // );
+  useFocusEffect(
+    React.useCallback(() => {
+      getLiveLocation();
+    }, []),
+  );
 
   // useEffect(() => {
   //   console.log('call api');

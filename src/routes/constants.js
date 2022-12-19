@@ -27,5 +27,6 @@ const RoutesName = {
   ROOM_BOOK: 'RoomBook',
   FEED_BACK: 'Feedback',
   PAYMENT_OPTIONS: 'PaymentScreen',
+  BIKE_DETAILS: 'Bikedetails',
 };
 export {defaultOptions, RoutesName};

@@ -63,6 +63,7 @@
 		<string>Poppins-SemiBoldItalic.otf</string>
 		<string>Poppins-Thin.otf</string>
 		<string>Poppins-ThinItalic.otf</string>
+		<string>MaterialIcons.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

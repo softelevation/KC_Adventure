@@ -18,6 +18,7 @@ import MapsScreen from './maps';
 import BookRoom from './room-book';
 import Feedback from './room-book/feedback';
 import PaymentScreen from './payment';
+import Bikedetails from './bike-details';
 
 export {
   SplashScreen,
@@ -40,4 +41,5 @@ export {
   BookRoom,
   Feedback,
   PaymentScreen,
+  Bikedetails,
 };

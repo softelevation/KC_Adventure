@@ -3,7 +3,7 @@
 // https://aboutreact.com/react-native-geolocation/
 
 // import React in our code
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState, useRef} from 'react';
 import {Keyboard} from 'react-native';
 
 import CommonStyles from 'src/assets/styles';
@@ -26,7 +26,7 @@ import Modal from 'react-native-modal';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 
 import {data} from './data';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   getCurrentLocation,
   locationPermission,
@@ -35,36 +35,38 @@ import {
 import {light} from 'src/components/theme/colors';
 import {RoutesName} from '_routeName';
 import MapViewDirections from 'react-native-maps-directions';
+import GooglePlacesTextInput from 'src/components/google-places';
+import {Formik} from 'formik';
+import * as yup from 'yup';
+import {strictValidObjectWithKeys} from 'src/utils/commonUtils';
+import {locationRequest} from 'src/redux/location/action';
 
 const latitudeDelta = 0.0922;
 const longitudeDelta = 0.0421;
 const MapsScreen = () => {
-  const [isModalVisible, setModalVisible] = useState(true);
+  const [isModalVisible, setModalVisible] = useState(false);
   const [isEmergencyModalVisible, setEmergencyModalVisible] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const {goBack, navigate} = useNavigation();
   const location = useSelector(state => state.location.data);
   const [defaultHeight, setDefaultHeight] = useState(40);
-  console.log('isEmergencyModalVisible: ', isEmergencyModalVisible);
+  const [modalloc, setModalLoc] = useState(true);
+  const formikRef = useRef();
 
   const [state, setState] = useState({
-    // latitude: location.latitude || 0,
-    // longitude: location.longitude || 0,
-    latitude: 30.682414,
-    longitude: 76.725572,
+    latitude: location.latitude || 0,
+    longitude: location.longitude || 0,
     latitudeDelta: latitudeDelta,
     longitudeDelta: longitudeDelta,
   });
-  const [coordinates] = useState([
-    {
-      latitude: 48.8587741,
-      longitude: 2.2069771,
-    },
-    {
-      latitude: 48.8323785,
-      longitude: 2.3361663,
-    },
-  ]);
+
+  const [destlat, setDestLat] = useState();
+  const [destlong, setDestLong] = useState({});
+  const dispatch = useDispatch();
+  const [destinationCoords, setDestinationCoords] = useState({
+    latitude: null,
+    longitude: null,
+  });
 
   const mapView = React.createRef();
   const animateMap = () => {
@@ -79,6 +81,13 @@ const MapsScreen = () => {
       1000,
     );
   };
+
+  useEffect(() => {
+    if (modalloc === true) {
+      // setModalVisible(false);
+      setEmergencyModalVisible();
+    }
+  }, [modalloc]);
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -116,6 +125,12 @@ const MapsScreen = () => {
           latitude: latitude,
           longitude: longitude,
         });
+        dispatch(
+          locationRequest({
+            latitude: latitude,
+            longitude: longitude,
+          }),
+        );
         animateMap();
       }
     }
@@ -123,9 +138,9 @@ const MapsScreen = () => {
 
   const onSubmit = () => {
     setModalVisible(false);
-    setTimeout(() => {
-      setEmergencyModalVisible(true);
-    }, 2000);
+    // setTimeout(() => {
+    //   setEmergencyModalVisible(true);
+    // }, 2000);
     Keyboard.dismiss();
   };
   const onCancelSubmit = () => {
@@ -144,11 +159,11 @@ const MapsScreen = () => {
   useFocusEffect(
     useCallback(() => {
       getLiveLocation();
-      setModalVisible(true);
-      setIsVisible(true);
+      // setModalVisible(true);
+      // setIsVisible(true);
     }, []),
   );
-
+  const GOOGLE_MAPS_APIKEY = 'AIzaSyBsm0dvdFzqBuomYIx3INjnHdxuuFpEEyk';
   return (
     <Block safearea>
       <Block style={styles.container} flex={false}>
@@ -182,8 +197,6 @@ const MapsScreen = () => {
                     <Text margin={[-hp(5), 0, 0, 0]} height={117}>
                       <ImageComponent
                         name={'restaurant_img'}
-                        // resizeMode="contain"
-                        // style={{height: 72, borderRadius: 20, width: 72}}
                         height={72}
                         width={72}
                       />
@@ -204,11 +217,16 @@ const MapsScreen = () => {
               </Marker>
             );
           })}
-          <MapViewDirections
-            origin={coordinates[0]}
-            destination={coordinates[0]}
-            // apikey={GOOGLE_MAPS_APIKEY}
-          />
+          {strictValidObjectWithKeys(destinationCoords) &&
+            destinationCoords.latitude && (
+              <MapViewDirections
+                origin={state}
+                destination={destinationCoords}
+                apikey={GOOGLE_MAPS_APIKEY}
+                strokeColor={light.success}
+                strokeWidth={5}
+              />
+            )}
         </MapView>
       </Block>
       <Block flex={false} space="between" row margin={[hp(2)]}>
@@ -222,6 +240,21 @@ const MapsScreen = () => {
           <ImageComponent name="back_icon" width={8} height={15} />
         </CustomButton>
         <Block flex={false} row>
+          <CustomButton
+            onPress={() => {
+              setModalLoc(!modalloc);
+              setModalVisible(false);
+              setEmergencyModalVisible(false);
+            }}
+            // center
+            middle
+            padding={wp(4)}
+            margin={[0, wp(2), 0, 0]}
+            borderRadius={15}
+            primary
+            style={CommonStyles.icon}>
+            <ImageComponent name="search_loc" width={25} height={25} />
+          </CustomButton>
           <ImageComponent name="camera_icon" height={45} width={45} />
           <Block flex={false} margin={[0, 0, 0, wp(2)]}>
             <ImageComponent name="like_icon" height={45} width={45} />
@@ -229,168 +262,247 @@ const MapsScreen = () => {
         </Block>
       </Block>
       <Modal
+        style={CommonStyles.congratulationModal}
         coverScreen={false}
         hasBackdrop={false}
-        style={
-          isModalVisible
-            ? CommonStyles.congratulationModal
-            : CommonStyles.modalEmergencyStyle
-        }
+        isVisible={modalloc}>
+        <>
+          <Formik
+            innerRef={formikRef}
+            enableReinitialize
+            initialValues={{
+              user_destination: '',
+              dest_lat: destlat,
+              dest_lng: destlong,
+            }}
+            validateOnMount={true}
+            onSubmit={onSubmit}
+            validationSchema={yup.object().shape({
+              user_destination: yup.string().min(1).required(),
+            })}>
+            {({
+              values,
+              handleChange,
+              errors,
+              setFieldTouched,
+              touched,
+              setFieldValue,
+              handleSubmit,
+              isValid,
+              dirty,
+              setFieldError,
+            }) => (
+              <>
+                <Block
+                  defaultPadding
+                  padding={[hp(4)]}
+                  style={{height: hp(50)}}
+                  primary
+                  center
+                  borderRadius={10}
+                  flex={false}>
+                  <>
+                    <Text medium size={20}>
+                      Enter Location
+                    </Text>
+                    <GooglePlacesTextInput
+                      searchKeyword={values.user_destination}
+                      placeholder={'Search Location'}
+                      onPress={async (datas, details) => {
+                        const {name, latLng} = datas;
+                        setFieldValue('user_destination', name);
+                        setDestinationCoords({
+                          latitude: latLng.lat,
+                          longitude: latLng.lng,
+                        });
+                        setFieldValue('dest_lat', latLng.lat);
+                        setFieldValue('dest_lng', latLng.lng);
+                        // setFieldValue('dest_lat', latLng.lat);
+                        // setFieldValue('dest_lng', latLng.lng);
+                      }}
+                      onChangeText={e => {
+                        if (e === '') {
+                          setFieldValue('user_destination', '');
+                          setDestLat('');
+                          setDestLong('');
+                        } else {
+                          setFieldValue('user_destination', e);
+                        }
+                      }}
+                      // onBlur={() => setFieldTouched('user_destination')}
+                      // error={touched.user_destination && errors.user_destination}
+                    />
+                  </>
+                </Block>
+              </>
+            )}
+          </Formik>
+        </>
+      </Modal>
+      <Modal
+        coverScreen={false}
+        hasBackdrop={false}
+        style={CommonStyles.modalWithoutMarginStyle}
         isVisible={isVisible}>
         <>
-          {isModalVisible ? (
-            <Block
-              padding={[hp(3), wp(5)]}
-              borderRadius={24}
-              primary
-              flex={false}
-              style={{height: hp(28)}}>
-              <Block flex={false} padding={[0, wp(6)]} space="between" row>
-                <Block flex={false} center>
-                  <Text center paragraph height={20}>
-                    Distance{'\n'}Traveled
+          <Block
+            padding={[hp(3), wp(5)]}
+            borderRadius={24}
+            primary
+            flex={false}
+            style={{height: hp(28)}}>
+            <Block flex={false} padding={[0, wp(6)]} space="between" row>
+              <Block flex={false} center>
+                <Text center paragraph height={20}>
+                  Distance{'\n'}Traveled
+                </Text>
+                <Text size={18} bold>
+                  107{''}{' '}
+                  <Text semibold size={12}>
+                    mi
                   </Text>
-                  <Text size={18} bold>
-                    107{''}{' '}
-                    <Text semibold size={12}>
-                      mi
-                    </Text>
-                  </Text>
-                </Block>
-                <Block flex={false} middle center>
-                  <Text center paragraph height={20}>
-                    Distance{'\n'}to next POI
-                  </Text>
-                  <Text size={18} bold>
-                    67{''}{' '}
-                    <Text semibold size={12}>
-                      mi
-                    </Text>
-                  </Text>
-                </Block>
-                <Block flex={false} center>
-                  <Text center paragraph height={20}>
-                    Distance{'\n'}Remaining
-                  </Text>
-                  <Text size={18} bold>
-                    27{''}{' '}
-                    <Text semibold size={12}>
-                      mi
-                    </Text>
-                  </Text>
-                </Block>
+                </Text>
               </Block>
-              <Block
-                margin={[hp(2), 0, hp(1.5)]}
-                style={{width: wp(85)}}
-                flex={false}
-                borderWidth={[0, 0, 0.5, 0]}
-                borderColor={'#F2F2F2'}
-              />
-              <Block flex={false} center margin={[hp(1), 0, 0]}>
-                <Button
-                  onPress={() => onSubmit()}
-                  style={{width: wp(70)}}
-                  color={'primary'}>
-                  Get Help
-                </Button>
+              <Block flex={false} middle center>
+                <Text center paragraph height={20}>
+                  Distance{'\n'}to next POI
+                </Text>
+                <Text size={18} bold>
+                  67{''}{' '}
+                  <Text semibold size={12}>
+                    mi
+                  </Text>
+                </Text>
+              </Block>
+              <Block flex={false} center>
+                <Text center paragraph height={20}>
+                  Distance{'\n'}Remaining
+                </Text>
+                <Text size={18} bold>
+                  27{''}{' '}
+                  <Text semibold size={12}>
+                    mi
+                  </Text>
+                </Text>
               </Block>
             </Block>
-          ) : (
             <Block
-              padding={[hp(3), wp(5)]}
-              borderRadius={24}
-              header
+              margin={[hp(2), 0, hp(1.5)]}
+              style={{width: wp(85)}}
               flex={false}
-              style={{height: hp(85)}}>
-              <Block flex={false} center>
-                <ImageComponent name="done_icon" height={90} width={220} />
-                <Text gutterBottom size={25} semibold center>
-                  Congratulations!
-                </Text>
-                <Block
-                  margin={[0, 0, hp(1)]}
-                  style={{width: wp(25)}}
-                  flex={false}
+              borderWidth={[0, 0, 0.5, 0]}
+              borderColor={'#F2F2F2'}
+            />
+            <Block flex={false} center margin={[hp(1), 0, 0]}>
+              <Button
+                onPress={() => onSubmit()}
+                style={{width: wp(70)}}
+                color={'primary'}>
+                Get Help
+              </Button>
+            </Block>
+          </Block>
+        </>
+      </Modal>
+      <Modal
+        coverScreen={false}
+        hasBackdrop={false}
+        style={CommonStyles.congratulationModal}
+        isVisible={isEmergencyModalVisible}>
+        <>
+          <Block
+            padding={[hp(3), wp(5)]}
+            borderRadius={24}
+            header
+            flex={false}
+            style={{height: hp(85)}}>
+            <Block flex={false} center>
+              <ImageComponent name="done_icon" height={90} width={220} />
+              <Text gutterBottom size={25} semibold center>
+                Congratulations!
+              </Text>
+              <Block
+                margin={[0, 0, hp(1)]}
+                style={{width: wp(25)}}
+                flex={false}
+                center
+                middle
+                borderWidth={[0, 0, 1, 0]}
+                borderColor={light.secondary}
+              />
+              <Text
+                height={21}
+                margin={[hp(1), wp(5)]}
+                h4
+                center
+                color={'#323232'}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                vulputate libero et velit interdum, ac aliquet odio mattis.
+                Class aptent taciti sociosqu ad litora torquent per conubia
+                nostra.
+              </Text>
+            </Block>
+            <Block flex={false} row space="between">
+              <Block flex={false} row center padding={[hp(0), wp(1)]}>
+                <CustomRatingBar />
+              </Block>
+              <Block flex={false}>
+                <CustomButton
                   center
                   middle
-                  borderWidth={[0, 0, 1, 0]}
-                  borderColor={light.secondary}
-                />
-                <Text
-                  height={21}
-                  margin={[hp(1), wp(5)]}
-                  h4
-                  center
-                  color={'#323232'}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                  vulputate libero et velit interdum, ac aliquet odio mattis.
-                  Class aptent taciti sociosqu ad litora torquent per conubia
-                  nostra.
-                </Text>
-              </Block>
-              <Block flex={false} row space="between">
-                <Block flex={false} row center padding={[hp(0), wp(1)]}>
-                  <CustomRatingBar />
-                </Block>
-                <Block flex={false}>
-                  <CustomButton
-                    center
-                    middle
-                    margin={[hp(1), 0, 0, 0]}
-                    style={CommonStyles.icon}>
-                    <ImageComponent name="share_icon" width={30} height={30} />
-                  </CustomButton>
-                </Block>
-              </Block>
-              <Input
-                style={{height: hp(15), backgroundColor: '#65837B'}}
-                multiline
-                textAlignVertical="top"
-                color="#FFFFFF"
-                placeholder={'WRITE YOUR FEEDBACK HERE'}
-                placeholderTextColor="#FFFFFF"
-              />
-              <CustomButton
-                center
-                middle
-                borderWidth={1}
-                borderColor="#65837B"
-                borderRadius={10}
-                height={60}
-                margin={[hp(2), 0, 0, 0]}
-                style={CommonStyles.addPhoto}>
-                <Block flex={false} column center>
-                  <ImageComponent name="add_photo" height={30} width={30} />
-                  <Text uppercase bold secondary>
-                    add your photos
-                  </Text>
-                </Block>
-              </CustomButton>
-              <Block
-                row
-                space={'between'}
-                margin={[hp(2), 0, 0, 0]}
-                center
-                middle
-                flex={false}>
-                <Button
-                  onPress={() => onCancelSubmit()}
-                  style={{width: wp(40)}}
-                  uppercase
-                  color={'secondary'}>
-                  Cancel
-                </Button>
-                <Button
-                  onPress={() => onStartSubmit()}
-                  style={{width: wp(40)}}
-                  uppercase
-                  color={'primary'}>
-                  submit
-                </Button>
+                  margin={[hp(1), 0, 0, 0]}
+                  style={CommonStyles.icon}>
+                  <ImageComponent name="share_icon" width={30} height={30} />
+                </CustomButton>
               </Block>
             </Block>
-          )}
+            <Input
+              style={{height: hp(15), backgroundColor: '#65837B'}}
+              multiline
+              textAlignVertical="top"
+              color="#FFFFFF"
+              placeholder={'WRITE YOUR FEEDBACK HERE'}
+              placeholderTextColor="#FFFFFF"
+            />
+            <CustomButton
+              center
+              middle
+              borderWidth={1}
+              borderColor="#65837B"
+              borderRadius={10}
+              height={60}
+              margin={[hp(2), 0, 0, 0]}
+              style={CommonStyles.addPhoto}>
+              <Block flex={false} column center>
+                <ImageComponent name="add_photo" height={30} width={30} />
+                <Text uppercase bold secondary>
+                  add your photos
+                </Text>
+              </Block>
+            </CustomButton>
+            <Block
+              row
+              space={'between'}
+              margin={[hp(2), 0, 0, 0]}
+              center
+              middle
+              flex={false}>
+              <Button
+                onPress={() => onCancelSubmit()}
+                style={{width: wp(40)}}
+                uppercase
+                color={'secondary'}>
+                Cancel
+              </Button>
+              <Button
+                onPress={() => onStartSubmit()}
+                style={{width: wp(40)}}
+                uppercase
+                color={'primary'}>
+                submit
+              </Button>
+            </Block>
+          </Block>
         </>
       </Modal>
     </Block>
