@@ -22,10 +22,10 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
@@ -37,12 +37,12 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-  <string>$(PRODUCT_NAME) want to use your location when clocking in and out</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-  <string>$(PRODUCT_NAME) want to use your location when clocking in and out</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-  <string>$(PRODUCT_NAME) want to use your location when clocking in and out</string>
+	<string>$(PRODUCT_NAME) want to use your location when clocking in and out</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>$(PRODUCT_NAME) want to use your location when clocking in and out</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) want to use your location when clocking in and out</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Black.otf</string>
@@ -74,8 +74,12 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
