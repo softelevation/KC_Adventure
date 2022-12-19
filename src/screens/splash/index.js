@@ -25,7 +25,8 @@ const SplashScreen = () => {
         navigation.dispatch(
           CommonActions.reset({
             index: 1,
-            routes: [{name: RoutesName.DASHBOARD_STACK_SCREEN}],
+            // routes: [{name: RoutesName.DASHBOARD_STACK_SCREEN}],
+            routes: [{name: RoutesName.ADVENTURE_SCREEN}],
           }),
         );
       }, 3000);

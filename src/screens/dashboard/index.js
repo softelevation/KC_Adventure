@@ -40,7 +40,7 @@ const Adventure = () => {
       setEmergencyModalVisible(true);
     }, 2000);
     Keyboard.dismiss();
-    // navigate(RoutesName.EXPERIENCES_DRAWER_SCREEN);
+    navigate(RoutesName.EXPERIENCES_DRAWER_SCREEN);
   };
   const onCancelSubmit = () => {
     setModalVisible(true);
@@ -53,7 +53,7 @@ const Adventure = () => {
     setModalVisible(false);
     setEmergencyModalVisible(false);
     setIsVisible(false);
-    navigate(RoutesName.EXPERIENCES_DRAWER_SCREEN);
+    navigate(RoutesName.DASHBOARD_STACK_SCREEN);
   };
   useFocusEffect(
     React.useCallback(() => {

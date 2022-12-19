@@ -1,7 +1,7 @@
 import SplashScreen from './splash';
 import LoginScreen from './auth/login';
 import SignUpScreen from './auth/signup';
-import AdventureScreen from './dashboard/index';
+import Adventure from './dashboard';
 import ExperienceDetail from './dashboard/details';
 import ExperienceScreen from './dashboard/experiences';
 import NotificationScreen from './notifications';
@@ -26,7 +26,7 @@ export {
   SignUpScreen,
   ExperienceScreen,
   ExperienceDetail,
-  AdventureScreen,
+  Adventure,
   NotificationScreen,
   HelpCenter,
   AboutUs,
