@@ -10,9 +10,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {authRequest} from 'src/redux/login/action';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {navigate} from 'src/routes/navigation-service';
+import {useNavigation} from '@react-navigation/native';
 
 const LoginScreen = () => {
-  // const {navigate} = useNavigation();
+  const {navigate} = useNavigation();
   const dispatch = useDispatch();
   const loading = useSelector(state => state.auth.login.loading);
   const formik = useFormik({
@@ -27,13 +28,13 @@ const LoginScreen = () => {
         .required('Required'),
       email: Yup.string().email('Invalid email').required('Required'),
     }),
-    onSubmit: values => {
-      const data = {
-        email: values.email,
-        password: values.password,
-      };
-      dispatch(authRequest(data));
-    },
+    // onSubmit: values => {
+    //   const data = {
+    //     email: values.email,
+    //     password: values.password,
+    //   };
+    //   dispatch(authRequest(data));
+    // },
   });
   return (
     <ImageBackground source={images.bg} style={CommonStyles.defaultFlex}>
@@ -73,8 +74,8 @@ const LoginScreen = () => {
           </Text>
           <Block flex={false} center>
             <Button
-              onPress={() => formik.handleSubmit()}
-              // onPress={() => navigate(RoutesName.DASHBOARD_STACK_SCREEN)}
+              // onPress={() => formik.handleSubmit()}
+              onPress={() => navigate(RoutesName.ADVENTURE_SCREEN)}
               style={{width: wp(35)}}
               uppercase
               disabled={!formik.isValid}

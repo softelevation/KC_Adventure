@@ -4,7 +4,7 @@
 
 // import React in our code
 import React, {useCallback, useEffect, useState, useRef} from 'react';
-import {Keyboard} from 'react-native';
+import {Keyboard, TouchableOpacity} from 'react-native';
 
 import CommonStyles from 'src/assets/styles';
 import {StyleSheet} from 'react-native';
@@ -44,7 +44,7 @@ import {locationRequest} from 'src/redux/location/action';
 const latitudeDelta = 0.0922;
 const longitudeDelta = 0.0421;
 const MapsScreen = () => {
-  const [isModalVisible, setModalVisible] = useState(false);
+  // const [isModalVisible, setModalVisible] = useState(false);
   const [isEmergencyModalVisible, setEmergencyModalVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const {goBack, navigate} = useNavigation();
@@ -137,17 +137,14 @@ const MapsScreen = () => {
   };
 
   const onSubmit = () => {
-    setModalVisible(false);
-    // setTimeout(() => {
-    //   setEmergencyModalVisible(true);
-    // }, 2000);
+    navigate(RoutesName.HELP_SCREEN);
     Keyboard.dismiss();
   };
   const onCancelSubmit = () => {
-    setModalVisible(true);
+    // setModalVisible(true);
     setTimeout(() => {
-      setEmergencyModalVisible(true);
-    }, 2000);
+      setEmergencyModalVisible(false);
+    }, 1000);
     Keyboard.dismiss();
   };
   const onStartSubmit = () => {
@@ -159,8 +156,6 @@ const MapsScreen = () => {
   useFocusEffect(
     useCallback(() => {
       getLiveLocation();
-      // setModalVisible(true);
-      // setIsVisible(true);
     }, []),
   );
   const GOOGLE_MAPS_APIKEY = 'AIzaSyBsm0dvdFzqBuomYIx3INjnHdxuuFpEEyk';
@@ -243,7 +238,6 @@ const MapsScreen = () => {
           <CustomButton
             onPress={() => {
               setModalLoc(!modalloc);
-              setModalVisible(false);
               setEmergencyModalVisible(false);
             }}
             // center
@@ -255,9 +249,14 @@ const MapsScreen = () => {
             style={CommonStyles.icon}>
             <ImageComponent name="search_loc" width={25} height={25} />
           </CustomButton>
-          <ImageComponent name="camera_icon" height={45} width={45} />
+          <TouchableOpacity onPress={() => setEmergencyModalVisible(true)}>
+            <ImageComponent name="camera_icon" height={45} width={45} />
+          </TouchableOpacity>
+
           <Block flex={false} margin={[0, 0, 0, wp(2)]}>
-            <ImageComponent name="like_icon" height={45} width={45} />
+            <TouchableOpacity onPress={() => setIsVisible(true)}>
+              <ImageComponent name="like_icon" height={45} width={45} />
+            </TouchableOpacity>
           </Block>
         </Block>
       </Block>
@@ -296,13 +295,13 @@ const MapsScreen = () => {
                 <Block
                   defaultPadding
                   padding={[hp(4)]}
-                  style={{height: hp(50)}}
+                  style={{height: hp(45)}}
                   primary
                   center
                   borderRadius={10}
                   flex={false}>
                   <>
-                    <Text medium size={20}>
+                    <Text medium gutterBottom size={20}>
                       Enter Location
                     </Text>
                     <GooglePlacesTextInput
@@ -407,7 +406,7 @@ const MapsScreen = () => {
       <Modal
         coverScreen={false}
         hasBackdrop={false}
-        style={CommonStyles.congratulationModal}
+        style={CommonStyles.modalEmergencyStyle}
         isVisible={isEmergencyModalVisible}>
         <>
           <Block

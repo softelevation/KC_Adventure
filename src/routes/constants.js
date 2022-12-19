@@ -8,7 +8,7 @@ const RoutesName = {
   SPLASH_SCREEN: 'SplashScreen',
   LOGIN_SCREEN: 'LoginScreen',
   SIGNUP_SCREEN: 'SignupScreen',
-  ADVENTURE_SCREEN: 'AdventureScreen',
+  ADVENTURE_SCREEN: 'Adventure',
   EXPERIENCES_SCREEN: 'ExperienceScreen',
   EXPERIENCES_STACK_SCREEN: 'ExperienceStackScreen',
   EXPERIENCES_DRAWER_SCREEN: 'ExperienceDrawerScreen',

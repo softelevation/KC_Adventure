@@ -8,6 +8,7 @@ import AuthNavigator from './authStack';
 import DashboardNavigator from './homeStack';
 import {navigationRef} from './navigation-service';
 import DrawerNavigator from './drawerNav';
+import {Adventure} from '_screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,10 @@ const Routes = () => {
         <Stack.Screen
           name={RoutesName.DASHBOARD_STACK_SCREEN}
           component={DrawerNavigator}
+        />
+        <Stack.Screen
+          name={RoutesName.ADVENTURE_SCREEN}
+          component={Adventure}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -8,7 +8,7 @@ const HelpCenter = () => {
   const {navigate} = useNavigation();
   return (
     <Block safearea={true} primary>
-      <Header name="Help Center" />
+      <Header name="Emergency Contact" />
       <Block defaultPadding flex={false} margin={[hp(2), 0, 0]}>
         <Block row space={'between'} flex={false} margin={[hp(1), 0, 0]}>
           <Input
