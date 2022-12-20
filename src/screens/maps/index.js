@@ -4,7 +4,7 @@
 
 // import React in our code
 import React, {useCallback, useEffect, useState, useRef} from 'react';
-import {Keyboard, TouchableOpacity} from 'react-native';
+import {Keyboard, TouchableOpacity, Image} from 'react-native';
 
 import CommonStyles from 'src/assets/styles';
 import {StyleSheet} from 'react-native';
@@ -124,9 +124,7 @@ const MapsScreen = () => {
     Keyboard.dismiss();
   };
   const onCancelSubmit = () => {
-    setTimeout(() => {
-      setEmergencyModalVisible(false);
-    }, 1000);
+    setEmergencyModalVisible(false);
     Keyboard.dismiss();
   };
   const onStartSubmit = () => {
@@ -155,11 +153,12 @@ const MapsScreen = () => {
           initialRegion={state}>
           {data.map((val, i) => {
             return (
-              <Marker
-                coordinate={val.coords}
-                icon={val.image}
-                image={val.image}
-                description={'RESTAURANT'}>
+              <Marker coordinate={val.coords}>
+                <Image
+                  source={val.image}
+                  style={{width: 50, height: 40}}
+                  resizeMode="contain"
+                />
                 <Callout tooltip>
                   <Block
                     flex={false}
@@ -222,13 +221,12 @@ const MapsScreen = () => {
               setModalLoc(!modalloc);
               setEmergencyModalVisible(false);
             }}
-            // center
+            center
             middle
-            padding={wp(4)}
             margin={[0, wp(2), 0, 0]}
             borderRadius={15}
             primary
-            style={CommonStyles.icon}>
+            style={{height: 45, width: 45}}>
             <ImageComponent name="search_loc" width={25} height={25} />
           </CustomButton>
           <TouchableOpacity onPress={() => setEmergencyModalVisible(true)}>

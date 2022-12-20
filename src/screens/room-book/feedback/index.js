@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from 'src/common/header';
 import {FlatList, ScrollView} from 'react-native';
 import {Block, Button, hp, Input, Text, wp} from '_elements';
@@ -8,14 +8,18 @@ import {useNavigation} from '@react-navigation/native';
 
 const Feedback = () => {
   const navigation = useNavigation();
+  const [state, setState] = useState('');
+  console.log('state: ', state);
   const _renderVerticalItem = ({item, index}) => {
     return (
       <Block flex={false} margin={[hp(1), 0, 0, wp(5)]}>
         <Checkbox
-          checked={index === 0 ? true : false}
-          labelStyle={{marginRight: wp(5)}}
+          checked={state === item}
+          labelStyle={{marginRight: wp(5), width: wp(70)}}
           labelBefore
-          label=" Lorem ipsum dolor sit amet, conse."
+          numberOfLabelLines={2}
+          label={item}
+          onChange={v => setState(v.label)}
         />
       </Block>
     );
@@ -33,7 +37,13 @@ const Feedback = () => {
           <FlatList
             scrollEnabled={false}
             keyExtractor={(item, index) => index.toString()}
-            data={['All', 'America', 'Europe', 'Asia', 'Osenia']}
+            data={[
+              'Are our customer representatives polite?',
+              'Has our product helped as you would’ve liked?',
+              'Are you excited about our future products and launches?',
+              'Have you used our services in the past?',
+              'Will you recommend products/services to others?',
+            ]}
             renderItem={_renderVerticalItem}
             showsHorizontalScrollIndicator={false}
           />
