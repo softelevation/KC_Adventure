@@ -566,7 +566,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = D97XT7P7X8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = KC_Adventure/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "KCE Adventure";
@@ -599,7 +599,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = D97XT7P7X8;
 				INFOPLIST_FILE = KC_Adventure/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "KCE Adventure";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";

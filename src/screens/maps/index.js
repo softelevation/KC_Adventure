@@ -27,11 +27,7 @@ import {useFocusEffect, useNavigation} from '@react-navigation/native';
 
 import {data} from './data';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  getCurrentLocation,
-  locationPermission,
-  requestPermission,
-} from 'src/utils/helper';
+import {getCurrentLocation, requestPermission} from 'src/utils/helper';
 import {light} from 'src/components/theme/colors';
 import {RoutesName} from '_routeName';
 import MapViewDirections from 'react-native-maps-directions';
@@ -100,30 +96,26 @@ const MapsScreen = () => {
   }, []);
 
   const getLiveLocation = async () => {
-    const checkPermission = await locationPermission();
-    console.log(checkPermission, 'checkPermission');
-    if (checkPermission) {
-      const request = await requestPermission();
-      if (request) {
-        const {latitude, longitude, heading} = await getCurrentLocation();
-        console.log(
-          'latitude, longitude, heading: ',
-          latitude,
-          longitude,
-          heading,
-        );
-        setState({
+    const request = await requestPermission();
+    if (request) {
+      const {latitude, longitude, heading} = await getCurrentLocation();
+      console.log(
+        'latitude, longitude, heading: ',
+        latitude,
+        longitude,
+        heading,
+      );
+      setState({
+        latitude: latitude,
+        longitude: longitude,
+      });
+      dispatch(
+        locationRequest({
           latitude: latitude,
           longitude: longitude,
-        });
-        dispatch(
-          locationRequest({
-            latitude: latitude,
-            longitude: longitude,
-          }),
-        );
-        animateMap();
-      }
+        }),
+      );
+      animateMap();
     }
   };
 
@@ -179,7 +171,7 @@ const MapsScreen = () => {
                     shadow
                     padding={[hp(1), 0, hp(0)]}
                     column>
-                    <Text margin={[-hp(5), 0, 0, 0]} height={117}>
+                    <Text margin={[hp(3), 0, 0, 0]} height={117}>
                       <ImageComponent
                         name={'restaurant_img'}
                         height={72}
@@ -187,7 +179,12 @@ const MapsScreen = () => {
                       />
                     </Text>
 
-                    <Text gutterBottom size={14} regular center>
+                    <Text
+                      gutterBottom
+                      margin={[hp(1), 0, 0, 0]}
+                      size={14}
+                      regular
+                      center>
                       Point of interest description or video{'\n'}button to
                       learn more or to close
                     </Text>

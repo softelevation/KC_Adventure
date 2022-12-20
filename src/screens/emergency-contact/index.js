@@ -5,7 +5,7 @@ import {Block, Button, hp, Input, Text, wp} from '_elements';
 const EmergencyContact = () => {
   return (
     <Block safearea={true} primary>
-      <Header name="Get Help" />
+      <Header menuIcon={false} name="Get Help" />
       <Block defaultPadding flex={false} margin={[hp(5), 0, 0]}>
         <Text center size={20} bold>
           Please enter your emergency Contact information below.
