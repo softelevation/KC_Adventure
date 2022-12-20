@@ -17,11 +17,7 @@ import {
 } from '_elements';
 import {RoutesName} from '_routeName';
 import {useFocusEffect} from '@react-navigation/native';
-import {
-  getCurrentLocation,
-  locationPermission,
-  requestPermission,
-} from 'src/utils/helper';
+import {getCurrentLocation, requestPermission} from 'src/utils/helper';
 import {categoryRequest} from 'src/redux/dashboard/category/action';
 import {
   experienceRatRequest,
@@ -45,8 +41,6 @@ const Experiences = () => {
   ]);
 
   const getLiveLocation = async () => {
-    // const checkPermission = await locationPermission();
-    // if (checkPermission) {
     const request = await requestPermission();
     if (request) {
       const {latitude, longitude, heading} = await getCurrentLocation();
@@ -63,7 +57,6 @@ const Experiences = () => {
         }),
       );
     }
-    // }
   };
 
   // const currentApiCall = () => {
