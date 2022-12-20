@@ -563,10 +563,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+<<<<<<< HEAD
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
+=======
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = D97XT7P7X8;
+>>>>>>> 52a2aee2bf3d05e5231fe0b1656cc877c7ebfc13
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = KC_Adventure/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "KCE Adventure";
@@ -596,10 +601,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+<<<<<<< HEAD
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
+=======
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = D97XT7P7X8;
+>>>>>>> 52a2aee2bf3d05e5231fe0b1656cc877c7ebfc13
 				INFOPLIST_FILE = KC_Adventure/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "KCE Adventure";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
