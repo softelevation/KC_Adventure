@@ -68,6 +68,7 @@ function DrawerNavigator() {
         ...defaultOptions,
         drawerType: 'back',
         overlayColor: 'transparent',
+        unmountOnBlur: true,
       }}>
       <Drawer.Screen
         name={RoutesName.EXPERIENCES_STACK_SCREEN}
