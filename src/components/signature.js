@@ -78,7 +78,7 @@ export const SignatureScreen = () => {
                   border-radius: 10px;
                   // border: none;
                   height:100px;
-                  width:320px;
+                  width:350px;
                   position:center;
                   margin-left:3px;
                 }

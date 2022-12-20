@@ -13,6 +13,7 @@ import {
 import {RoutesName} from '_routeName';
 import {images} from 'src/assets';
 import Header from 'src/common/header';
+import ResponsiveImage from 'react-native-responsive-image';
 
 const LocationFound = () => {
   const navigation = useNavigation();
@@ -81,9 +82,13 @@ const LocationFound = () => {
           padding={[hp(2), wp(3)]}
           borderRadius={20}
           flex={false}>
-          <Image
-            style={{height: 130, width: 330, borderRadius: 15}}
+          <ResponsiveImage
+            // style={{height: 130, width: 330, borderRadius: 15}}
             source={item.image}
+            initWidth={wp(82)}
+            initHeight={130}
+            borderRadius={15}
+            resizeMode="cover"
           />
           <Block flex={false} margin={[hp(0.7), 0, 0, wp(2)]}>
             <Block center space={'between'} row flex={false}>

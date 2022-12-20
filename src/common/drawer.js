@@ -31,7 +31,7 @@ const DrawerScreen = ({state}) => {
         Main Menu
       </Text>
       {renderContent('Home', 'home_icon', index === 0, () =>
-        navigate(RoutesName.EXPERIENCES_SCREEN),
+        navigate(RoutesName.EXPERIENCES_STACK_SCREEN),
       )}
       {renderContent('My Wishlist', 'wishlist_icon', index === 1, () =>
         navigate(RoutesName.WISHLIST_SCREEN),
