@@ -19,6 +19,7 @@ import {
   Feedback,
   PaymentScreen,
   Bikedetails,
+  EmergencyContact,
 } from '_screens';
 import {defaultOptions} from './constants';
 import {RoutesName} from '_routeName';
@@ -40,6 +41,10 @@ export const ExperinceStackNavigator = () => {
         component={ExperienceDetail}
       />
       <DrawerStack.Screen name={RoutesName.MAP_SCREEN} component={MapsScreen} />
+      <DrawerStack.Screen
+        name={RoutesName.EMERGENCY_CONTACT}
+        component={EmergencyContact}
+      />
       <DrawerStack.Screen
         name={RoutesName.LOCATION_FOUND_SCREEN}
         component={LoacationFound}

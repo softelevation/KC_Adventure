@@ -128,7 +128,7 @@ const MapsScreen = () => {
   };
 
   const onSubmit = () => {
-    navigate(RoutesName.HELP_SCREEN);
+    navigate(RoutesName.EMERGENCY_CONTACT);
     Keyboard.dismiss();
   };
   const onCancelSubmit = () => {

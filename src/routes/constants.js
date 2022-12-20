@@ -28,5 +28,6 @@ const RoutesName = {
   FEED_BACK: 'Feedback',
   PAYMENT_OPTIONS: 'PaymentScreen',
   BIKE_DETAILS: 'Bikedetails',
+  EMERGENCY_CONTACT: 'EmergencyContact',
 };
 export {defaultOptions, RoutesName};
