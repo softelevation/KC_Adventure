@@ -44,7 +44,7 @@ export const requestPermission = () => {
     return request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION).then(result => {
       console.log('result Android: ', result);
       if (result === RESULTS.GRANTED) {
-        return true;
+        locationPermission();
       }
       // …
     });

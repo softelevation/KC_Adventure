@@ -28,7 +28,7 @@ export function* request(action) {
     console.log(response, 'response');
     if (response.status === 200) {
       yield put(authSuccess(dataResponse));
-      navigate(RoutesName.DASHBOARD_STACK_SCREEN);
+      navigate(RoutesName.ADVENTURE_SCREEN);
       yield call(SaveToken, dataResponse);
     } else {
       onDisplayNotification(response.message);

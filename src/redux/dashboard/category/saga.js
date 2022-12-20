@@ -3,7 +3,6 @@ import {categoryError, categorySuccess} from './action';
 import {put, call, all, takeLatest} from 'redux-saga/effects';
 import {apiCall} from '../../store/api-client';
 import {API_URL} from 'src/utils/config';
-import {onDisplayNotification} from 'src/utils/mobile-utils';
 
 export function* request(action) {
   // onDisplayNotification('action call');
@@ -14,11 +13,11 @@ export function* request(action) {
     if (response.status === 200) {
       yield put(categorySuccess(dataResponse));
     } else {
-      onDisplayNotification(response.message);
+      // onDisplayNotification(response.message);
       yield put(categoryError(response));
     }
   } catch (err) {
-    onDisplayNotification(err.message);
+    // onDisplayNotification(err.message);
     yield put(categoryError());
   }
 }

@@ -37,19 +37,17 @@ import {RoutesName} from '_routeName';
 import MapViewDirections from 'react-native-maps-directions';
 import GooglePlacesTextInput from 'src/components/google-places';
 import {Formik} from 'formik';
-import * as yup from 'yup';
 import {strictValidObjectWithKeys} from 'src/utils/commonUtils';
 import {locationRequest} from 'src/redux/location/action';
 
 const latitudeDelta = 0.0922;
 const longitudeDelta = 0.0421;
 const MapsScreen = () => {
-  // const [isModalVisible, setModalVisible] = useState(false);
   const [isEmergencyModalVisible, setEmergencyModalVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const {goBack, navigate} = useNavigation();
   const location = useSelector(state => state.location.data);
-  const [defaultHeight, setDefaultHeight] = useState(40);
+  const [defaultHeight, setDefaultHeight] = useState(hp(45));
   const [modalloc, setModalLoc] = useState(true);
   const formikRef = useRef();
 
@@ -72,7 +70,6 @@ const MapsScreen = () => {
   const animateMap = () => {
     mapView.current.animateToRegion(
       {
-        // Takes a region object as parameter
         latitude: location.latitude,
         longitude: location.longitude,
         latitudeDelta: 0.0922,
@@ -83,22 +80,16 @@ const MapsScreen = () => {
   };
 
   useEffect(() => {
-    if (modalloc === true) {
-      // setModalVisible(false);
-      setEmergencyModalVisible();
-    }
-  }, [modalloc]);
-  useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
       () => {
-        setDefaultHeight(70);
+        setDefaultHeight(hp(70));
       },
     );
     const keyboardDidHideListener = Keyboard.addListener(
       'keyboardDidHide',
       () => {
-        setDefaultHeight(40);
+        setDefaultHeight(hp(40));
       },
     );
 
@@ -141,7 +132,6 @@ const MapsScreen = () => {
     Keyboard.dismiss();
   };
   const onCancelSubmit = () => {
-    // setModalVisible(true);
     setTimeout(() => {
       setEmergencyModalVisible(false);
     }, 1000);
@@ -254,17 +244,30 @@ const MapsScreen = () => {
           </TouchableOpacity>
 
           <Block flex={false} margin={[0, 0, 0, wp(2)]}>
-            <TouchableOpacity onPress={() => setIsVisible(true)}>
+            <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
               <ImageComponent name="like_icon" height={45} width={45} />
             </TouchableOpacity>
           </Block>
         </Block>
       </Block>
       <Modal
-        style={CommonStyles.congratulationModal}
+        style={{
+          bottom: 0,
+          right: 0,
+          left: 0,
+          position: 'absolute',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          borderRadius: 24,
+          margin: 0,
+          height: defaultHeight,
+          backgroundColor: '#fff',
+          padding: hp(2),
+        }}
         coverScreen={false}
         hasBackdrop={false}
-        isVisible={modalloc}>
+        // avoidKeyboard={false}
+        isVisible={destinationCoords.latitude === null ? modalloc : !modalloc}>
         <>
           <Formik
             innerRef={formikRef}
@@ -275,10 +278,7 @@ const MapsScreen = () => {
               dest_lng: destlong,
             }}
             validateOnMount={true}
-            onSubmit={onSubmit}
-            validationSchema={yup.object().shape({
-              user_destination: yup.string().min(1).required(),
-            })}>
+            onSubmit={onSubmit}>
             {({
               values,
               handleChange,
@@ -292,47 +292,34 @@ const MapsScreen = () => {
               setFieldError,
             }) => (
               <>
-                <Block
-                  defaultPadding
-                  padding={[hp(4)]}
-                  style={{height: hp(45)}}
-                  primary
-                  center
-                  borderRadius={10}
-                  flex={false}>
-                  <>
-                    <Text medium gutterBottom size={20}>
-                      Enter Location
-                    </Text>
-                    <GooglePlacesTextInput
-                      searchKeyword={values.user_destination}
-                      placeholder={'Search Location'}
-                      onPress={async (datas, details) => {
-                        const {name, latLng} = datas;
-                        setFieldValue('user_destination', name);
-                        setDestinationCoords({
-                          latitude: latLng.lat,
-                          longitude: latLng.lng,
-                        });
-                        setFieldValue('dest_lat', latLng.lat);
-                        setFieldValue('dest_lng', latLng.lng);
-                        // setFieldValue('dest_lat', latLng.lat);
-                        // setFieldValue('dest_lng', latLng.lng);
-                      }}
-                      onChangeText={e => {
-                        if (e === '') {
-                          setFieldValue('user_destination', '');
-                          setDestLat('');
-                          setDestLong('');
-                        } else {
-                          setFieldValue('user_destination', e);
-                        }
-                      }}
-                      // onBlur={() => setFieldTouched('user_destination')}
-                      // error={touched.user_destination && errors.user_destination}
-                    />
-                  </>
-                </Block>
+                {console.log(destinationCoords, 'destinationCoords')}
+                <Text medium gutterBottom size={20}>
+                  Enter Location
+                </Text>
+                <GooglePlacesTextInput
+                  searchKeyword={values.user_destination}
+                  onSubmitEditing={Keyboard.dismiss}
+                  placeholder={'Search Location'}
+                  onPress={async (datas, details) => {
+                    const {name, latLng} = datas;
+                    setFieldValue('user_destination', name);
+                    setDestinationCoords({
+                      latitude: latLng.lat,
+                      longitude: latLng.lng,
+                    });
+                    setFieldValue('dest_lat', latLng.lat);
+                    setFieldValue('dest_lng', latLng.lng);
+                  }}
+                  onChangeText={e => {
+                    if (e === '') {
+                      setFieldValue('user_destination', '');
+                      setDestLat('');
+                      setDestLong('');
+                    } else {
+                      setFieldValue('user_destination', e);
+                    }
+                  }}
+                />
               </>
             )}
           </Formik>

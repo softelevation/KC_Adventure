@@ -563,8 +563,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = D97XT7P7X8;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = KC_Adventure/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "KCE Adventure";
@@ -581,6 +583,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kceadventure.org;
 				PRODUCT_NAME = KC_Adventure;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -593,8 +596,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = D97XT7P7X8;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = KC_Adventure/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "KCE Adventure";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
@@ -610,6 +615,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kceadventure.org;
 				PRODUCT_NAME = KC_Adventure;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

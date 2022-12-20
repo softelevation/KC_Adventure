@@ -45,25 +45,25 @@ const Experiences = () => {
   ]);
 
   const getLiveLocation = async () => {
-    const checkPermission = await locationPermission();
-    if (checkPermission) {
-      const request = await requestPermission();
-      if (request) {
-        const {latitude, longitude, heading} = await getCurrentLocation();
-        console.log(
-          'latitude, longitude, heading: ',
-          latitude,
-          longitude,
-          heading,
-        );
-        dispatch(
-          locationRequest({
-            latitude: latitude,
-            longitude: longitude,
-          }),
-        );
-      }
+    // const checkPermission = await locationPermission();
+    // if (checkPermission) {
+    const request = await requestPermission();
+    if (request) {
+      const {latitude, longitude, heading} = await getCurrentLocation();
+      console.log(
+        'latitude, longitude, heading: ',
+        latitude,
+        longitude,
+        heading,
+      );
+      dispatch(
+        locationRequest({
+          latitude: latitude,
+          longitude: longitude,
+        }),
+      );
     }
+    // }
   };
 
   // const currentApiCall = () => {

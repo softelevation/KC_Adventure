@@ -28,13 +28,13 @@ const LoginScreen = () => {
         .required('Required'),
       email: Yup.string().email('Invalid email').required('Required'),
     }),
-    // onSubmit: values => {
-    //   const data = {
-    //     email: values.email,
-    //     password: values.password,
-    //   };
-    //   dispatch(authRequest(data));
-    // },
+    onSubmit: values => {
+      const data = {
+        email: values.email,
+        password: values.password,
+      };
+      dispatch(authRequest(data));
+    },
   });
   return (
     <ImageBackground source={images.bg} style={CommonStyles.defaultFlex}>
@@ -74,8 +74,8 @@ const LoginScreen = () => {
           </Text>
           <Block flex={false} center>
             <Button
-              // onPress={() => formik.handleSubmit()}
-              onPress={() => navigate(RoutesName.ADVENTURE_SCREEN)}
+              onPress={() => formik.handleSubmit()}
+              // onPress={() => navigate(RoutesName.ADVENTURE_SCREEN)}
               style={{width: wp(35)}}
               uppercase
               disabled={!formik.isValid}
