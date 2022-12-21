@@ -100,11 +100,11 @@ const LocationFound = () => {
                 style={{width: wp(23), paddingVertical: hp(1)}}
                 textStyle={{lineHeight: 15, marginTop: hp(0.3)}}
                 onPress={() => {
-                  navigation.navigate(RoutesName.ROOM_BOOK);
+                  navigation.navigate(RoutesName.MAP_SCREEN);
                 }}
                 size={13}
                 color={'secondary'}>
-                book
+                View on Map
               </Button>
             </Block>
             <Block flex={false}>

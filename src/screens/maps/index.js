@@ -20,7 +20,7 @@ import {
 } from '_elements';
 import CustomRatingBar from 'src/components/rating';
 
-import MapView from 'react-native-maps';
+import MapView, {Polyline} from 'react-native-maps';
 import {Marker, Callout} from 'react-native-maps';
 import Modal from 'react-native-modal';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
@@ -35,6 +35,7 @@ import GooglePlacesTextInput from 'src/components/google-places';
 import {Formik} from 'formik';
 import {strictValidObjectWithKeys} from 'src/utils/commonUtils';
 import {locationRequest} from 'src/redux/location/action';
+import {decode} from '@mapbox/polyline';
 
 const latitudeDelta = 0.0922;
 const longitudeDelta = 0.0421;
@@ -46,10 +47,39 @@ const MapsScreen = () => {
   const [defaultHeight, setDefaultHeight] = useState(hp(45));
   const [modalloc, setModalLoc] = useState(true);
   const formikRef = useRef();
+  const [coordsss, setCoordsss] = useState([]);
+
+  const getDirections = async (startLoc, destinationLoc) => {
+    try {
+      const KEY = 'AIzaSyBsm0dvdFzqBuomYIx3INjnHdxuuFpEEyk'; //put your API key here.
+      //otherwise, you'll have an 'unauthorized' error.
+      let resp = await fetch(
+        `https://maps.googleapis.com/maps/api/directions/json?origin=${startLoc}&destination=${destinationLoc}&key=${KEY}`,
+      );
+      let respJson = await resp.json();
+      let points = decode(respJson.routes[0].overview_polyline.points);
+      console.log(points);
+
+      let coords = points.map((point, index) => {
+        // const newCoordsArray = [...coordsss, coords];
+        // setCoordsss({coordsss: newCoordsArray});
+        return {
+          latitude: point[0],
+          longitude: point[1],
+        };
+      });
+      setCoordsss({coordsss: coords});
+      return coords;
+    } catch (error) {
+      return error;
+    }
+  };
 
   const [state, setState] = useState({
-    latitude: location.latitude || 0,
-    longitude: location.longitude || 0,
+    // latitude: location.latitude || 0,
+    // longitude: location.longitude || 0,
+    latitude: 41.682151,
+    longitude: -73.358423,
     latitudeDelta: latitudeDelta,
     longitudeDelta: longitudeDelta,
   });
@@ -66,8 +96,10 @@ const MapsScreen = () => {
   const animateMap = () => {
     mapView.current.animateToRegion(
       {
-        latitude: location.latitude,
-        longitude: location.longitude,
+        // latitude: location.latitude,
+        // longitude: location.longitude,
+        latitude: 41.682151,
+        longitude: -73.358423,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       },
@@ -94,6 +126,20 @@ const MapsScreen = () => {
       keyboardDidShowListener.remove();
     };
   }, []);
+  useEffect(() => {
+    //fetch the coordinates and then store its value into the coords Hook.
+    getDirections('41.682151,-73.358423', ' 41.713582,-73.393943')
+      .then(coords => setCoordsss(coords))
+      .catch(err => console.log('Something went wrong'));
+    // getDirections('  41.7002989,-73.3887551', '41.69327, -73.374271');
+    // .then(coords => setCoordsss(coords))
+    // .catch(err => console.log('Something went wrong'));
+  }, []);
+
+  const COORDINATES = [
+    {latitude: 41.682151, longitude: -73.358423},
+    {latitude: 41.675582, longitude: -73.353479},
+  ];
 
   const getLiveLocation = async () => {
     const request = await requestPermission();
@@ -138,6 +184,7 @@ const MapsScreen = () => {
       getLiveLocation();
     }, []),
   );
+
   const GOOGLE_MAPS_APIKEY = 'AIzaSyBsm0dvdFzqBuomYIx3INjnHdxuuFpEEyk';
   return (
     <Block safearea>
@@ -159,7 +206,7 @@ const MapsScreen = () => {
                   style={{width: 50, height: 40}}
                   resizeMode="contain"
                 />
-                <Callout tooltip>
+                {/* <Callout tooltip>
                   <Block
                     flex={false}
                     borderRadius={21}
@@ -194,11 +241,53 @@ const MapsScreen = () => {
                       <CustomRatingBar />
                     </Text>
                   </Block>
+                </Callout> */}
+                <Callout tooltip>
+                  <Block
+                    flex={false}
+                    borderRadius={21}
+                    height={hp(30)}
+                    width={wp(85)}
+                    header
+                    center
+                    shadow
+                    padding={[hp(1), 0, hp(0)]}
+                    column>
+                    <Text gutterBottom size={18} bold center>
+                      KEEP RIDING
+                    </Text>
+                    <Text
+                      gutterBottom
+                      margin={[hp(1), 0, 0, 0]}
+                      size={14}
+                      regular
+                      center>
+                      Point of interest description or video{'\n'}button to
+                      learn more or to close
+                    </Text>
+                  </Block>
                 </Callout>
               </Marker>
             );
           })}
-          {strictValidObjectWithKeys(destinationCoords) &&
+          <MapViewDirections
+            origin={COORDINATES[0]}
+            destination={COORDINATES[1]}
+            apikey={GOOGLE_MAPS_APIKEY}
+            waypoints={[
+              {latitude: 41.7049042, longitude: -73.3716619},
+              {latitude: 41.713582, longitude: -73.393943},
+              {latitude: 41.7002989, longitude: -73.3887551},
+              {latitude: 41.694924, longitude: -73.38242},
+              {latitude: 41.69327, longitude: -73.374271},
+              {latitude: 41.675748, longitude: -73.353675},
+              // {latitude: 41.694566, longitude: -73.350251},
+              // {latitude: 41.686654, longitude: -73.353813},
+            ]}
+            strokeColor="red"
+            strokeWidth={5}
+          />
+          {/* {strictValidObjectWithKeys(destinationCoords) &&
             destinationCoords.latitude && (
               <MapViewDirections
                 origin={state}
@@ -207,7 +296,7 @@ const MapsScreen = () => {
                 strokeColor={light.success}
                 strokeWidth={5}
               />
-            )}
+            )} */}
         </MapView>
       </Block>
       <Block flex={false} space="between" row margin={[hp(2)]}>
@@ -287,7 +376,7 @@ const MapsScreen = () => {
               setFieldError,
             }) => (
               <>
-                {console.log(destinationCoords, 'destinationCoords')}
+                {console.log(coordsss, 'destinationCoords')}
                 <Text medium gutterBottom size={20}>
                   Enter Location
                 </Text>
