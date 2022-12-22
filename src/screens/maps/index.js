@@ -36,6 +36,7 @@ import {Formik} from 'formik';
 import {strictValidObjectWithKeys} from 'src/utils/commonUtils';
 import {locationRequest} from 'src/redux/location/action';
 import {decode} from '@mapbox/polyline';
+import {clear} from 'console';
 
 const latitudeDelta = 0.0922;
 const longitudeDelta = 0.0421;
@@ -45,7 +46,7 @@ const MapsScreen = () => {
   const {goBack, navigate} = useNavigation();
   const location = useSelector(state => state.location.data);
   const [defaultHeight, setDefaultHeight] = useState(hp(45));
-  const [modalloc, setModalLoc] = useState(true);
+  const [modalloc, setModalLoc] = useState(false);
   const formikRef = useRef();
   const [coordsss, setCoordsss] = useState([]);
 
@@ -78,8 +79,8 @@ const MapsScreen = () => {
   const [state, setState] = useState({
     // latitude: location.latitude || 0,
     // longitude: location.longitude || 0,
-    latitude: 41.682151,
-    longitude: -73.358423,
+    latitude: 41.694573,
+    longitude: -73.3764224,
     latitudeDelta: latitudeDelta,
     longitudeDelta: longitudeDelta,
   });
@@ -98,8 +99,8 @@ const MapsScreen = () => {
       {
         // latitude: location.latitude,
         // longitude: location.longitude,
-        latitude: 41.682151,
-        longitude: -73.358423,
+        latitude: 41.694573,
+        longitude: -73.3764224,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       },
@@ -165,6 +166,13 @@ const MapsScreen = () => {
     }
   };
 
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     getLiveLocation();
+  //   }, 4000);
+  //   return () => clearInterval(interval);
+  // });
+
   const onSubmit = () => {
     navigate(RoutesName.EMERGENCY_CONTACT);
     Keyboard.dismiss();
@@ -191,7 +199,7 @@ const MapsScreen = () => {
       <Block style={styles.container} flex={false}>
         <MapView
           style={styles.map}
-          mapType="hybrid"
+          mapType="standard"
           zoomControlEnabled={false}
           showsUserLocation
           zoomEnabled={true}
@@ -206,55 +214,20 @@ const MapsScreen = () => {
                   style={{width: 50, height: 40}}
                   resizeMode="contain"
                 />
-                {/* <Callout tooltip>
-                  <Block
-                    flex={false}
-                    borderRadius={21}
-                    height={hp(30)}
-                    width={wp(85)}
-                    header
-                    center
-                    shadow
-                    padding={[hp(1), 0, hp(0)]}
-                    column>
-                    <Text margin={[hp(3), 0, 0, 0]} height={117}>
-                      <ImageComponent
-                        name={'restaurant_img'}
-                        height={72}
-                        width={72}
-                      />
-                    </Text>
-
-                    <Text
-                      gutterBottom
-                      margin={[hp(1), 0, 0, 0]}
-                      size={14}
-                      regular
-                      center>
-                      Point of interest description or video{'\n'}button to
-                      learn more or to close
-                    </Text>
-                    <Text gutterBottom size={18} bold center>
-                      KEEP RIDING
-                    </Text>
-                    <Text height={50}>
-                      <CustomRatingBar />
-                    </Text>
-                  </Block>
-                </Callout> */}
                 <Callout tooltip>
                   <Block
                     flex={false}
-                    borderRadius={21}
+                    // borderRadius={21}
                     height={hp(30)}
                     width={wp(85)}
                     header
                     center
+                    middle
                     shadow
                     padding={[hp(1), 0, hp(0)]}
                     column>
                     <Text gutterBottom size={18} bold center>
-                      KEEP RIDING
+                      {val.title}
                     </Text>
                     <Text
                       gutterBottom
@@ -262,8 +235,7 @@ const MapsScreen = () => {
                       size={14}
                       regular
                       center>
-                      Point of interest description or video{'\n'}button to
-                      learn more or to close
+                      {val.text}
                     </Text>
                   </Block>
                 </Callout>
@@ -590,3 +562,69 @@ const styles = StyleSheet.create({
   },
 });
 export default MapsScreen;
+
+// {
+//   {
+//     Object.keys(destinationCoords).length > 0 && (
+//       <Marker coordinate={state}>
+//         <Image
+//           source={require('../../assets/icons/information.png')}
+//           style={{width: 50, height: 40}}
+//           resizeMode="contain"
+//         />
+//       </Marker>
+//     );
+//   }
+//   {
+//     Object.keys(state).length > 0 && (
+//       <Marker coordinate={state}>
+//         <Image
+//           source={require('../../assets/icons/information.png')}
+//           style={{width: 50, height: 40}}
+//           resizeMode="contain"
+//         />
+//       </Marker>
+//     );
+//   }
+//   {
+//     Object.keys(destinationCoords).length > 0 && (
+//       <MapViewDirections
+//         origin={state}
+//         destination={destinationCoords}
+//         apikey={GOOGLE_MAPS_APIKEY}
+//         strokeColor={light.success}
+//         strokeWidth={5}
+//       />
+//     );
+//   }
+// }
+
+// {
+//   <Callout tooltip>
+//     <Block
+//       flex={false}
+//       borderRadius={21}
+//       height={hp(30)}
+//       width={wp(85)}
+//       header
+//       center
+//       shadow
+//       padding={[hp(1), 0, hp(0)]}
+//       column>
+//       <Text margin={[hp(3), 0, 0, 0]} height={117}>
+//         <ImageComponent name={'restaurant_img'} height={72} width={72} />
+//       </Text>
+
+//       <Text gutterBottom margin={[hp(1), 0, 0, 0]} size={14} regular center>
+//         Point of interest description or video{'\n'}button to learn more or to
+//         close
+//       </Text>
+//       <Text gutterBottom size={18} bold center>
+//         KEEP RIDING
+//       </Text>
+//       <Text height={50}>
+//         <CustomRatingBar />
+//       </Text>
+//     </Block>
+//   </Callout>;
+// }

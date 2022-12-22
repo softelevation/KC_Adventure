@@ -97,13 +97,13 @@ const LocationFound = () => {
               </Text>
               <Button
                 shadow
-                style={{width: wp(23), paddingVertical: hp(1)}}
+                style={{width: wp(27), paddingVertical: hp(1)}}
                 textStyle={{lineHeight: 15, marginTop: hp(0.3)}}
                 onPress={() => {
                   navigation.navigate(RoutesName.MAP_SCREEN);
                 }}
-                size={13}
-                color={'secondary'}>
+                size={12}
+                color={'primary'}>
                 View on Map
               </Button>
             </Block>

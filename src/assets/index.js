@@ -66,4 +66,5 @@ export const images = {
   hopkins_inn: require('./icons/hopkinsinn.png'),
   bike_icon: require('./icons/bikeicon.png'),
   search_loc: require('./icons/searchloc.png'),
+  info_icon: require('./icons/information.png'),
 };
