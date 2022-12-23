@@ -77,10 +77,12 @@ const MapsScreen = () => {
   };
 
   const [state, setState] = useState({
-    // latitude: location.latitude || 0,
-    // longitude: location.longitude || 0,
-    latitude: 41.694573,
-    longitude: -73.3764224,
+    latitude: location.latitude || 0,
+    longitude: location.longitude || 0,
+    // latitude: 41.694573,
+    // longitude: -73.3764224,
+    // latitude: 30.681181,
+    // longitude: 76.724998,
     latitudeDelta: latitudeDelta,
     longitudeDelta: longitudeDelta,
   });
@@ -89,18 +91,18 @@ const MapsScreen = () => {
   const [destlong, setDestLong] = useState({});
   const dispatch = useDispatch();
   const [destinationCoords, setDestinationCoords] = useState({
-    latitude: null,
-    longitude: null,
+    latitude: 30.739388,
+    longitude: 76.773242,
   });
 
   const mapView = React.createRef();
   const animateMap = () => {
     mapView.current.animateToRegion(
       {
-        // latitude: location.latitude,
-        // longitude: location.longitude,
-        latitude: 41.694573,
-        longitude: -73.3764224,
+        latitude: location.latitude,
+        longitude: location.longitude,
+        // latitude: 41.694573,
+        // longitude: -73.3764224,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       },
@@ -127,20 +129,20 @@ const MapsScreen = () => {
       keyboardDidShowListener.remove();
     };
   }, []);
-  useEffect(() => {
-    //fetch the coordinates and then store its value into the coords Hook.
-    getDirections('41.682151,-73.358423', ' 41.713582,-73.393943')
-      .then(coords => setCoordsss(coords))
-      .catch(err => console.log('Something went wrong'));
-    // getDirections('  41.7002989,-73.3887551', '41.69327, -73.374271');
-    // .then(coords => setCoordsss(coords))
-    // .catch(err => console.log('Something went wrong'));
-  }, []);
+  // useEffect(() => {
+  //   //fetch the coordinates and then store its value into the coords Hook.
+  //   getDirections('41.682151,-73.358423', ' 41.713582,-73.393943')
+  //     .then(coords => setCoordsss(coords))
+  //     .catch(err => console.log('Something went wrong'));
+  //   // getDirections('  41.7002989,-73.3887551', '41.69327, -73.374271');
+  //   // .then(coords => setCoordsss(coords))
+  //   // .catch(err => console.log('Something went wrong'));
+  // }, []);
 
-  const COORDINATES = [
-    {latitude: 41.682151, longitude: -73.358423},
-    {latitude: 41.675582, longitude: -73.353479},
-  ];
+  // const COORDINATES = [
+  //   {latitude: 41.682151, longitude: -73.358423},
+  //   {latitude: 41.675582, longitude: -73.353479},
+  // ];
 
   const getLiveLocation = async () => {
     const request = await requestPermission();
@@ -166,12 +168,12 @@ const MapsScreen = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     getLiveLocation();
-  //   }, 4000);
-  //   return () => clearInterval(interval);
-  // });
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getLiveLocation();
+    }, 4000);
+    return () => clearInterval(interval);
+  });
 
   const onSubmit = () => {
     navigate(RoutesName.EMERGENCY_CONTACT);
@@ -242,7 +244,34 @@ const MapsScreen = () => {
               </Marker>
             );
           })}
-          <MapViewDirections
+          {Object.keys(state).length > 0 && (
+            <Marker coordinate={state}>
+              <Image
+                source={require('../../assets/icons/placeholder.png')}
+                style={{width: 50, height: 40}}
+                resizeMode="contain"
+              />
+            </Marker>
+          )}
+          {Object.keys(destinationCoords).length > 0 && (
+            <Marker coordinate={destinationCoords}>
+              <Image
+                source={require('../../assets/icons/information.png')}
+                style={{width: 50, height: 40}}
+                resizeMode="contain"
+              />
+            </Marker>
+          )}
+          {Object.keys(state).length > 0 && (
+            <MapViewDirections
+              origin={state}
+              destination={destinationCoords}
+              apikey={GOOGLE_MAPS_APIKEY}
+              strokeColor={light.success}
+              strokeWidth={5}
+            />
+          )}
+          {/* <MapViewDirections
             origin={COORDINATES[0]}
             destination={COORDINATES[1]}
             apikey={GOOGLE_MAPS_APIKEY}
@@ -258,8 +287,8 @@ const MapsScreen = () => {
             ]}
             strokeColor="red"
             strokeWidth={5}
-          />
-          {/* {strictValidObjectWithKeys(destinationCoords) &&
+          /> */}
+          {strictValidObjectWithKeys(destinationCoords) &&
             destinationCoords.latitude && (
               <MapViewDirections
                 origin={state}
@@ -268,7 +297,7 @@ const MapsScreen = () => {
                 strokeColor={light.success}
                 strokeWidth={5}
               />
-            )} */}
+            )}
         </MapView>
       </Block>
       <Block flex={false} space="between" row margin={[hp(2)]}>
@@ -348,7 +377,7 @@ const MapsScreen = () => {
               setFieldError,
             }) => (
               <>
-                {console.log(coordsss, 'destinationCoords')}
+                {console.log(state, 'destinationCoords')}
                 <Text medium gutterBottom size={20}>
                   Enter Location
                 </Text>
@@ -564,39 +593,7 @@ const styles = StyleSheet.create({
 export default MapsScreen;
 
 // {
-//   {
-//     Object.keys(destinationCoords).length > 0 && (
-//       <Marker coordinate={state}>
-//         <Image
-//           source={require('../../assets/icons/information.png')}
-//           style={{width: 50, height: 40}}
-//           resizeMode="contain"
-//         />
-//       </Marker>
-//     );
-//   }
-//   {
-//     Object.keys(state).length > 0 && (
-//       <Marker coordinate={state}>
-//         <Image
-//           source={require('../../assets/icons/information.png')}
-//           style={{width: 50, height: 40}}
-//           resizeMode="contain"
-//         />
-//       </Marker>
-//     );
-//   }
-//   {
-//     Object.keys(destinationCoords).length > 0 && (
-//       <MapViewDirections
-//         origin={state}
-//         destination={destinationCoords}
-//         apikey={GOOGLE_MAPS_APIKEY}
-//         strokeColor={light.success}
-//         strokeWidth={5}
-//       />
-//     );
-//   }
+
 // }
 
 // {
