@@ -43,7 +43,7 @@ const MapsScreen = () => {
   const {goBack, navigate} = useNavigation();
   const location = useSelector(state => state.location.data);
   const [defaultHeight, setDefaultHeight] = useState(hp(45));
-  const [modalloc, setModalLoc] = useState(false);
+  const [modalloc, setModalLoc] = useState(true);
   const formikRef = useRef();
 
   const [destlat, setDestLat] = useState();
@@ -57,11 +57,14 @@ const MapsScreen = () => {
   const mapView = React.createRef();
   const markerRef = useRef();
   const GOOGLE_MAP_KEY = 'AIzaSyBsm0dvdFzqBuomYIx3INjnHdxuuFpEEyk';
+  const GOOGLE_MAPS_APIKEY = 'AIzaSyBsm0dvdFzqBuomYIx3INjnHdxuuFpEEyk';
 
   const [state, setState] = useState({
     curLoc: {
-      latitude: location.latitude || 0,
-      longitude: location.longitude || 0,
+      // latitude: location.latitude || 0,
+      // longitude: location.longitude || 0,
+      latitude: 41.682151,
+      longitude: -73.358423,
     },
     isLoading: false,
     coordinate: new AnimatedRegion({
@@ -138,7 +141,7 @@ const MapsScreen = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       getLiveLocation();
-    }, 6000);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
@@ -161,6 +164,11 @@ const MapsScreen = () => {
       getLiveLocation();
     }, []),
   );
+
+  const COORDINATES = [
+    {latitude: 41.682151, longitude: -73.358423},
+    {latitude: 41.675582, longitude: -73.353479},
+  ];
 
   return (
     <Block safearea>
@@ -256,7 +264,7 @@ const MapsScreen = () => {
               optimizeWaypoints={false}
             />
           )} */}
-          {/* <MapViewDirections
+          <MapViewDirections
             origin={COORDINATES[0]}
             destination={COORDINATES[1]}
             apikey={GOOGLE_MAPS_APIKEY}
@@ -272,7 +280,7 @@ const MapsScreen = () => {
             ]}
             strokeColor="red"
             strokeWidth={5}
-          /> */}
+          />
           {/* {strictValidObjectWithKeys(destinationCords) &&
             destinationCords.latitude && (
               <MapViewDirections
