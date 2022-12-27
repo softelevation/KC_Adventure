@@ -4,7 +4,7 @@
 
 // import React in our code
 import React, {useCallback, useEffect, useState, useRef} from 'react';
-import {Keyboard, TouchableOpacity, Image} from 'react-native';
+import {Keyboard, TouchableOpacity, Image, Platform} from 'react-native';
 
 import CommonStyles from 'src/assets/styles';
 import {StyleSheet} from 'react-native';
@@ -20,8 +20,8 @@ import {
 } from '_elements';
 import CustomRatingBar from 'src/components/rating';
 
-import MapView, {Polyline} from 'react-native-maps';
-import {Marker, Callout} from 'react-native-maps';
+import MapView from 'react-native-maps';
+import {Marker, Callout, AnimatedRegion} from 'react-native-maps';
 import Modal from 'react-native-modal';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 
@@ -33,13 +33,10 @@ import {RoutesName} from '_routeName';
 import MapViewDirections from 'react-native-maps-directions';
 import GooglePlacesTextInput from 'src/components/google-places';
 import {Formik} from 'formik';
-import {strictValidObjectWithKeys} from 'src/utils/commonUtils';
 import {locationRequest} from 'src/redux/location/action';
-import {decode} from '@mapbox/polyline';
-import {clear} from 'console';
 
-const latitudeDelta = 0.0922;
-const longitudeDelta = 0.0421;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = 0.0421;
 const MapsScreen = () => {
   const [isEmergencyModalVisible, setEmergencyModalVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -48,67 +45,39 @@ const MapsScreen = () => {
   const [defaultHeight, setDefaultHeight] = useState(hp(45));
   const [modalloc, setModalLoc] = useState(false);
   const formikRef = useRef();
-  const [coordsss, setCoordsss] = useState([]);
-
-  const getDirections = async (startLoc, destinationLoc) => {
-    try {
-      const KEY = 'AIzaSyBsm0dvdFzqBuomYIx3INjnHdxuuFpEEyk'; //put your API key here.
-      //otherwise, you'll have an 'unauthorized' error.
-      let resp = await fetch(
-        `https://maps.googleapis.com/maps/api/directions/json?origin=${startLoc}&destination=${destinationLoc}&key=${KEY}`,
-      );
-      let respJson = await resp.json();
-      let points = decode(respJson.routes[0].overview_polyline.points);
-      console.log(points);
-
-      let coords = points.map((point, index) => {
-        // const newCoordsArray = [...coordsss, coords];
-        // setCoordsss({coordsss: newCoordsArray});
-        return {
-          latitude: point[0],
-          longitude: point[1],
-        };
-      });
-      setCoordsss({coordsss: coords});
-      return coords;
-    } catch (error) {
-      return error;
-    }
-  };
-
-  const [state, setState] = useState({
-    latitude: location.latitude || 0,
-    longitude: location.longitude || 0,
-    // latitude: 41.694573,
-    // longitude: -73.3764224,
-    // latitude: 30.681181,
-    // longitude: 76.724998,
-    latitudeDelta: latitudeDelta,
-    longitudeDelta: longitudeDelta,
-  });
 
   const [destlat, setDestLat] = useState();
   const [destlong, setDestLong] = useState({});
   const dispatch = useDispatch();
   const [destinationCoords, setDestinationCoords] = useState({
-    latitude: 30.739388,
-    longitude: 76.773242,
+    latitude: 30.697347,
+    longitude: 76.706026,
   });
 
   const mapView = React.createRef();
-  const animateMap = () => {
-    mapView.current.animateToRegion(
-      {
-        latitude: location.latitude,
-        longitude: location.longitude,
-        // latitude: 41.694573,
-        // longitude: -73.3764224,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      },
-      1000,
-    );
-  };
+  const markerRef = useRef();
+  const GOOGLE_MAP_KEY = 'AIzaSyBsm0dvdFzqBuomYIx3INjnHdxuuFpEEyk';
+
+  const [state, setState] = useState({
+    curLoc: {
+      latitude: location.latitude || 0,
+      longitude: location.longitude || 0,
+    },
+    isLoading: false,
+    coordinate: new AnimatedRegion({
+      latitude: 30.7046,
+      longitude: 77.1025,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
+    }),
+  });
+
+  const {curLoc, coordinate} = state;
+  const updateState = data => setState(state => ({...state, ...data}));
+
+  useEffect(() => {
+    getLiveLocation();
+  }, []);
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -129,34 +98,22 @@ const MapsScreen = () => {
       keyboardDidShowListener.remove();
     };
   }, []);
-  // useEffect(() => {
-  //   //fetch the coordinates and then store its value into the coords Hook.
-  //   getDirections('41.682151,-73.358423', ' 41.713582,-73.393943')
-  //     .then(coords => setCoordsss(coords))
-  //     .catch(err => console.log('Something went wrong'));
-  //   // getDirections('  41.7002989,-73.3887551', '41.69327, -73.374271');
-  //   // .then(coords => setCoordsss(coords))
-  //   // .catch(err => console.log('Something went wrong'));
-  // }, []);
-
-  // const COORDINATES = [
-  //   {latitude: 41.682151, longitude: -73.358423},
-  //   {latitude: 41.675582, longitude: -73.353479},
-  // ];
 
   const getLiveLocation = async () => {
-    const request = await requestPermission();
-    if (request) {
+    const locPermissionDenied = await requestPermission();
+    if (locPermissionDenied) {
       const {latitude, longitude, heading} = await getCurrentLocation();
-      console.log(
-        'latitude, longitude, heading: ',
-        latitude,
-        longitude,
-        heading,
-      );
-      setState({
-        latitude: latitude,
-        longitude: longitude,
+      console.log('get live location after 4 second', heading);
+      animate(latitude, longitude);
+      updateState({
+        heading: heading,
+        curLoc: {latitude, longitude},
+        coordinate: new AnimatedRegion({
+          latitude: latitude,
+          longitude: longitude,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA,
+        }),
       });
       dispatch(
         locationRequest({
@@ -164,16 +121,26 @@ const MapsScreen = () => {
           longitude: longitude,
         }),
       );
-      animateMap();
+    }
+  };
+
+  const animate = (latitude, longitude) => {
+    const newCoordinate = {latitude, longitude};
+    if (Platform.OS == 'android') {
+      if (markerRef.current) {
+        markerRef.current.animateMarkerToCoordinate(newCoordinate, 7000);
+      }
+    } else {
+      coordinate.timing(newCoordinate).start();
     }
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
       getLiveLocation();
-    }, 4000);
+    }, 6000);
     return () => clearInterval(interval);
-  });
+  }, []);
 
   const onSubmit = () => {
     navigate(RoutesName.EMERGENCY_CONTACT);
@@ -195,19 +162,22 @@ const MapsScreen = () => {
     }, []),
   );
 
-  const GOOGLE_MAPS_APIKEY = 'AIzaSyBsm0dvdFzqBuomYIx3INjnHdxuuFpEEyk';
   return (
     <Block safearea>
       <Block style={styles.container} flex={false}>
         <MapView
-          style={styles.map}
+          style={StyleSheet.absoluteFill}
           mapType="standard"
           zoomControlEnabled={false}
           showsUserLocation
           zoomEnabled={true}
           showsMyLocationButton={false}
           ref={mapView}
-          initialRegion={state}>
+          initialRegion={{
+            ...curLoc,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          }}>
           {data.map((val, i) => {
             return (
               <Marker coordinate={val.coords}>
@@ -244,8 +214,18 @@ const MapsScreen = () => {
               </Marker>
             );
           })}
-          {Object.keys(state).length > 0 && (
-            <Marker coordinate={state}>
+          <Marker.Animated ref={markerRef} coordinate={coordinate}>
+            <Image
+              source={require('../../assets/icons/placeholder.png')}
+              style={{
+                width: 40,
+                height: 40,
+              }}
+              resizeMode="contain"
+            />
+          </Marker.Animated>
+          {Object.keys(destinationCoords).length > 0 && (
+            <Marker coordinate={destinationCoords}>
               <Image
                 source={require('../../assets/icons/placeholder.png')}
                 style={{width: 50, height: 40}}
@@ -254,23 +234,28 @@ const MapsScreen = () => {
             </Marker>
           )}
           {Object.keys(destinationCoords).length > 0 && (
-            <Marker coordinate={destinationCoords}>
-              <Image
-                source={require('../../assets/icons/information.png')}
-                style={{width: 50, height: 40}}
-                resizeMode="contain"
-              />
-            </Marker>
+            <MapViewDirections
+              origin={curLoc}
+              destination={destinationCoords}
+              apikey={GOOGLE_MAP_KEY}
+              strokeWidth={6}
+              strokeColor="red"
+              optimizeWaypoints={false}
+              onError={errorMessage => {
+                // console.log('GOT AN ERROR');
+              }}
+            />
           )}
-          {Object.keys(state).length > 0 && (
+          {/* {Object.keys(state).length > 0 && (
             <MapViewDirections
               origin={state}
               destination={destinationCoords}
               apikey={GOOGLE_MAPS_APIKEY}
               strokeColor={light.success}
               strokeWidth={5}
+              optimizeWaypoints={false}
             />
-          )}
+          )} */}
           {/* <MapViewDirections
             origin={COORDINATES[0]}
             destination={COORDINATES[1]}
@@ -288,16 +273,16 @@ const MapsScreen = () => {
             strokeColor="red"
             strokeWidth={5}
           /> */}
-          {strictValidObjectWithKeys(destinationCoords) &&
-            destinationCoords.latitude && (
+          {/* {strictValidObjectWithKeys(destinationCords) &&
+            destinationCords.latitude && (
               <MapViewDirections
                 origin={state}
-                destination={destinationCoords}
+                destination={destinationCords}
                 apikey={GOOGLE_MAPS_APIKEY}
                 strokeColor={light.success}
                 strokeWidth={5}
               />
-            )}
+            )} */}
         </MapView>
       </Block>
       <Block flex={false} space="between" row margin={[hp(2)]}>
@@ -351,7 +336,6 @@ const MapsScreen = () => {
         }}
         coverScreen={false}
         hasBackdrop={false}
-        // avoidKeyboard={false}
         isVisible={destinationCoords.latitude === null ? modalloc : !modalloc}>
         <>
           <Formik
@@ -388,10 +372,10 @@ const MapsScreen = () => {
                   onPress={async (datas, details) => {
                     const {name, latLng} = datas;
                     setFieldValue('user_destination', name);
-                    setDestinationCoords({
-                      latitude: latLng.lat,
-                      longitude: latLng.lng,
-                    });
+                    // setDestinationCoords({
+                    //   latitude: latLng.lat,
+                    //   longitude: latLng.lng,
+                    // });
                     setFieldValue('dest_lat', latLng.lat);
                     setFieldValue('dest_lng', latLng.lng);
                   }}

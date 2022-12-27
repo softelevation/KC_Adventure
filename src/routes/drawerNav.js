@@ -95,6 +95,7 @@ function DrawerNavigator() {
         name={RoutesName.BIKE_DETAILS}
         component={Bikedetails}
       />
+      <DrawerStack.Screen name={RoutesName.MAP_SCREEN} component={MapsScreen} />
       <Drawer.Screen name={RoutesName.TOUR_SCREEN} component={Tour} />
       <Drawer.Screen
         name={RoutesName.TOUR_DETAILS_SCREEN}
