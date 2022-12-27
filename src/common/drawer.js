@@ -48,9 +48,6 @@ const DrawerScreen = ({state}) => {
       {renderContent('Help center', 'help_icon', index === 5, () =>
         navigate(RoutesName.HELP_SCREEN),
       )}
-      {renderContent('Bike Details', 'bike_icon', index === 6, () =>
-        navigate(RoutesName.BIKE_DETAILS),
-      )}
       {renderContent('Logout', 'logout_icon', false, () =>
         navigate(RoutesName.AUTH_STACK_SCREEN),
       )}
