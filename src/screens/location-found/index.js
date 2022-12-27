@@ -100,7 +100,7 @@ const LocationFound = () => {
                 style={{width: wp(27), paddingVertical: hp(1)}}
                 textStyle={{lineHeight: 15, marginTop: hp(0.3)}}
                 onPress={() => {
-                  navigation.navigate(RoutesName.MAP_SCREEN);
+                  navigation.navigate(RoutesName.BIKE_DETAILS);
                 }}
                 size={12}
                 color={'primary'}>

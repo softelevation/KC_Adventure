@@ -13,7 +13,12 @@ const Bikedetails = () => {
   const {navigate} = useNavigation();
   return (
     <Block safearea={true} primary>
-      <Header name="Bike Details" />
+      <Header
+        rightText="Skip"
+        onPressText={() => navigate(RoutesName.MAP_SCREEN)}
+        menuIcon={false}
+        name="Bike Details"
+      />
       <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
         <Block flex={false}>
           <VideoPlayer

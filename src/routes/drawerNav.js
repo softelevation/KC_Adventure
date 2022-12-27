@@ -53,6 +53,10 @@ export const ExperinceStackNavigator = () => {
         name={RoutesName.LOCATION_DETAILS}
         component={LoacationDetails}
       />
+      <DrawerStack.Screen
+        name={RoutesName.BIKE_DETAILS}
+        component={Bikedetails}
+      />
       <DrawerStack.Screen name={RoutesName.ROOM_BOOK} component={BookRoom} />
       <DrawerStack.Screen name={RoutesName.FEED_BACK} component={Feedback} />
 
@@ -91,11 +95,6 @@ function DrawerNavigator() {
         component={NotificationScreen}
       />
       <Drawer.Screen name={RoutesName.HELP_SCREEN} component={HelpCenter} />
-      <DrawerStack.Screen
-        name={RoutesName.BIKE_DETAILS}
-        component={Bikedetails}
-      />
-      <DrawerStack.Screen name={RoutesName.MAP_SCREEN} component={MapsScreen} />
       <Drawer.Screen name={RoutesName.TOUR_SCREEN} component={Tour} />
       <Drawer.Screen
         name={RoutesName.TOUR_DETAILS_SCREEN}

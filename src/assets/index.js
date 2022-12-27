@@ -67,4 +67,5 @@ export const images = {
   bike_icon: require('./icons/bikeicon.png'),
   search_loc: require('./icons/searchloc.png'),
   info_icon: require('./icons/information.png'),
+  close: require('./icons/cancel.png'),
 };

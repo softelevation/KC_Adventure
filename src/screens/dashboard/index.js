@@ -1,20 +1,37 @@
-import {ImageBackground, Keyboard, SafeAreaView} from 'react-native';
+import {
+  ActivityIndicator,
+  ImageBackground,
+  Keyboard,
+  SafeAreaView,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {images} from 'src/assets';
 import CommonStyles from 'src/assets/styles';
-import {Block, Button, hp, ImageComponent, Input, Text, wp} from '_elements';
+import {
+  Block,
+  Button,
+  CustomButton,
+  hp,
+  ImageComponent,
+  Input,
+  Text,
+  wp,
+} from '_elements';
 import Modal from 'react-native-modal';
 import {light} from 'src/components/theme/colors';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {RoutesName} from '_routeName';
+import WebView from 'react-native-webview';
 
 const Adventure = () => {
   const [isModalVisible, setModalVisible] = useState(true);
   const [isEmergencyModalVisible, setEmergencyModalVisible] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  console.log('isEmergencyModalVisible: ', isEmergencyModalVisible);
+  const [isVisible, setIsVisible] = useState(false);
+  const [webView, setWebView] = useState(true);
   const {navigate} = useNavigation();
   const [defaultHeight, setDefaultHeight] = useState(40);
+  const [loader, setloader] = useState(true);
+  const [canGoNext, setCanGoNext] = useState(false);
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -55,139 +72,177 @@ const Adventure = () => {
     setIsVisible(false);
     navigate(RoutesName.DASHBOARD_STACK_SCREEN);
   };
-  useFocusEffect(
-    React.useCallback(() => {
-      setModalVisible(true);
-      setIsVisible(true);
-    }, []),
-  );
+  const showModalAfterClose = () => {
+    setModalVisible(true);
+    setIsVisible(true);
+  };
   return (
-    <ImageBackground
-      source={images.adventure_bg}
-      style={CommonStyles.defaultFlex}>
-      <SafeAreaView />
-      <Block flex={false} margin={[hp(10), 0, 0]}>
-        <Text semibold size={40} primary center>
-          Let’s find your adventure!
-        </Text>
-      </Block>
-      <Modal
-        coverScreen={true}
-        hasBackdrop={true}
-        style={
-          isModalVisible
-            ? CommonStyles.modalStyle
-            : CommonStyles.modalEmergencyStyle
-        }
-        isVisible={isVisible}>
+    <>
+      {webView ? (
         <>
-          {isModalVisible ? (
-            <Block
-              padding={[hp(3), wp(5)]}
-              borderRadius={24}
-              header
+          <WebView
+            source={{
+              uri: 'https://waiver.smartwaiver.com/w/6150d6e10a97c/web/',
+            }}
+            onLoad={w => {
+              console.log(w);
+              setloader(false);
+            }}
+            onNavigationStateChange={navState => {
+              // Keep track of going back navigation within component
+              console.log(navState, 'navState');
+              if (navState.canGoBack) {
+                setCanGoNext(true);
+              }
+            }}
+          />
+          {canGoNext && (
+            <CustomButton
+              onPress={() => {
+                setWebView(false);
+                showModalAfterClose();
+              }}
               flex={false}
-              style={{height: hp(defaultHeight)}}>
-              <Text gutterBottom info semibold h5>
-                Enter your unique code here
-              </Text>
-              <Input
-                style={CommonStyles.inputWithBorder}
-                placeholder={'Enter Code Here'}
+              style={{position: 'absolute', top: hp(6), right: wp(3)}}>
+              <ImageComponent
+                name="close"
+                height={40}
+                width={40}
+                color={light.secondary}
               />
-              <Text
-                underline
-                margin={[hp(1), 0]}
-                h2
-                extrabold
-                center
-                color={'#FABB05'}>
-                OR
-              </Text>
-              <Text margin={[hp(1), 0]} h5 semibold center info>
-                Browse experiences
-              </Text>
-              <Block center middle flex={false}>
-                <Block
-                  margin={[0, 0, hp(2)]}
-                  style={{width: wp(25)}}
-                  flex={false}
-                  center
-                  middle
-                  borderWidth={[0, 0, 1, 0]}
-                  borderColor={light.secondary}
-                />
-                <Button
-                  onPress={() => onSubmit()}
-                  style={{width: wp(50)}}
-                  uppercase
-                  color={'primary'}>
-                  Start your search
-                </Button>
-              </Block>
-            </Block>
-          ) : (
-            <Block
-              padding={[hp(3), wp(5)]}
-              borderRadius={24}
-              header
-              flex={false}
-              style={{height: hp(55)}}>
-              <Block flex={false} center>
-                <ImageComponent name="done_icon" height={64} width={135} />
-                <Text gutterBottom size={25} semibold center>
-                  We found your experience!
-                </Text>
-                <Block
-                  margin={[hp(2), 0, hp(2)]}
-                  style={{width: wp(25)}}
-                  flex={false}
-                  center
-                  middle
-                  borderWidth={[0, 0, 1, 0]}
-                  borderColor={light.secondary}
-                />
-                <Text
-                  height={21}
-                  margin={[hp(1), wp(4)]}
-                  h4
-                  center
-                  color={'#323232'}>
-                  But before we get started we need some more information in the
-                  event of an emergency!
-                </Text>
-                <Text
-                  margin={[hp(2), 0]}
-                  size={10}
-                  medium
-                  center
-                  color={'#323232'}>
-                  This is where emergency contact form, waiver & email opt in
-                  will all be, this is also where the app should ask to track
-                  the user
-                </Text>
-              </Block>
-              <Block row space={'between'} center middle flex={false}>
-                <Button
-                  onPress={() => onCancelSubmit()}
-                  style={{width: wp(40)}}
-                  uppercase
-                  color={'secondary'}>
-                  Cancel
-                </Button>
-                <Button
-                  onPress={() => onStartSubmit()}
-                  style={{width: wp(40)}}
-                  uppercase
-                  color={'primary'}>
-                  Start
-                </Button>
-              </Block>
-            </Block>
+            </CustomButton>
           )}
         </>
-      </Modal>
-    </ImageBackground>
+      ) : (
+        <ImageBackground
+          source={images.adventure_bg}
+          style={CommonStyles.defaultFlex}>
+          <SafeAreaView />
+
+          <Block flex={false} margin={[hp(10), 0, 0]}>
+            <Text semibold size={40} primary center>
+              Let’s find your adventure!
+            </Text>
+          </Block>
+          <Modal
+            coverScreen={true}
+            hasBackdrop={true}
+            style={
+              isModalVisible
+                ? CommonStyles.modalStyle
+                : CommonStyles.modalEmergencyStyle
+            }
+            isVisible={isVisible}>
+            <>
+              {isModalVisible ? (
+                <Block
+                  padding={[hp(3), wp(5)]}
+                  borderRadius={24}
+                  header
+                  flex={false}
+                  style={{height: hp(defaultHeight)}}>
+                  <Text gutterBottom info semibold h5>
+                    Enter your unique code here
+                  </Text>
+                  <Input
+                    style={CommonStyles.inputWithBorder}
+                    placeholder={'Enter Code Here'}
+                  />
+                  <Text
+                    underline
+                    margin={[hp(1), 0]}
+                    h2
+                    extrabold
+                    center
+                    color={'#FABB05'}>
+                    OR
+                  </Text>
+                  <Text margin={[hp(1), 0]} h5 semibold center info>
+                    Browse experiences
+                  </Text>
+                  <Block center middle flex={false}>
+                    <Block
+                      margin={[0, 0, hp(2)]}
+                      style={{width: wp(25)}}
+                      flex={false}
+                      center
+                      middle
+                      borderWidth={[0, 0, 1, 0]}
+                      borderColor={light.secondary}
+                    />
+                    <Button
+                      onPress={() => onSubmit()}
+                      style={{width: wp(50)}}
+                      uppercase
+                      color={'primary'}>
+                      Start your search
+                    </Button>
+                  </Block>
+                </Block>
+              ) : (
+                <Block
+                  padding={[hp(3), wp(5)]}
+                  borderRadius={24}
+                  header
+                  flex={false}
+                  style={{height: hp(55)}}>
+                  <Block flex={false} center>
+                    <ImageComponent name="done_icon" height={64} width={135} />
+                    <Text gutterBottom size={25} semibold center>
+                      We found your experience!
+                    </Text>
+                    <Block
+                      margin={[hp(2), 0, hp(2)]}
+                      style={{width: wp(25)}}
+                      flex={false}
+                      center
+                      middle
+                      borderWidth={[0, 0, 1, 0]}
+                      borderColor={light.secondary}
+                    />
+                    <Text
+                      height={21}
+                      margin={[hp(1), wp(4)]}
+                      h4
+                      center
+                      color={'#323232'}>
+                      But before we get started we need some more information in
+                      the event of an emergency!
+                    </Text>
+                    <Text
+                      margin={[hp(2), 0]}
+                      size={10}
+                      medium
+                      center
+                      color={'#323232'}>
+                      This is where emergency contact form, waiver & email opt
+                      in will all be, this is also where the app should ask to
+                      track the user
+                    </Text>
+                  </Block>
+                  <Block row space={'between'} center middle flex={false}>
+                    <Button
+                      onPress={() => onCancelSubmit()}
+                      style={{width: wp(40)}}
+                      uppercase
+                      color={'secondary'}>
+                      Cancel
+                    </Button>
+                    <Button
+                      onPress={() => onStartSubmit()}
+                      style={{width: wp(40)}}
+                      uppercase
+                      color={'primary'}>
+                      Start
+                    </Button>
+                  </Block>
+                </Block>
+              )}
+            </>
+          </Modal>
+        </ImageBackground>
+      )}
+    </>
   );
 };
 

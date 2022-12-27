@@ -112,7 +112,7 @@ const ExperienceDetails = ({route}) => {
             </Text>
             <Block flex={false} center margin={[hp(3), 0, 0]}>
               <Button
-                onPress={() => navigate(RoutesName.MAP_SCREEN)}
+                onPress={() => navigate(RoutesName.BIKE_DETAILS)}
                 icon="location_icon"
                 iconColor={'#fff'}
                 iconWithText

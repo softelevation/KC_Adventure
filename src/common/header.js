@@ -1,8 +1,14 @@
 import {DrawerActions, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Block, CustomButton, hp, ImageComponent, Text} from '_elements';
+export const defaultPropGetter = () => ({});
 
-const Header = ({name = '', menuIcon = true}) => {
+const Header = ({
+  name = '',
+  menuIcon = true,
+  rightText = false,
+  onPressText = defaultPropGetter,
+}) => {
   const navigation = useNavigation();
   return (
     <Block
@@ -26,7 +32,13 @@ const Header = ({name = '', menuIcon = true}) => {
       <Text spacing={1} uppercase bold>
         {name}
       </Text>
-      <ImageComponent name="notification_icon" height={24} width={24} />
+      {rightText ? (
+        <Text semibold onPress={onPressText}>
+          {rightText}
+        </Text>
+      ) : (
+        <ImageComponent name="notification_icon" height={24} width={24} />
+      )}
     </Block>
   );
 };
