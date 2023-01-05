@@ -31,7 +31,6 @@ import MapViewDirections from 'react-native-maps-directions';
 import GooglePlacesTextInput from 'src/components/google-places';
 import {Formik} from 'formik';
 import {locationRequest} from 'src/redux/location/action';
-import RenderHTML from 'react-native-render-html';
 import HtmlText from 'react-native-html-to-text';
 
 const LATITUDE_DELTA = 0.0922;
@@ -50,8 +49,8 @@ const MapsScreen = () => {
   const [destlong, setDestLong] = useState({});
   const dispatch = useDispatch();
   const [destinationCoords, setDestinationCoords] = useState({
-    latitude: 31.020244,
-    longitude: 76.591605,
+    latitude: 30.717829,
+    longitude: 76.811988,
   });
 
   const mapView = React.createRef();
@@ -68,8 +67,8 @@ const MapsScreen = () => {
     },
     isLoading: false,
     coordinate: new AnimatedRegion({
-      latitude: 30.7046,
-      longitude: 77.1025,
+      latitude: 30.705321,
+      longitude: 76.734083,
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA,
     }),
@@ -79,6 +78,7 @@ const MapsScreen = () => {
   const [stepsDetails, setstepsDetails] = useState([
     {html_instructions: '<div></div>', maneuver: ''},
   ]);
+  const [totalTime, setTotalTime] = useState([]);
   const updateState = data => setState(state => ({...state, ...data}));
 
   useEffect(() => {
@@ -172,6 +172,16 @@ const MapsScreen = () => {
     {latitude: 41.675582, longitude: -73.353479},
   ];
 
+  const _renderDirections = () => {
+    if (stepsDetails[1]?.maneuver === 'turn-left') {
+      return <ImageComponent name="turn_left" height={60} width={50} />;
+    } else if (stepsDetails[1]?.maneuver === 'turn-right') {
+      return <ImageComponent name="turn_right" height={60} width={50} />;
+    } else {
+      return <ImageComponent name="go_straight" height={60} width={50} />;
+    }
+  };
+
   return (
     <Block safearea>
       <Block style={styles.container} flex={false}>
@@ -224,7 +234,7 @@ const MapsScreen = () => {
               </Marker>
             );
           })}
-          <Marker.Animated ref={markerRef} coordinate={coordinate}>
+          {/* <Marker.Animated ref={markerRef} coordinate={coordinate}>
             <Image
               source={require('../../assets/icons/location-pin.png')}
               style={{
@@ -233,7 +243,7 @@ const MapsScreen = () => {
               }}
               resizeMode="contain"
             />
-          </Marker.Animated>
+          </Marker.Animated> */}
           {Object.keys(destinationCoords).length > 0 && (
             <Marker coordinate={destinationCoords}>
               <Image
@@ -253,10 +263,9 @@ const MapsScreen = () => {
               optimizeWaypoints={false}
               onReady={e => {
                 e.legs.map(item => {
-                  console.log('dddddddddddd', item.steps[1]);
                   setstepsDetails(item.steps);
+                  setTotalTime(item.duration.text);
                 });
-                // console.log('map data', e);
               }}
               // onReady={e => {
               //   e.legs.map(item => {
@@ -595,34 +604,38 @@ const MapsScreen = () => {
         isVisible={!distanceModal}>
         <>
           <Block
-            padding={[hp(3), wp(3)]}
+            padding={[hp(1), wp(3)]}
             borderRadius={15}
             primary
             row
             space={'between'}
             flex={false}
             style={{height: hp(25)}}>
-            {/* <RenderHTML contentWidth={wp(80)} source={stepsDetails[0]} /> */}
-            <Block
-              column
-              middle
-              center
-              padding={[hp(2), 0, 0, wp(5)]}
-              flex={false}>
-              <ImageComponent name="go_straight" height={50} width={40} />
-              <Text h2 semibold>
+            <Block column middle center padding={[0, 0, 0, wp(4)]} flex={false}>
+              {/* <ImageComponent name="go_straight" height={50} width={40} /> */}
+              {_renderDirections()}
+              <Text h2 width={wp(10)} semibold margin={[hp(1), 0, 0, 0]}>
                 {stepsDetails[0]?.duration?.text}
               </Text>
-
-              <Text h3 semibold>
-                {stepsDetails[1].maneuver}
-              </Text>
+              {/* <Text h3 semibold>
+                {stepsDetails[1]?.maneuver}
+              </Text> */}
+              {console.log('direction', stepsDetails[1]?.maneuver)}
             </Block>
-            {console.log(stepsDetails[1].maneuver, 'djdd')}
-            <HtmlText
-              style={{fontWeight: 'bold', fontSize: 17, width: wp(60)}}
-              html={stepsDetails[0].html_instructions}
-            />
+            <Block flex={false} column>
+              <Text margin={[0, 0, hp(2), 0]} h2 bold>
+                {totalTime}
+              </Text>
+              <HtmlText
+                style={{
+                  fontWeight: 'bold',
+                  fontSize: 17,
+                  width: wp(60),
+                  height: hp(5.5),
+                }}
+                html={stepsDetails[0].html_instructions}
+              />
+            </Block>
           </Block>
         </>
       </Modal>
