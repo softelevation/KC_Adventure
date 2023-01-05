@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* KC_AdventureTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* KC_AdventureTests.m */; };
+		0C1D57CA3A477394304E082B /* libPods-KC_Adventure-KC_AdventureTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E1C0B22E68F6E04479D3E3A /* libPods-KC_Adventure-KC_AdventureTests.a */; };
 		12D9A17C37124AAEB42B68F6 /* Poppins-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B6EB99CBCB004A6CA0CEAEB1 /* Poppins-SemiBoldItalic.otf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -15,10 +16,9 @@
 		1D4CFA76FE2D4450AEC03861 /* Poppins-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 10320E2415184060B70BEBF9 /* Poppins-ExtraBold.otf */; };
 		24418CFB38B94617949249E7 /* Poppins-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5B32F7C86E3A4B64874D5662 /* Poppins-ExtraLight.otf */; };
 		4FF2239FE25A4297BFA9E70E /* Poppins-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = CD4187E82E274397B7C0630F /* Poppins-Black.otf */; };
-		62C723606B1762B6761B04CC /* libPods-KC_Adventure-KC_AdventureTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FF5659779321AC6D91901E /* libPods-KC_Adventure-KC_AdventureTests.a */; };
+		5A999A030C646A771D8F411E /* libPods-KC_Adventure.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 087C7EB77C1E9580FB95AC96 /* libPods-KC_Adventure.a */; };
 		6E66A5AA22044D8D998D7EDD /* Poppins-ExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B8293B8A7FE54A54BFDB0AEB /* Poppins-ExtraLightItalic.otf */; };
 		6EAE35A389E24A8C868D6B00 /* Poppins-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0741C32657964F2EB1D44C0B /* Poppins-BlackItalic.otf */; };
-		702D284B7165E89BC2458EFD /* libPods-KC_Adventure.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 748CF8C12694FFA8A4BA54A1 /* libPods-KC_Adventure.a */; };
 		7D97291002254BF99C596670 /* Poppins-ExtraBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9C41FA62F4A44BDAC2AAD5C /* Poppins-ExtraBoldItalic.otf */; };
 		7EF43B3B63834C509227674D /* Poppins-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 118F288C0EE6487FBE9BE67A /* Poppins-Bold.otf */; };
 		7FB36E28B1A84CC2A6BA5B0B /* Poppins-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6BEE1A1219A24FD8ADF65F19 /* Poppins-BoldItalic.otf */; };
@@ -50,6 +50,7 @@
 		00E356F21AD99517003FC87E /* KC_AdventureTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KC_AdventureTests.m; sourceTree = "<group>"; };
 		059350CA5DD44491806142FA /* Poppins-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.otf"; path = "../src/assets/fonts/Poppins-Regular.otf"; sourceTree = "<group>"; };
 		0741C32657964F2EB1D44C0B /* Poppins-BlackItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BlackItalic.otf"; path = "../src/assets/fonts/Poppins-BlackItalic.otf"; sourceTree = "<group>"; };
+		087C7EB77C1E9580FB95AC96 /* libPods-KC_Adventure.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KC_Adventure.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10320E2415184060B70BEBF9 /* Poppins-ExtraBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.otf"; path = "../src/assets/fonts/Poppins-ExtraBold.otf"; sourceTree = "<group>"; };
 		118F288C0EE6487FBE9BE67A /* Poppins-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.otf"; path = "../src/assets/fonts/Poppins-Bold.otf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* KC_Adventure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KC_Adventure.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,23 +59,22 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = KC_Adventure/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = KC_Adventure/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = KC_Adventure/main.m; sourceTree = "<group>"; };
-		14FF5659779321AC6D91901E /* libPods-KC_Adventure-KC_AdventureTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KC_Adventure-KC_AdventureTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22B29D6906354488837506D2 /* Poppins-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-LightItalic.otf"; path = "../src/assets/fonts/Poppins-LightItalic.otf"; sourceTree = "<group>"; };
 		32411A640F09457E8113C991 /* Poppins-MediumItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-MediumItalic.otf"; path = "../src/assets/fonts/Poppins-MediumItalic.otf"; sourceTree = "<group>"; };
+		35B517BAF96EEDA91CDE70C5 /* Pods-KC_Adventure-KC_AdventureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KC_Adventure-KC_AdventureTests.release.xcconfig"; path = "Target Support Files/Pods-KC_Adventure-KC_AdventureTests/Pods-KC_Adventure-KC_AdventureTests.release.xcconfig"; sourceTree = "<group>"; };
 		5B32F7C86E3A4B64874D5662 /* Poppins-ExtraLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLight.otf"; path = "../src/assets/fonts/Poppins-ExtraLight.otf"; sourceTree = "<group>"; };
 		668330D7AFE84EBAA7161243 /* Poppins-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Thin.otf"; path = "../src/assets/fonts/Poppins-Thin.otf"; sourceTree = "<group>"; };
 		6BEE1A1219A24FD8ADF65F19 /* Poppins-BoldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BoldItalic.otf"; path = "../src/assets/fonts/Poppins-BoldItalic.otf"; sourceTree = "<group>"; };
-		748CF8C12694FFA8A4BA54A1 /* libPods-KC_Adventure.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KC_Adventure.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		748E759AB3A24C26A130AE01 /* Poppins-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.otf"; path = "../src/assets/fonts/Poppins-Light.otf"; sourceTree = "<group>"; };
 		7D1C25437E664D80BB17DDD4 /* Poppins-ThinItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ThinItalic.otf"; path = "../src/assets/fonts/Poppins-ThinItalic.otf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = KC_Adventure/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		90A73F41E7095BF3043126BE /* Pods-KC_Adventure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KC_Adventure.debug.xcconfig"; path = "Target Support Files/Pods-KC_Adventure/Pods-KC_Adventure.debug.xcconfig"; sourceTree = "<group>"; };
-		A2B62676568003F616952763 /* Pods-KC_Adventure.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KC_Adventure.release.xcconfig"; path = "Target Support Files/Pods-KC_Adventure/Pods-KC_Adventure.release.xcconfig"; sourceTree = "<group>"; };
+		87A59717094B83B4FC7AE93D /* Pods-KC_Adventure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KC_Adventure.debug.xcconfig"; path = "Target Support Files/Pods-KC_Adventure/Pods-KC_Adventure.debug.xcconfig"; sourceTree = "<group>"; };
+		9E1C0B22E68F6E04479D3E3A /* libPods-KC_Adventure-KC_AdventureTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KC_Adventure-KC_AdventureTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACBC751B621B2BBA0045761A /* Pods-KC_Adventure.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KC_Adventure.release.xcconfig"; path = "Target Support Files/Pods-KC_Adventure/Pods-KC_Adventure.release.xcconfig"; sourceTree = "<group>"; };
+		AD6E935D8FB9414EE582C8CF /* Pods-KC_Adventure-KC_AdventureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KC_Adventure-KC_AdventureTests.debug.xcconfig"; path = "Target Support Files/Pods-KC_Adventure-KC_AdventureTests/Pods-KC_Adventure-KC_AdventureTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B6EB99CBCB004A6CA0CEAEB1 /* Poppins-SemiBoldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBoldItalic.otf"; path = "../src/assets/fonts/Poppins-SemiBoldItalic.otf"; sourceTree = "<group>"; };
 		B8293B8A7FE54A54BFDB0AEB /* Poppins-ExtraLightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLightItalic.otf"; path = "../src/assets/fonts/Poppins-ExtraLightItalic.otf"; sourceTree = "<group>"; };
-		BF6064958D8A9CAE10E05DCD /* Pods-KC_Adventure-KC_AdventureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KC_Adventure-KC_AdventureTests.release.xcconfig"; path = "Target Support Files/Pods-KC_Adventure-KC_AdventureTests/Pods-KC_Adventure-KC_AdventureTests.release.xcconfig"; sourceTree = "<group>"; };
 		CD4187E82E274397B7C0630F /* Poppins-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Black.otf"; path = "../src/assets/fonts/Poppins-Black.otf"; sourceTree = "<group>"; };
-		CF4E7BEF5986C02C41540078 /* Pods-KC_Adventure-KC_AdventureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KC_Adventure-KC_AdventureTests.debug.xcconfig"; path = "Target Support Files/Pods-KC_Adventure-KC_AdventureTests/Pods-KC_Adventure-KC_AdventureTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E9C41FA62F4A44BDAC2AAD5C /* Poppins-ExtraBoldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBoldItalic.otf"; path = "../src/assets/fonts/Poppins-ExtraBoldItalic.otf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EDD7742ACA56426FBEFE701A /* Poppins-Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Italic.otf"; path = "../src/assets/fonts/Poppins-Italic.otf"; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62C723606B1762B6761B04CC /* libPods-KC_Adventure-KC_AdventureTests.a in Frameworks */,
+				0C1D57CA3A477394304E082B /* libPods-KC_Adventure-KC_AdventureTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				702D284B7165E89BC2458EFD /* libPods-KC_Adventure.a in Frameworks */,
+				5A999A030C646A771D8F411E /* libPods-KC_Adventure.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,8 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				748CF8C12694FFA8A4BA54A1 /* libPods-KC_Adventure.a */,
-				14FF5659779321AC6D91901E /* libPods-KC_Adventure-KC_AdventureTests.a */,
+				087C7EB77C1E9580FB95AC96 /* libPods-KC_Adventure.a */,
+				9E1C0B22E68F6E04479D3E3A /* libPods-KC_Adventure-KC_AdventureTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -202,10 +202,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				90A73F41E7095BF3043126BE /* Pods-KC_Adventure.debug.xcconfig */,
-				A2B62676568003F616952763 /* Pods-KC_Adventure.release.xcconfig */,
-				CF4E7BEF5986C02C41540078 /* Pods-KC_Adventure-KC_AdventureTests.debug.xcconfig */,
-				BF6064958D8A9CAE10E05DCD /* Pods-KC_Adventure-KC_AdventureTests.release.xcconfig */,
+				87A59717094B83B4FC7AE93D /* Pods-KC_Adventure.debug.xcconfig */,
+				ACBC751B621B2BBA0045761A /* Pods-KC_Adventure.release.xcconfig */,
+				AD6E935D8FB9414EE582C8CF /* Pods-KC_Adventure-KC_AdventureTests.debug.xcconfig */,
+				35B517BAF96EEDA91CDE70C5 /* Pods-KC_Adventure-KC_AdventureTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -217,12 +217,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "KC_AdventureTests" */;
 			buildPhases = (
-				F599DED6C44646E3844834B6 /* [CP] Check Pods Manifest.lock */,
+				5B8FC32920B245CCE3DA0FD5 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				E08E18268F2CFA42F08FA094 /* [CP] Embed Pods Frameworks */,
-				B1A84F33C47D35F8063DAEF5 /* [CP] Copy Pods Resources */,
+				065E6B61573CD668479F9299 /* [CP] Embed Pods Frameworks */,
+				BB10C705AE4D9767204F470C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -238,14 +238,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "KC_Adventure" */;
 			buildPhases = (
-				474AB3AF48BE661171FFD877 /* [CP] Check Pods Manifest.lock */,
+				822B1B1321CB96EC99DA1A5F /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				1D57AE2D1F2FE2164FD9957E /* [CP] Embed Pods Frameworks */,
-				4BB4B3392A1436390C554B66 /* [CP] Copy Pods Resources */,
+				24B91523BD8F0BC5B84E035A /* [CP] Embed Pods Frameworks */,
+				33E0CE5B8D59CE8E41885014 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -269,7 +269,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1340;
 					};
 				};
 			};
@@ -344,7 +344,24 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		1D57AE2D1F2FE2164FD9957E /* [CP] Embed Pods Frameworks */ = {
+		065E6B61573CD668479F9299 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KC_Adventure-KC_AdventureTests/Pods-KC_Adventure-KC_AdventureTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KC_Adventure-KC_AdventureTests/Pods-KC_Adventure-KC_AdventureTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KC_Adventure-KC_AdventureTests/Pods-KC_Adventure-KC_AdventureTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		24B91523BD8F0BC5B84E035A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -361,7 +378,46 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KC_Adventure/Pods-KC_Adventure-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		474AB3AF48BE661171FFD877 /* [CP] Check Pods Manifest.lock */ = {
+		33E0CE5B8D59CE8E41885014 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KC_Adventure/Pods-KC_Adventure-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KC_Adventure/Pods-KC_Adventure-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KC_Adventure/Pods-KC_Adventure-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B8FC32920B245CCE3DA0FD5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KC_Adventure-KC_AdventureTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		822B1B1321CB96EC99DA1A5F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -383,24 +439,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4BB4B3392A1436390C554B66 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KC_Adventure/Pods-KC_Adventure-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KC_Adventure/Pods-KC_Adventure-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KC_Adventure/Pods-KC_Adventure-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B1A84F33C47D35F8063DAEF5 /* [CP] Copy Pods Resources */ = {
+		BB10C705AE4D9767204F470C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -415,45 +454,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KC_Adventure-KC_AdventureTests/Pods-KC_Adventure-KC_AdventureTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E08E18268F2CFA42F08FA094 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KC_Adventure-KC_AdventureTests/Pods-KC_Adventure-KC_AdventureTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KC_Adventure-KC_AdventureTests/Pods-KC_Adventure-KC_AdventureTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KC_Adventure-KC_AdventureTests/Pods-KC_Adventure-KC_AdventureTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F599DED6C44646E3844834B6 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-KC_Adventure-KC_AdventureTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -508,7 +508,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CF4E7BEF5986C02C41540078 /* Pods-KC_Adventure-KC_AdventureTests.debug.xcconfig */;
+			baseConfigurationReference = AD6E935D8FB9414EE582C8CF /* Pods-KC_Adventure-KC_AdventureTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -535,7 +535,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF6064958D8A9CAE10E05DCD /* Pods-KC_Adventure-KC_AdventureTests.release.xcconfig */;
+			baseConfigurationReference = 35B517BAF96EEDA91CDE70C5 /* Pods-KC_Adventure-KC_AdventureTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -559,13 +559,13 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 90A73F41E7095BF3043126BE /* Pods-KC_Adventure.debug.xcconfig */;
+			baseConfigurationReference = 87A59717094B83B4FC7AE93D /* Pods-KC_Adventure.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = KC_Adventure/Info.plist;
@@ -584,6 +584,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kceadventure.org;
 				PRODUCT_NAME = KC_Adventure;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "KC_Adventure-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -592,13 +593,13 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2B62676568003F616952763 /* Pods-KC_Adventure.release.xcconfig */;
+			baseConfigurationReference = ACBC751B621B2BBA0045761A /* Pods-KC_Adventure.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = KC_Adventure/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "KCE Adventure";
@@ -616,6 +617,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kceadventure.org;
 				PRODUCT_NAME = KC_Adventure;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "KC_Adventure-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

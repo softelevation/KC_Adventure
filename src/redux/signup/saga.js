@@ -25,14 +25,14 @@ export function* request(action) {
     const dataResponse = response.data;
     if (response.status === 200) {
       yield put(signSuccess(dataResponse));
-      navigate(RoutesName.DASHBOARD_STACK_SCREEN);
+      navigate(RoutesName.ADVENTURE_SCREEN);
       yield call(SaveToken, dataResponse);
     } else {
       onDisplayNotification(response.message);
       yield put(signError(response));
     }
   } catch (err) {
-    onDisplayNotification('Oops something went wrong');
+    onDisplayNotification(err.response.message);
     yield put(signError());
   }
 }

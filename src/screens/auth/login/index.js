@@ -84,53 +84,17 @@ const LoginScreen = () => {
               Sign In
             </Button>
           </Block>
-          <Block margin={[hp(2), 0]} center space={'between'} flex={false} row>
-            <Block
-              style={{width: wp(25)}}
-              flex={false}
-              borderWidth={[0, 0, 1, 0]}
-              borderColorDeafult
-            />
-            <Text paragraph>Or sign up using</Text>
-            <Block
-              style={{width: wp(25)}}
-              flex={false}
-              borderWidth={[0, 0, 1, 0]}
-              borderColorDeafult
-            />
-          </Block>
-          <Block margin={[hp(2), 0]} middle flex={false} row center>
-            <Block
-              margin={[0, wp(3)]}
-              center
-              middle
-              flex={false}
-              borderRadius={40}
-              shadow
-              header
-              style={CommonStyles.icon}>
-              <ImageComponent name="google" height={20} width={20} />
-            </Block>
-            <Block
-              center
-              middle
-              flex={false}
-              shadow
-              borderRadius={40}
-              header
-              style={CommonStyles.icon}>
-              <ImageComponent name="apple" height={22} width={20} />
-            </Block>
-          </Block>
-          <Text medium color={'#1F1F1F'} center>
-            Don't have an Account?{' '}
-            <Text
-              onPress={() => navigate(RoutesName.SIGNUP_SCREEN)}
-              secondary={true}
-              bold>
-              Sign Up!
+          <Block margin={[hp(2), 0]}>
+            <Text medium color={'#1F1F1F'} center>
+              Don't have an Account?{' '}
+              <Text
+                onPress={() => navigate(RoutesName.SIGNUP_SCREEN)}
+                secondary={true}
+                bold>
+                Sign Up!
+              </Text>
             </Text>
-          </Text>
+          </Block>
         </Block>
       </KeyboardAwareScrollView>
     </ImageBackground>

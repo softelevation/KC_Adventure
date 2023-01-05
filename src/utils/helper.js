@@ -34,7 +34,7 @@ export const getCurrentLocation = () =>
 export const requestPermission = () => {
   if (Platform.OS === 'ios') {
     return request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then(result => {
-      console.log('result: ', result);
+      // console.log('result: ', result);
       if (result === RESULTS.GRANTED) {
         return true;
       }

@@ -68,4 +68,8 @@ export const images = {
   search_loc: require('./icons/searchloc.png'),
   info_icon: require('./icons/information.png'),
   close: require('./icons/cancel.png'),
+  location_image: require('./icons/location-pin.png'),
+  turn_right: require('./icons/turn-right.png'),
+  turn_left: require('./icons/turn-left.png'),
+  go_straight: require('./icons/up-arrow.png'),
 };

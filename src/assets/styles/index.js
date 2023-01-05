@@ -30,7 +30,15 @@ const CommonStyles = {
     bottom: 0,
     right: 0,
     left: 0,
-    borderRadius: 24,
+    borderRadius: 15,
+    margin: 0,
+  },
+  distanceModal: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    left: 10,
+    borderRadius: 20,
     margin: 0,
   },
   inputWithBorder: {

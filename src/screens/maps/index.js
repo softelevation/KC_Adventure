@@ -5,7 +5,6 @@
 // import React in our code
 import React, {useCallback, useEffect, useState, useRef} from 'react';
 import {Keyboard, TouchableOpacity, Image, Platform} from 'react-native';
-
 import CommonStyles from 'src/assets/styles';
 import {StyleSheet} from 'react-native';
 import {
@@ -19,12 +18,10 @@ import {
   Input,
 } from '_elements';
 import CustomRatingBar from 'src/components/rating';
-
 import MapView from 'react-native-maps';
 import {Marker, Callout, AnimatedRegion} from 'react-native-maps';
 import Modal from 'react-native-modal';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-
 import {data} from './data';
 import {useDispatch, useSelector} from 'react-redux';
 import {getCurrentLocation, requestPermission} from 'src/utils/helper';
@@ -34,6 +31,8 @@ import MapViewDirections from 'react-native-maps-directions';
 import GooglePlacesTextInput from 'src/components/google-places';
 import {Formik} from 'formik';
 import {locationRequest} from 'src/redux/location/action';
+import RenderHTML from 'react-native-render-html';
+import HtmlText from 'react-native-html-to-text';
 
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = 0.0421;
@@ -44,14 +43,15 @@ const MapsScreen = () => {
   const location = useSelector(state => state.location.data);
   const [defaultHeight, setDefaultHeight] = useState(hp(45));
   const [modalloc, setModalLoc] = useState(true);
+  const [distanceModal, setDistanceModal] = useState(false);
   const formikRef = useRef();
 
   const [destlat, setDestLat] = useState();
   const [destlong, setDestLong] = useState({});
   const dispatch = useDispatch();
   const [destinationCoords, setDestinationCoords] = useState({
-    latitude: 30.697347,
-    longitude: 76.706026,
+    latitude: 31.020244,
+    longitude: 76.591605,
   });
 
   const mapView = React.createRef();
@@ -61,10 +61,10 @@ const MapsScreen = () => {
 
   const [state, setState] = useState({
     curLoc: {
-      // latitude: location.latitude || 0,
-      // longitude: location.longitude || 0,
-      latitude: 41.682151,
-      longitude: -73.358423,
+      latitude: location.latitude || 0,
+      longitude: location.longitude || 0,
+      // latitude: 41.682151,
+      // longitude: -73.358423,
     },
     isLoading: false,
     coordinate: new AnimatedRegion({
@@ -76,6 +76,9 @@ const MapsScreen = () => {
   });
 
   const {curLoc, coordinate} = state;
+  const [stepsDetails, setstepsDetails] = useState([
+    {html_instructions: '<div></div>', maneuver: ''},
+  ]);
   const updateState = data => setState(state => ({...state, ...data}));
 
   useEffect(() => {
@@ -106,7 +109,6 @@ const MapsScreen = () => {
     const locPermissionDenied = await requestPermission();
     if (locPermissionDenied) {
       const {latitude, longitude, heading} = await getCurrentLocation();
-      console.log('get live location after 4 second', heading);
       animate(latitude, longitude);
       updateState({
         heading: heading,
@@ -224,7 +226,7 @@ const MapsScreen = () => {
           })}
           <Marker.Animated ref={markerRef} coordinate={coordinate}>
             <Image
-              source={require('../../assets/icons/placeholder.png')}
+              source={require('../../assets/icons/location-pin.png')}
               style={{
                 width: 40,
                 height: 40,
@@ -249,9 +251,24 @@ const MapsScreen = () => {
               strokeWidth={6}
               strokeColor="red"
               optimizeWaypoints={false}
-              onError={errorMessage => {
-                // console.log('GOT AN ERROR');
+              onReady={e => {
+                e.legs.map(item => {
+                  console.log('dddddddddddd', item.steps[1]);
+                  setstepsDetails(item.steps);
+                });
+                // console.log('map data', e);
               }}
+              // onReady={e => {
+              //   e.legs.map(item => {
+              //     const stepString = item.steps.map(i => {
+              //       console.log('shhh! koi ane ko hai!', i);
+              //       return `${i.duration.text + i.html_instructions}`;
+              //     });
+              //     setstepsDetails(stepString);
+              //   });
+              //   console.log('map data', e);
+              // }}
+              // onStart={e => console.log(e, 'eee/')}
             />
           )}
           {/* {Object.keys(state).length > 0 && (
@@ -264,7 +281,7 @@ const MapsScreen = () => {
               optimizeWaypoints={false}
             />
           )} */}
-          <MapViewDirections
+          {/* <MapViewDirections
             origin={COORDINATES[0]}
             destination={COORDINATES[1]}
             apikey={GOOGLE_MAPS_APIKEY}
@@ -278,9 +295,11 @@ const MapsScreen = () => {
               // {latitude: 41.694566, longitude: -73.350251},
               // {latitude: 41.686654, longitude: -73.353813},
             ]}
+            onReady={e => console.log(e)}
+            onStart={e => console.log(e, 'eee/')}
             strokeColor="red"
             strokeWidth={5}
-          />
+          /> */}
           {/* {strictValidObjectWithKeys(destinationCords) &&
             destinationCords.latitude && (
               <MapViewDirections
@@ -346,6 +365,7 @@ const MapsScreen = () => {
         hasBackdrop={false}
         isVisible={destinationCoords.latitude === null ? modalloc : !modalloc}>
         <>
+          {/* {console.log('loxdnn', stepsDetails[0].maneuver)} */}
           <Formik
             innerRef={formikRef}
             enableReinitialize
@@ -369,7 +389,7 @@ const MapsScreen = () => {
               setFieldError,
             }) => (
               <>
-                {console.log(state, 'destinationCoords')}
+                {/* {console.log(state, 'destinationCoords')} */}
                 <Text medium gutterBottom size={20}>
                   Enter Location
                 </Text>
@@ -565,6 +585,44 @@ const MapsScreen = () => {
                 submit
               </Button>
             </Block>
+          </Block>
+        </>
+      </Modal>
+      <Modal
+        coverScreen={false}
+        hasBackdrop={false}
+        style={CommonStyles.modalWithoutMarginStyle}
+        isVisible={!distanceModal}>
+        <>
+          <Block
+            padding={[hp(3), wp(3)]}
+            borderRadius={15}
+            primary
+            row
+            space={'between'}
+            flex={false}
+            style={{height: hp(25)}}>
+            {/* <RenderHTML contentWidth={wp(80)} source={stepsDetails[0]} /> */}
+            <Block
+              column
+              middle
+              center
+              padding={[hp(2), 0, 0, wp(5)]}
+              flex={false}>
+              <ImageComponent name="go_straight" height={50} width={40} />
+              <Text h2 semibold>
+                {stepsDetails[0]?.duration?.text}
+              </Text>
+
+              <Text h3 semibold>
+                {stepsDetails[1].maneuver}
+              </Text>
+            </Block>
+            {console.log(stepsDetails[1].maneuver, 'djdd')}
+            <HtmlText
+              style={{fontWeight: 'bold', fontSize: 17, width: wp(60)}}
+              html={stepsDetails[0].html_instructions}
+            />
           </Block>
         </>
       </Modal>
