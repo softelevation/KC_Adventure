@@ -262,6 +262,7 @@ const MapsScreen = () => {
               strokeColor="red"
               optimizeWaypoints={false}
               onReady={e => {
+                console.log(e);
                 e.legs.map(item => {
                   setstepsDetails(item.steps);
                   setTotalTime(item.duration.text);
@@ -356,6 +357,25 @@ const MapsScreen = () => {
           </Block>
         </Block>
       </Block>
+      <Block
+        style={{
+          bottom: 0,
+          right: 0,
+          left: 0,
+          position: 'absolute',
+          alignItems: 'center',
+          margin: 0,
+          padding: hp(2),
+        }}
+        flex={false}>
+        <Button
+          onPress={() => setDistanceModal(true)}
+          style={{width: wp(40)}}
+          color={'primary'}>
+          start ride
+        </Button>
+      </Block>
+
       <Modal
         style={{
           bottom: 0,
@@ -601,7 +621,7 @@ const MapsScreen = () => {
         coverScreen={false}
         hasBackdrop={false}
         style={CommonStyles.modalWithoutMarginStyle}
-        isVisible={!distanceModal}>
+        isVisible={distanceModal}>
         <>
           <Block
             padding={[hp(1), wp(3)]}
@@ -617,6 +637,7 @@ const MapsScreen = () => {
               <Text h2 width={wp(10)} semibold margin={[hp(1), 0, 0, 0]}>
                 {stepsDetails[0]?.duration?.text}
               </Text>
+              <Text h3>{stepsDetails[0]?.distance?.text}</Text>
               {/* <Text h3 semibold>
                 {stepsDetails[1]?.maneuver}
               </Text> */}
@@ -631,7 +652,7 @@ const MapsScreen = () => {
                   fontWeight: 'bold',
                   fontSize: 17,
                   width: wp(60),
-                  height: hp(5.5),
+                  // height: hp(5.5),
                 }}
                 html={stepsDetails[0].html_instructions}
               />
