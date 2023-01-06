@@ -72,4 +72,5 @@ export const images = {
   turn_right: require('./icons/turn-right.png'),
   turn_left: require('./icons/turn-left.png'),
   go_straight: require('./icons/up-arrow.png'),
+  plane: require('./icons/paper-plane.png'),
 };

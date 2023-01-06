@@ -32,9 +32,14 @@ import GooglePlacesTextInput from 'src/components/google-places';
 import {Formik} from 'formik';
 import {locationRequest} from 'src/redux/location/action';
 import HtmlText from 'react-native-html-to-text';
+import {Dimensions} from 'react-native';
 
+// const LATITUDE_DELTA = 0.0922;
+// const LONGITUDE_DELTA = 0.0421;
+const screen = Dimensions.get('window');
+const ASPECT_RATIO = screen.width / screen.height;
 const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA = 0.0421;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const MapsScreen = () => {
   const [isEmergencyModalVisible, setEmergencyModalVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -49,14 +54,14 @@ const MapsScreen = () => {
   const [destlong, setDestLong] = useState({});
   const dispatch = useDispatch();
   const [destinationCoords, setDestinationCoords] = useState({
-    latitude: 30.717829,
-    longitude: 76.811988,
+    latitude: 30.748256,
+    longitude: 76.646027,
   });
 
   const mapView = React.createRef();
   const markerRef = useRef();
   const GOOGLE_MAP_KEY = 'AIzaSyBsm0dvdFzqBuomYIx3INjnHdxuuFpEEyk';
-  const GOOGLE_MAPS_APIKEY = 'AIzaSyBsm0dvdFzqBuomYIx3INjnHdxuuFpEEyk';
+  // const GOOGLE_MAPS_APIKEY = 'AIzaSyBsm0dvdFzqBuomYIx3INjnHdxuuFpEEyk';
 
   const [state, setState] = useState({
     curLoc: {
@@ -66,6 +71,7 @@ const MapsScreen = () => {
       // longitude: -73.358423,
     },
     isLoading: false,
+    heading: 0,
     coordinate: new AnimatedRegion({
       latitude: 30.705321,
       longitude: 76.734083,
@@ -74,12 +80,12 @@ const MapsScreen = () => {
     }),
   });
 
-  const {curLoc, coordinate} = state;
   const [stepsDetails, setstepsDetails] = useState([
     {html_instructions: '<div></div>', maneuver: ''},
   ]);
   const [totalTime, setTotalTime] = useState([]);
-  const updateState = data => setState(state => ({...state, ...data}));
+  const {curLoc, coordinate, heading} = state;
+  const updateState = newState => setState(state => ({...state, ...newState}));
 
   useEffect(() => {
     getLiveLocation();
@@ -109,7 +115,7 @@ const MapsScreen = () => {
     const locPermissionDenied = await requestPermission();
     if (locPermissionDenied) {
       const {latitude, longitude, heading} = await getCurrentLocation();
-      animate(latitude, longitude);
+      animate(latitude, longitude, heading);
       updateState({
         heading: heading,
         curLoc: {latitude, longitude},
@@ -131,7 +137,7 @@ const MapsScreen = () => {
 
   const animate = (latitude, longitude) => {
     const newCoordinate = {latitude, longitude};
-    if (Platform.OS == 'android') {
+    if (Platform.OS === 'android') {
       if (markerRef.current) {
         markerRef.current.animateMarkerToCoordinate(newCoordinate, 7000);
       }
@@ -140,10 +146,15 @@ const MapsScreen = () => {
     }
   };
 
+  const handleBoundsChanged = () => {
+    const mapCenter = mapView.current.getCenter(); //get map center
+    setState({curLoc: mapCenter});
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       getLiveLocation();
-    }, 4000);
+    }, 6000);
     return () => clearInterval(interval);
   }, []);
 
@@ -191,14 +202,15 @@ const MapsScreen = () => {
           zoomControlEnabled={false}
           showsUserLocation
           zoomEnabled={true}
-          showsMyLocationButton={false}
+          // showsMyLocationButton={false}
           ref={mapView}
+          center={{...curLoc}}
           initialRegion={{
             ...curLoc,
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA,
           }}>
-          {data.map((val, i) => {
+          {/* {data.map((val, i) => {
             return (
               <Marker coordinate={val.coords}>
                 <Image
@@ -233,17 +245,21 @@ const MapsScreen = () => {
                 </Callout>
               </Marker>
             );
-          })}
-          {/* <Marker.Animated ref={markerRef} coordinate={coordinate}>
+          })} */}
+          <Marker.Animated
+            anchor={{x: 0.5, y: 0.5}}
+            ref={markerRef}
+            coordinate={coordinate}>
             <Image
               source={require('../../assets/icons/location-pin.png')}
               style={{
                 width: 40,
                 height: 40,
+                transform: [{rotate: `${heading}deg`}],
               }}
               resizeMode="contain"
             />
-          </Marker.Animated> */}
+          </Marker.Animated>
           {Object.keys(destinationCoords).length > 0 && (
             <Marker coordinate={destinationCoords}>
               <Image
@@ -260,6 +276,8 @@ const MapsScreen = () => {
               apikey={GOOGLE_MAP_KEY}
               strokeWidth={6}
               strokeColor="red"
+              mode={'DRIVING'}
+              resetOnChange={false}
               optimizeWaypoints={false}
               onReady={e => {
                 console.log(e);
@@ -268,6 +286,16 @@ const MapsScreen = () => {
                   setTotalTime(item.duration.text);
                 });
               }}
+              // waypoints={[
+              //   {latitude: 30.680063, longitude: 76.726769},
+              //   {latitude: 30.679483, longitude: 76.725729},
+              //   {latitude: 30.680557, longitude: 76.724192},
+              //   {latitude: 30.679065, longitude: 76.7217},
+              //   {latitude: 30.681445, longitude: 76.719287},
+              //   {latitude: 30.694777, longitude: 76.707459},
+              //   {latitude: 30.714942, longitude: 76.691148},
+              //   {latitude: 30.739831, longitude: 76.674642},
+              // ]}
               // onReady={e => {
               //   e.legs.map(item => {
               //     const stepString = item.steps.map(i => {
