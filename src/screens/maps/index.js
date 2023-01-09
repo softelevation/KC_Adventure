@@ -19,10 +19,10 @@ import {
 } from '_elements';
 import CustomRatingBar from 'src/components/rating';
 import MapView from 'react-native-maps';
-import {Marker, Callout, AnimatedRegion} from 'react-native-maps';
+import {Marker, AnimatedRegion} from 'react-native-maps';
 import Modal from 'react-native-modal';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {data} from './data';
+// import {data} from './data';
 import {useDispatch, useSelector} from 'react-redux';
 import {getCurrentLocation, requestPermission} from 'src/utils/helper';
 import {light} from 'src/components/theme/colors';
@@ -34,8 +34,6 @@ import {locationRequest} from 'src/redux/location/action';
 import HtmlText from 'react-native-html-to-text';
 import {Dimensions} from 'react-native';
 
-// const LATITUDE_DELTA = 0.0922;
-// const LONGITUDE_DELTA = 0.0421;
 const screen = Dimensions.get('window');
 const ASPECT_RATIO = screen.width / screen.height;
 const LATITUDE_DELTA = 0.0922;
@@ -54,8 +52,8 @@ const MapsScreen = () => {
   const [destlong, setDestLong] = useState({});
   const dispatch = useDispatch();
   const [destinationCoords, setDestinationCoords] = useState({
-    latitude: 30.748256,
-    longitude: 76.646027,
+    latitude: 31.004203,
+    longitude: 76.42806,
   });
 
   const mapView = React.createRef();
@@ -73,8 +71,8 @@ const MapsScreen = () => {
     isLoading: false,
     heading: 0,
     coordinate: new AnimatedRegion({
-      latitude: 30.705321,
-      longitude: 76.734083,
+      latitude: 30.680751,
+      longitude: 76.726707,
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA,
     }),
@@ -85,7 +83,8 @@ const MapsScreen = () => {
   ]);
   const [totalTime, setTotalTime] = useState([]);
   const {curLoc, coordinate, heading} = state;
-  const updateState = newState => setState(state => ({...state, ...newState}));
+  const updateState = newState =>
+    setState(mystate => ({...mystate, ...newState}));
 
   useEffect(() => {
     getLiveLocation();
@@ -146,11 +145,6 @@ const MapsScreen = () => {
     }
   };
 
-  const handleBoundsChanged = () => {
-    const mapCenter = mapView.current.getCenter(); //get map center
-    setState({curLoc: mapCenter});
-  };
-
   useEffect(() => {
     const interval = setInterval(() => {
       getLiveLocation();
@@ -178,10 +172,10 @@ const MapsScreen = () => {
     }, []),
   );
 
-  const COORDINATES = [
-    {latitude: 41.682151, longitude: -73.358423},
-    {latitude: 41.675582, longitude: -73.353479},
-  ];
+  // const COORDINATES = [
+  //   {latitude: 41.682151, longitude: -73.358423},
+  //   {latitude: 41.675582, longitude: -73.353479},
+  // ];
 
   const _renderDirections = () => {
     if (stepsDetails[1]?.maneuver === 'turn-left') {
@@ -202,8 +196,8 @@ const MapsScreen = () => {
           zoomControlEnabled={false}
           showsUserLocation
           zoomEnabled={true}
-          // showsMyLocationButton={false}
           ref={mapView}
+          loadingEnabled={true}
           center={{...curLoc}}
           initialRegion={{
             ...curLoc,
@@ -251,12 +245,11 @@ const MapsScreen = () => {
             ref={markerRef}
             coordinate={coordinate}>
             <Image
-              source={require('../../assets/icons/location-pin.png')}
-              style={{
-                width: 40,
-                height: 40,
-                transform: [{rotate: `${heading}deg`}],
-              }}
+              source={require('../../assets/icons/paper-plane.png')}
+              style={[
+                styles.imgstyle,
+                {transform: [{rotate: `${heading}deg`}]},
+              ]}
               resizeMode="contain"
             />
           </Marker.Animated>
@@ -264,7 +257,7 @@ const MapsScreen = () => {
             <Marker coordinate={destinationCoords}>
               <Image
                 source={require('../../assets/icons/placeholder.png')}
-                style={{width: 50, height: 40}}
+                style={styles.mark}
                 resizeMode="contain"
               />
             </Marker>
@@ -278,7 +271,7 @@ const MapsScreen = () => {
               strokeColor="red"
               mode={'DRIVING'}
               resetOnChange={false}
-              optimizeWaypoints={false}
+              optimizeWaypoints={true}
               onReady={e => {
                 console.log(e);
                 e.legs.map(item => {
@@ -286,27 +279,6 @@ const MapsScreen = () => {
                   setTotalTime(item.duration.text);
                 });
               }}
-              // waypoints={[
-              //   {latitude: 30.680063, longitude: 76.726769},
-              //   {latitude: 30.679483, longitude: 76.725729},
-              //   {latitude: 30.680557, longitude: 76.724192},
-              //   {latitude: 30.679065, longitude: 76.7217},
-              //   {latitude: 30.681445, longitude: 76.719287},
-              //   {latitude: 30.694777, longitude: 76.707459},
-              //   {latitude: 30.714942, longitude: 76.691148},
-              //   {latitude: 30.739831, longitude: 76.674642},
-              // ]}
-              // onReady={e => {
-              //   e.legs.map(item => {
-              //     const stepString = item.steps.map(i => {
-              //       console.log('shhh! koi ane ko hai!', i);
-              //       return `${i.duration.text + i.html_instructions}`;
-              //     });
-              //     setstepsDetails(stepString);
-              //   });
-              //   console.log('map data', e);
-              // }}
-              // onStart={e => console.log(e, 'eee/')}
             />
           )}
           {/* {Object.keys(state).length > 0 && (
@@ -371,7 +343,7 @@ const MapsScreen = () => {
             margin={[0, wp(2), 0, 0]}
             borderRadius={15}
             primary
-            style={{height: 45, width: 45}}>
+            style={styles.custombtn}>
             <ImageComponent name="search_loc" width={25} height={25} />
           </CustomButton>
           <TouchableOpacity onPress={() => setEmergencyModalVisible(true)}>
@@ -385,17 +357,7 @@ const MapsScreen = () => {
           </Block>
         </Block>
       </Block>
-      <Block
-        style={{
-          bottom: 0,
-          right: 0,
-          left: 0,
-          position: 'absolute',
-          alignItems: 'center',
-          margin: 0,
-          padding: hp(2),
-        }}
-        flex={false}>
+      <Block style={styles.modalstyle} flex={false}>
         <Button
           onPress={() => setDistanceModal(true)}
           style={{width: wp(40)}}
@@ -405,24 +367,11 @@ const MapsScreen = () => {
       </Block>
 
       <Modal
-        style={{
-          bottom: 0,
-          right: 0,
-          left: 0,
-          position: 'absolute',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          borderRadius: 24,
-          margin: 0,
-          height: defaultHeight,
-          backgroundColor: '#fff',
-          padding: hp(2),
-        }}
+        style={[styles.modal2, {height: defaultHeight}]}
         coverScreen={false}
         hasBackdrop={false}
         isVisible={destinationCoords.latitude === null ? modalloc : !modalloc}>
         <>
-          {/* {console.log('loxdnn', stepsDetails[0].maneuver)} */}
           <Formik
             innerRef={formikRef}
             enableReinitialize
@@ -446,7 +395,6 @@ const MapsScreen = () => {
               setFieldError,
             }) => (
               <>
-                {/* {console.log(state, 'destinationCoords')} */}
                 <Text medium gutterBottom size={20}>
                   Enter Location
                 </Text>
@@ -597,7 +545,7 @@ const MapsScreen = () => {
               </Block>
             </Block>
             <Input
-              style={{height: hp(15), backgroundColor: '#65837B'}}
+              style={styles.inpstyle}
               multiline
               textAlignVertical="top"
               color="#FFFFFF"
@@ -660,15 +608,11 @@ const MapsScreen = () => {
             flex={false}
             style={{height: hp(25)}}>
             <Block column middle center padding={[0, 0, 0, wp(4)]} flex={false}>
-              {/* <ImageComponent name="go_straight" height={50} width={40} /> */}
               {_renderDirections()}
               <Text h2 width={wp(10)} semibold margin={[hp(1), 0, 0, 0]}>
                 {stepsDetails[0]?.duration?.text}
               </Text>
               <Text h3>{stepsDetails[0]?.distance?.text}</Text>
-              {/* <Text h3 semibold>
-                {stepsDetails[1]?.maneuver}
-              </Text> */}
               {console.log('direction', stepsDetails[1]?.maneuver)}
             </Block>
             <Block flex={false} column>
@@ -676,12 +620,7 @@ const MapsScreen = () => {
                 {totalTime}
               </Text>
               <HtmlText
-                style={{
-                  fontWeight: 'bold',
-                  fontSize: 17,
-                  width: wp(60),
-                  // height: hp(5.5),
-                }}
+                style={styles.htmlstyle}
                 html={stepsDetails[0].html_instructions}
               />
             </Block>
@@ -701,6 +640,32 @@ const styles = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
   },
+  modalstyle: {
+    bottom: 0,
+    right: 0,
+    left: 0,
+    position: 'absolute',
+    alignItems: 'center',
+    margin: 0,
+    padding: hp(2),
+  },
+  modal2: {
+    bottom: 0,
+    right: 0,
+    left: 0,
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    borderRadius: 24,
+    margin: 0,
+    backgroundColor: '#fff',
+    padding: hp(2),
+  },
+  htmlstyle: {fontWeight: 'bold', fontSize: 17, width: wp(60)},
+  imgstyle: {width: 40, height: 40},
+  inpstyle: {height: hp(15), backgroundColor: '#65837B'},
+  custombtn: {height: 45, width: 45},
+  mark: {width: 50, height: 40},
 });
 export default MapsScreen;
 
@@ -737,3 +702,24 @@ export default MapsScreen;
 //     </Block>
 //   </Callout>;
 // }
+
+// <Text h3 semibold>
+//   {stepsDetails[1]?.maneuver}
+// </Text>;
+
+// const handleBoundsChanged = () => {
+//   const mapCenter = mapView.current.getCenter(); //get map center
+//   setState({curLoc: mapCenter});
+// };
+
+// onReady={e => {
+//   e.legs.map(item => {
+//     const stepString = item.steps.map(i => {
+//       console.log('shhh! koi ane ko hai!', i);
+//       return `${i.duration.text + i.html_instructions}`;
+//     });
+//     setstepsDetails(stepString);
+//   });
+//   console.log('map data', e);
+// }}
+// onStart={e => console.log(e, 'eee/')}
