@@ -18,7 +18,7 @@ import {
   Input,
 } from '_elements';
 import CustomRatingBar from 'src/components/rating';
-import MapView from 'react-native-maps';
+import MapView, {Callout} from 'react-native-maps';
 import {Marker, AnimatedRegion} from 'react-native-maps';
 import Modal from 'react-native-modal';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
@@ -33,6 +33,7 @@ import {Formik} from 'formik';
 import {locationRequest} from 'src/redux/location/action';
 import HtmlText from 'react-native-html-to-text';
 import {Dimensions} from 'react-native';
+import {data} from './data';
 
 const screen = Dimensions.get('window');
 const ASPECT_RATIO = screen.width / screen.height;
@@ -63,16 +64,18 @@ const MapsScreen = () => {
 
   const [state, setState] = useState({
     curLoc: {
-      latitude: location.latitude || 0,
-      longitude: location.longitude || 0,
-      // latitude: 41.682151,
-      // longitude: -73.358423,
+      // latitude: location.latitude || 0,
+      // longitude: location.longitude || 0,
+      // latitude: 41.675774,
+      // longitude: -73.353595,
+      latitude: 41.675605,
+      longitude: -73.354296,
     },
     isLoading: false,
     heading: 0,
     coordinate: new AnimatedRegion({
-      latitude: 30.680751,
-      longitude: 76.726707,
+      latitude: location.latitude,
+      longitude: location.longitude,
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA,
     }),
@@ -172,10 +175,11 @@ const MapsScreen = () => {
     }, []),
   );
 
-  // const COORDINATES = [
-  //   {latitude: 41.682151, longitude: -73.358423},
-  //   {latitude: 41.675582, longitude: -73.353479},
-  // ];
+  const COORDINATES = [
+    // {latitude: 41.675659, longitude: -73.353423},
+    {latitude: 41.675605, longitude: -73.354296},
+    {latitude: 41.682016, longitude: -73.353507},
+  ];
 
   const _renderDirections = () => {
     if (stepsDetails[1]?.maneuver === 'turn-left') {
@@ -185,6 +189,12 @@ const MapsScreen = () => {
     } else {
       return <ImageComponent name="go_straight" height={60} width={50} />;
     }
+  };
+
+  const _changeregion = coordinate => {
+    updateState({
+      coordinate: coordinate,
+    });
   };
 
   return (
@@ -199,12 +209,13 @@ const MapsScreen = () => {
           ref={mapView}
           loadingEnabled={true}
           center={{...curLoc}}
+          // onRegionChange={_changeregion}
           initialRegion={{
             ...curLoc,
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA,
           }}>
-          {/* {data.map((val, i) => {
+          {data.map((val, i) => {
             return (
               <Marker coordinate={val.coords}>
                 <Image
@@ -239,7 +250,7 @@ const MapsScreen = () => {
                 </Callout>
               </Marker>
             );
-          })} */}
+          })}
           <Marker.Animated
             anchor={{x: 0.5, y: 0.5}}
             ref={markerRef}
@@ -253,7 +264,7 @@ const MapsScreen = () => {
               resizeMode="contain"
             />
           </Marker.Animated>
-          {Object.keys(destinationCoords).length > 0 && (
+          {/* {Object.keys(destinationCoords).length > 0 && (
             <Marker coordinate={destinationCoords}>
               <Image
                 source={require('../../assets/icons/placeholder.png')}
@@ -280,7 +291,7 @@ const MapsScreen = () => {
                 });
               }}
             />
-          )}
+          )} */}
           {/* {Object.keys(state).length > 0 && (
             <MapViewDirections
               origin={state}
@@ -291,25 +302,33 @@ const MapsScreen = () => {
               optimizeWaypoints={false}
             />
           )} */}
-          {/* <MapViewDirections
-            origin={COORDINATES[0]}
-            destination={COORDINATES[1]}
-            apikey={GOOGLE_MAPS_APIKEY}
-            waypoints={[
-              {latitude: 41.7049042, longitude: -73.3716619},
-              {latitude: 41.713582, longitude: -73.393943},
-              {latitude: 41.7002989, longitude: -73.3887551},
-              {latitude: 41.694924, longitude: -73.38242},
-              {latitude: 41.69327, longitude: -73.374271},
-              {latitude: 41.675748, longitude: -73.353675},
-              // {latitude: 41.694566, longitude: -73.350251},
-              // {latitude: 41.686654, longitude: -73.353813},
-            ]}
-            onReady={e => console.log(e)}
-            onStart={e => console.log(e, 'eee/')}
-            strokeColor="red"
-            strokeWidth={5}
-          /> */}
+          {Object.keys(COORDINATES[1]).length > 0 && (
+            <MapViewDirections
+              origin={COORDINATES[0]}
+              destination={COORDINATES[1]}
+              apikey={GOOGLE_MAP_KEY}
+              waypoints={[
+                {latitude: 41.675774, longitude: -73.353595},
+                {latitude: 41.713582, longitude: -73.393943},
+                {latitude: 41.7002989, longitude: -73.3887551},
+                {latitude: 41.694924, longitude: -73.38242},
+                {latitude: 41.69327, longitude: -73.374271},
+                {latitude: 41.682016, longitude: -73.353507},
+                // {latitude: 41.694566, longitude: -73.350251},
+                // {latitude: 41.686654, longitude: -73.353813},
+              ]}
+              onReady={e => {
+                console.log(e);
+                e.legs.map(item => {
+                  setstepsDetails(item.steps);
+                  setTotalTime(item.duration.text);
+                });
+              }}
+              onStart={e => console.log(e, 'eee/')}
+              strokeColor="red"
+              strokeWidth={5}
+            />
+          )}
           {/* {strictValidObjectWithKeys(destinationCords) &&
             destinationCords.latitude && (
               <MapViewDirections

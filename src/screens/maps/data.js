@@ -1,9 +1,5 @@
 import {images} from 'src/assets';
 export const data = [
-  // {
-  //   id: 0,
-  //   image: images.restaurant_icon,
-  // },
   {
     id: 1,
     coords: {

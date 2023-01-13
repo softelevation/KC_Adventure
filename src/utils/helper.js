@@ -24,7 +24,7 @@ export const getCurrentLocation = () =>
         console.log('error.message: ', error.message);
       },
       {
-        enableHighAccuracy: true,
+        enableHighAccuracy: false,
         timeout: 20000,
         maximumAge: 1000,
       },
